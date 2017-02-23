@@ -1,4 +1,5 @@
 # rtu-fe
+![](https://travis-ci.org/echaoo/rtu-fe.svg?branch=master)
 
 > A Vue.js project
 
