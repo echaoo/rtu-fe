@@ -5,6 +5,9 @@
       <div class="login-area">
         <login-panel></login-panel>
       </div>
+      <div class="carousel">
+        <carousel-text></carousel-text>
+      </div>
     </div>
     <rtu-footer></rtu-footer>
   </div>
@@ -13,10 +16,12 @@
 <script>
   import LoginPanel from './LoginPanel'
   import RtuFooter from './RtuFooter.vue'
+  import CarouselText from './CarouselText.vue'
   export default {
     components: {
       LoginPanel,
-      RtuFooter
+      RtuFooter,
+      CarouselText
     }
   }
 </script>
@@ -39,6 +44,12 @@
         float: right;
         margin-top: 50px;
         margin-right: 30px;
+      }
+
+      .carousel {
+        min-width: 500px;
+        margin-left: 8%;
+        margin-top: 8%;
       }
     }
   }
