@@ -1,0 +1,20 @@
+<template>
+  <footer class="footer-container">
+    <p>Copyright © 2016 - 2017  山东创新石油技术有限公司  All rights reserved.</p>
+  </footer>
+</template>
+
+<script>
+  export default {}
+</script>
+
+<style lang="less" rel="stylesheet/less">
+.footer-container {
+  padding: 20px;
+  background-color: #696969;
+
+  p {
+    color: white;
+  }
+}
+</style>
