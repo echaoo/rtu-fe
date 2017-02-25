@@ -6,8 +6,12 @@ import 'element-ui/lib/theme-default/index.css'
 import 'bootstrap/dist/css/bootstrap.css'
 import App from './App'
 import router from './router'
+import VueResource from 'vue-resource'
 
 Vue.use(ElementUI)
+Vue.use(VueResource)
+Vue.http.options.emulateJSON = true;
+Vue.http.options.credentials = true;
 
 /* eslint-disable no-new */
 new Vue({
