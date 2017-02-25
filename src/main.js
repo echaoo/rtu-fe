@@ -7,8 +7,12 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'animate.css/animate.css'
 import App from './App'
 import router from './router'
+import VueResource from 'vue-resource'
 
 Vue.use(ElementUI)
+Vue.use(VueResource)
+Vue.http.options.emulateJSON = true;
+Vue.http.options.credentials = true;
 
 /* eslint-disable no-new */
 new Vue({
