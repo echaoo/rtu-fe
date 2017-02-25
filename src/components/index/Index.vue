@@ -5,11 +5,13 @@
       <div class="login-area">
         <login-panel></login-panel>
       </div>
-      <div class="carousel">
+      <div class="carousel hidden-sm hidden-xs">
         <carousel-text></carousel-text>
       </div>
     </div>
-    <rtu-footer></rtu-footer>
+    <div class="footer-container">
+      <rtu-footer></rtu-footer>
+    </div>
   </div>
 </template>
 
@@ -33,7 +35,7 @@
     .bg-container {
       background: url('../../assets/bg.jpg') no-repeat;
       background-size: cover;
-      height: 100%;
+      height: 90%;
       width: 100%;
 
       .logo {
@@ -52,6 +54,10 @@
         margin-left: 8%;
         margin-top: 8%;
       }
+    }
+
+    .footer-container {
+      min-height: 10%;
     }
   }
 </style>
