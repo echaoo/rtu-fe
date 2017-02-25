@@ -23,7 +23,7 @@
       let that = this;
       let interval = setInterval(function () {
         that.isShow = !that.isShow
-      }, 1000)
+      }, 3000)
     },
     methods: {}
   }
