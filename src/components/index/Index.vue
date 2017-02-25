@@ -26,7 +26,8 @@
     height: 100%;
 
     .bg-container {
-      background: url('../../assets/bg.jpg');
+      background: url('../../assets/bg.jpg') no-repeat;
+      background-size: cover;
       height: 100%;
       width: 100%;
 
