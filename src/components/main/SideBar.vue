@@ -1,5 +1,6 @@
 <template>
-    <div>
+    <div class="wrapper">
+      <i class="fa fa-th-large"></i>
       <nav class="navbar-default navbar-static-side" role="navigation">
         <div class="sidebar-collapse">
           <ul class="nav metismenu" id="side-menu">
@@ -26,10 +27,6 @@
               <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">Dashboards</span> <span class="fa arrow"></span></a>
               <ul class="nav nav-second-level collapse">
                 <li><a href="index.html">Dashboard v.1</a></li>
-                <li><a href="dashboard_2.html">Dashboard v.2</a></li>
-                <li><a href="dashboard_3.html">Dashboard v.3</a></li>
-                <li><a href="dashboard_4_1.html">Dashboard v.4</a></li>
-                <li><a href="dashboard_5.html">Dashboard v.5 <span class="label label-primary pull-right">NEW</span></a></li>
               </ul>
             </li>
             <li>
@@ -229,10 +226,39 @@
 </template>
 
 <script>
-  import
     export default {}
 </script>
 
 <style lang="less" rel="stylesheet/less" scoped>
+  .active {
+    background-color: #1e2c39;
+  }
+  @media (min-width: 768px) {
+    .navbar-static-side {
+      z-index: 2007;
+      position: absolute;
+      width: 220px;
+    }
 
+    .navbar-default {
+      background-color: #25303f;
+      border-color: #2f4050;
+    }
+
+    .pace-done .navbar-static-side, .pace-done .nav-header, .pace-done li.active, .pace-done #page-wrapper, .pace-done .footer {
+      -webkit-transition: all 0.4s;
+      -moz-transition: all 0.4s;
+      -o-transition: all 0.4s;
+      transition: all 0.4s;
+    }
+
+    .pace-done .nav-header {
+      transition: all 0.4s;
+    }
+
+    .nav > li > a > soan {
+      color: #fff;
+    }
+
+  }
 </style>
