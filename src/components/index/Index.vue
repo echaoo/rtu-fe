@@ -48,7 +48,7 @@
       }
 
       .carousel {
-        min-width: 500px;
+        width: 500px;
         margin-left: 8%;
         margin-top: 8%;
       }
