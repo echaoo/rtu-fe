@@ -38,8 +38,8 @@
 
       .login-area {
         float: right;
-        margin-top: 50px;
-        margin-right: 30px;
+        margin-top: 100px;
+        margin-right: 70px;
       }
     }
   }
