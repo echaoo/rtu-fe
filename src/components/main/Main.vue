@@ -1,9 +1,10 @@
 <template>
   <div class="main-container">
-    <side-bar></side-bar>
     <top-bar></top-bar>
-    <router-view></router-view>
-    <button @click="logout">登出</button>
+    <side-bar></side-bar>
+    <div class="main-box" v-bind:class="{'side-bar-open': isSideBarOpen}">
+      <router-view></router-view>
+    </div>
   </div>
 </template>
 
@@ -11,6 +12,11 @@
   import SideBar from './SideBar.vue'
   import TopBar from './TopBar.vue'
   export default {
+    computed: {
+      isSideBarOpen() {
+        return this.$store.state.layout.isSideBarOpen;
+      }
+    },
     methods: {
       logout() {
         this.$store.dispatch('doLogout').then(
@@ -35,5 +41,20 @@
 </script>
 
 <style lang="less" rel="stylesheet/less" scoped>
+  .main-container {
+    position: relative;
+    overflow: hidden;
+    min-height: 100%;
 
+    .main-box {
+      height: auto;
+      padding-bottom: 20px;
+      padding-left: 20px;
+      background: #fff;
+    }
+
+    .side-bar-open {
+      margin-left: 260px;
+    }
+  }
 </style>
