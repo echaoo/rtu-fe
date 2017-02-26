@@ -1,7 +1,7 @@
 <template>
   <div class="main-container">
+    <side-bar></side-bar>
     <top-bar></top-bar>
-    <!--<side-bar></side-bar>-->
     <router-view></router-view>
     <button @click="logout">登出</button>
   </div>
