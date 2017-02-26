@@ -18,20 +18,7 @@
       }
     },
     methods: {
-      logout() {
-        this.$store.dispatch('doLogout').then(
-          (rs) => {
-            if (rs) {
-              this.$notify({
-                title: '成功',
-                message: '登出成功',
-                type: 'success'
-              })
-              this.$router.push({name: 'index'});
-            }
-          }
-        )
-      }
+
     },
     components: {
       SideBar,

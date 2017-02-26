@@ -14,7 +14,7 @@
       <el-menu-item index="alert" :route="{name: 'alert'}">报警信息</el-menu-item>
       <el-menu-item index="4">井列表</el-menu-item>
 
-      <el-menu-item index="logout">登出</el-menu-item>
+      <el-menu-item v-on:click="logout">登出</el-menu-item>
     </el-menu>
   </div>
 </template>
@@ -35,8 +35,22 @@
       changeSideBar() {
         this.$store.dispatch('changeSideBar')
       },
+      logout() {
+        this.$store.dispatch('doLogout').then(
+          (rs) => {
+          if (rs) {
+            this.$notify({
+              title: '成功',
+              message: '登出成功',
+              type: 'success'
+            })
+            this.$router.push({name: 'index'});
+          }
+        }
+      )
+      },
       handleSelect(key, keyPath) {
-        console.log(key, keyPath);
+//        console.log(key, keyPath);
       }
     }
   }
