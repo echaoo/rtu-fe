@@ -1,6 +1,6 @@
 <template>
   <div class="top-container" v-bind:class="{'side-bar-open': iconSwitch}">
-    <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
+    <el-menu :default-active="activeIndex" class="" mode="horizontal" @select="handleSelect" :router=true>
       <button class="switch-btn" @click="changeSideBar">
         <i v-if="iconSwitch" class="el-icon-d-arrow-left"></i>
         <i v-if="!iconSwitch" class="el-icon-d-arrow-right"></i>
@@ -9,7 +9,7 @@
       <!--<img src="../../assets/main/CXSYIcon.png" alt="">-->
       <!--<span>创新石油</span>-->
       <!--</div>-->
-      <el-menu-item index="map">地图</el-menu-item>
+      <el-menu-item index="map" :route="{name: 'map'}">地图</el-menu-item>
       <el-menu-item index="2">示功图</el-menu-item>
       <el-menu-item index="3">报警信息</el-menu-item>
       <el-menu-item index="4">井列表</el-menu-item>
