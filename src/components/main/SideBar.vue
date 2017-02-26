@@ -37,9 +37,12 @@
     height: 100%;
     width: 260px;
     display: inline-block;
+    overflow: hidden;
 
     .menu {
       height: 100%;
+      width: 280px;
+      overflow: scroll;
     }
   }
 </style>
