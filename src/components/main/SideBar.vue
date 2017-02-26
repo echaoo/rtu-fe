@@ -1,7 +1,7 @@
 <template>
-  <div class="side-container" v-if="isSideBarOpen">
-    <el-menu theme="dark" default-active="2" class="menu">
-      <el-menu-item v-for="item in blockInfo" :index="item.ID"><i class="el-icon-menu"></i>{{item.Name}}</el-menu-item>
+  <div class="side-container" v-show="isSideBarOpen">
+    <el-menu theme="dark" default-active="2" class="menu" @select="handleClick">
+      <el-menu-item v-for="(item, index) in blockInfo" :index="index"><i class="el-icon-menu"></i>{{item.Name}}</el-menu-item>
     </el-menu>
   </div>
 </template>
@@ -27,6 +27,12 @@
             this.blockInfo = response.data.data;
           }
         })
+    },
+    methods: {
+      handleClick(index) {
+          console.log(123)
+          console.log(index)
+      }
     }
   }
 </script>
@@ -43,6 +49,7 @@
       height: 100%;
       width: 280px;
       overflow: scroll;
+      padding-bottom: 60px;
     }
   }
 </style>

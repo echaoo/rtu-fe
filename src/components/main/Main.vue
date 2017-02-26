@@ -48,9 +48,6 @@
 
     .main-box {
       height: auto;
-      padding-bottom: 20px;
-      padding-left: 20px;
-      background: #fff;
     }
 
     .side-bar-open {
