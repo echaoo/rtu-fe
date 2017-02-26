@@ -5,11 +5,13 @@
       <div class="login-area">
         <login-panel></login-panel>
       </div>
-      <div class="carousel">
+      <div class="carousel hidden-sm hidden-xs">
         <carousel-text></carousel-text>
       </div>
     </div>
-    <rtu-footer></rtu-footer>
+    <div class="footer-container">
+      <rtu-footer></rtu-footer>
+    </div>
   </div>
 </template>
 
@@ -18,6 +20,15 @@
   import RtuFooter from './RtuFooter.vue'
   import CarouselText from './CarouselText.vue'
   export default {
+    created() {
+      this.$store.dispatch('checkLogin').then(
+          rs => {
+            if (rs) {
+                this.$router.push('main')
+            }
+          }
+      )
+    },
     components: {
       LoginPanel,
       RtuFooter,
@@ -33,7 +44,7 @@
     .bg-container {
       background: url('../../assets/bg.jpg') no-repeat;
       background-size: cover;
-      height: 100%;
+      height: 90%;
       width: 100%;
 
       .logo {
@@ -43,15 +54,19 @@
 
       .login-area {
         float: right;
-        margin-top: 50px;
-        margin-right: 30px;
+        margin-top: 100px;
+        margin-right: 70px;
       }
 
       .carousel {
-        min-width: 500px;
+        width: 500px;
         margin-left: 8%;
         margin-top: 8%;
       }
+    }
+
+    .footer-container {
+      min-height: 10%;
     }
   }
 </style>

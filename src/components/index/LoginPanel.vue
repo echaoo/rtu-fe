@@ -1,8 +1,8 @@
 <template>
   <div class="login-panel-container">
     <h1>系统登录</h1>
-    <input type="text" v-model="username">
-    <input type="password" v-model="password">
+    <input type="text" v-model="username" placeholder="请输入经过授权的用户名">
+    <input type="password" v-model="password" placeholder="请输入密码">
     <button @click="login">同意相关协定，授权并登录</button>
     <p>
       该系统处于研发更新阶段，如遇到临时无法登陆的情况，请联系公司技术人员。如需获取授权的用户名及密码，请联系山东创新石油技术有限公司相关人员。
@@ -21,13 +21,16 @@
     },
     methods: {
       login() {
+        let that = this;
         let param = {
-          username: this.username,
+          name: this.username,
           password: this.password
         };
-        this.$http.post(API.login, param).then(res => {
-            console.log(res);
-        })
+        this.$store.dispatch('doLogin', param).then(
+          () => {
+            that.$router.push('main');
+          }
+        )
       }
     }
   }
@@ -35,15 +38,16 @@
 
 <style lang="less" rel="stylesheet/less">
   .login-panel-container {
-    width: 280px;
+    width: 330px;
     border-radius: 10px;
-    padding: 20px 12px;
+    padding: 20px 20px;
     background-color: rgba(0, 0, 0, 0.6);
     text-align: center;
 
     h1 {
       margin-top: 0;
       color: white;
+      margin-bottom: 20px;
     }
 
     input {
