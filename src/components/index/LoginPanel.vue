@@ -1,9 +1,9 @@
 <template>
   <div class="login-panel-container">
     <h1>系统登录</h1>
-    <input type="text" v-model="username" placeholder="请输入经过授权的用户名">
-    <input type="password" v-model="password" placeholder="请输入密码">
-    <button @click="login">同意相关协定，授权并登录</button>
+    <el-input autocomplete type="text" v-model="username" placeholder="请输入经过授权的用户名"></el-input>
+    <el-input autocomplete type="password" v-model="password" placeholder="请输入密码"></el-input>
+    <button @click="login" type="button">同意相关协定，授权并登录</button>
     <p>
       该系统处于研发更新阶段，如遇到临时无法登陆的情况，请联系公司技术人员。如需获取授权的用户名及密码，请联系山东创新石油技术有限公司相关人员。
     </p>
@@ -64,10 +64,7 @@
     }
 
     input {
-      width: 100%;
-      height: 30px;
       margin-bottom: 10px;
-      border: none;
     }
 
     button {
