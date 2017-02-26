@@ -15,16 +15,16 @@ const actions = {
   doLogin(context, {name, password}) {
     return auth.doLogin(name, password).then(
       (res) => {
-        if (res === '0') {
+        if (res.data.status === '0') {
           context.commit('setLogin', true)
         }
         else {
           context.commit('setLogin', false)
         }
-        return res
+        return res.data.status
       },
       () => {
-        return -1
+        return '-1'
       }
     )
   },
@@ -38,14 +38,30 @@ const actions = {
           (res) => {
             if (res.data.status === '0') {
               context.commit('setLogin', true)
-              resolve(context.state.isLogin)
             }
-
+            else {
+              context.commit('setLogin', false)
+            }
+            resolve(context.state.isLogin)
           }
         )
       }
     })
 
+  },
+  doLogout(context) {
+    return new Promise((resolve, reject) => {
+      auth.doLogout().then(
+        (res) => {
+          if (res.data.status === '0') {
+            context.commit('setLogin', false)
+            resolve(true)
+          }else {
+            resolve(false)
+          }
+        }
+      )
+    })
   }
 }
 

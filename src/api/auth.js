@@ -12,5 +12,8 @@ export default {
   },
   checkLogin() {
     return Vue.http.get(API.isLogin)
+  },
+  doLogout() {
+    return Vue.http.get(API.logout)
   }
 }
