@@ -8,5 +8,6 @@ export default {
   login: host + 'Login',
   logout: host + 'Login/Logout',
   reg: host + 'Register',
-  isLogin: host + 'Login/IsLogin'
+  isLogin: host + 'Login/IsLogin',
+  block: host + 'Map/Block'
 }
