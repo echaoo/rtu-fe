@@ -2,8 +2,10 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Index from 'components/index/Index'
 import Reg from 'components/reg/Reg'
-import Main from 'components/main/Main'
 import NotFound from 'components/404/NotFound'
+
+import Main from 'components/main/Main'
+import Map from 'components/main/map/Map'
 
 Vue.use(Router)
 
@@ -27,7 +29,14 @@ export default new Router({
     {
       path: '/main',
       name: 'main',
-      component: Main
+      component: Main,
+      children: [
+        {
+          path: 'map',
+          name: 'map',
+          component: Map
+        },
+      ]
     },
     {
       path: '*',

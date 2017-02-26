@@ -1,19 +1,26 @@
 <template>
-  <div>
+  <div class="main-container">
     <side-bar></side-bar>
+    <top-bar></top-bar>
+    <router-view></router-view>
     <button @click="logout">登出</button>
   </div>
 </template>
 
 <script>
   import SideBar from './SideBar.vue'
+  import TopBar from './TopBar.vue'
   export default {
     methods: {
       logout() {
         this.$store.dispatch('doLogout').then(
           (rs) => {
-            console.log(rs);
             if (rs) {
+              this.$notify({
+                title: '成功',
+                message: '登出成功',
+                type: 'success'
+              })
               this.$router.push({name: 'index'});
             }
           }
@@ -21,7 +28,8 @@
       }
     },
     components: {
-      SideBar
+      SideBar,
+      TopBar
     }
   }
 </script>
