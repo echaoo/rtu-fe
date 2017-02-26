@@ -36,8 +36,11 @@ const actions = {
       else {
         auth.checkLogin().then(
           (res) => {
-            console.log(res.data)
-            resolve(res.data.status)
+            if (res.data.status === '0') {
+              context.commit('setLogin', true)
+              resolve(context.state.isLogin)
+            }
+
           }
         )
       }

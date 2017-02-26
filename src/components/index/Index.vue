@@ -23,7 +23,9 @@
     created() {
       this.$store.dispatch('checkLogin').then(
           rs => {
-            console.log(rs)
+            if (rs) {
+                this.$router.push('main')
+            }
           }
       )
     },
