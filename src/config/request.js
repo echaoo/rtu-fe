@@ -7,5 +7,6 @@ let host = 'http://202.194.155.189:9999/';
 export default {
   login: host + 'Login',
   logout: host + 'Login/Logout',
-  reg: host + 'Register'
+  reg: host + 'Register',
+  isLogin: host + 'Login/IsLogin'
 }

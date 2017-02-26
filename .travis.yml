@@ -10,6 +10,7 @@ before_install:
 - cp .travis/ssh_config ~/.ssh/config
 - npm install
 script:
+- npm run test
 - npm run build
 deploy:
   skip_cleanup: true

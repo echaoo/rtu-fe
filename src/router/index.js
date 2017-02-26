@@ -14,7 +14,12 @@ export default new Router({
     // },
     {
       path: '/',
-      name: 'Main',
+      name: 'index',
+      component: Index
+    },
+    {
+      path: '/main',
+      name: 'main',
       component: Main
     }
   ]
