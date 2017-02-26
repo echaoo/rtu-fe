@@ -28,6 +28,7 @@ export default new Router({
     },
     {
       path: '/main',
+      redirect: '/main/map',
       name: 'main',
       component: Main,
       children: [
