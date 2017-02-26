@@ -10,11 +10,10 @@
     created() {
       this.$store.dispatch('checkLogin').then(
         rs => {
-          if (!rs) {
+          if (!rs && this.$route.name !== 'reg') {
             this.$router.push({name: 'index'})
           }
           else {
-            console.log(this.$route.name === 'index');
             if (this.$route.name === 'index') {
               this.$router.push({name: 'main'})
             }
