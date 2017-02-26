@@ -1,6 +1,8 @@
 <template>
   <div class="index-container">
     <div class="bg-container">
+      <el-alert v-if="alertConfig.isShow" :title="alertConfig.title" :type="alertConfig.type">
+      </el-alert>
       <img class="logo" src="../../assets/logo.png" alt="RTU-LOGO">
       <div class="login-area">
         <login-panel></login-panel>
@@ -20,14 +22,30 @@
   import RtuFooter from './RtuFooter.vue'
   import CarouselText from './CarouselText.vue'
   export default {
-    created() {
-      this.$store.dispatch('checkLogin').then(
-          rs => {
-            if (rs) {
-                this.$router.push('main')
-            }
+    computed: {
+      alertConfig() {
+        let rs = {
+          isShow: false,
+          title: '',
+          type: ''
+        }
+        if (this.$store.state.user.isLogin) {
+          rs = {
+            isShow: true,
+            title: '登录成功',
+            type: 'success'
           }
-      )
+        }
+        return rs
+      }
+    },
+    data() {
+      return {}
+    },
+    created() {
+      if (this.$store.state.user.isLogin) {
+          this.$router.push({name: 'main'})
+      }
     },
     components: {
       LoginPanel,

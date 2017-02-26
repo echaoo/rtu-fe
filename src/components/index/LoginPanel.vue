@@ -15,8 +15,8 @@
   export default {
     data() {
       return {
-        username: '',
-        password: ''
+        username: '123@123.com',
+        password: 'Admin-123'
       }
     },
     methods: {
@@ -27,8 +27,21 @@
           password: this.password
         };
         this.$store.dispatch('doLogin', param).then(
-          () => {
-            that.$router.push('main');
+          (rs) => {
+            console.log(rs)
+            if (rs === '0') {
+              setTimeout(function () {
+                that.$router.push('main');
+              }, 1000)
+            }
+            else {
+              // TODO:错误处理
+              this.$notify({
+                title: '错误',
+                message: '账户或密码错误',
+                type: 'error'
+              });
+            }
           }
         )
       }
