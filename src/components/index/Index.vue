@@ -20,6 +20,13 @@
   import RtuFooter from './RtuFooter.vue'
   import CarouselText from './CarouselText.vue'
   export default {
+    created() {
+      this.$store.dispatch('checkLogin').then(
+          rs => {
+            console.log(rs)
+          }
+      )
+    },
     components: {
       LoginPanel,
       RtuFooter,

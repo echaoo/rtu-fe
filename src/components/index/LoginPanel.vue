@@ -21,13 +21,16 @@
     },
     methods: {
       login() {
+        let that = this;
         let param = {
-          username: this.username,
+          name: this.username,
           password: this.password
         };
-        this.$http.post(API.login, param).then(res => {
-            console.log(res);
-        })
+        this.$store.dispatch('doLogin', param).then(
+          () => {
+            that.$router.push('main');
+          }
+        )
       }
     }
   }
