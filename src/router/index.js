@@ -8,6 +8,7 @@ import Main from 'components/main/Main'
 import Map from 'components/main/map/Map'
 import Indicator from 'components/main/indicator/Indicator'
 import WarnLog from 'components/main/warnlog/WarnLog'
+import WellList from 'components/main/welllist/WellList'
 
 Vue.use(Router)
 
@@ -48,6 +49,11 @@ export default new Router({
           path: 'warnlog',
           name: 'warnlog',
           component: WarnLog
+        },
+        {
+          path: 'welllist',
+          name: 'welllist',
+          component: WellList
         },
       ]
     },
