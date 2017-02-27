@@ -11,6 +11,7 @@
                 </div>
                 <div class="ibox-content">
                   <div id="ct-chart1" class="ct-perfect-fourth">sds</div>
+                  <!--<chart :options="polar"></chart>-->
                 </div>
               </div>
             </div>
@@ -38,9 +39,11 @@
 <script>
   import API from '../../../config/request'
   export default {
-    data: {
-      chartMsgOdd: [],
-      chartMsgEven: []
+    data() {
+        return {
+          chartMsgOdd: [],
+          chartMsgEven: []
+        }
     },
     created() {
       let that = this;
