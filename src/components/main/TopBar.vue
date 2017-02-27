@@ -24,11 +24,9 @@
     computed: {
       iconSwitch() {
         return this.$store.state.layout.isSideBarOpen
-      }
-    },
-    computed: {
+      },
       activeIndex() {
-          return this.$route.name
+        return this.$route.name
       }
     },
     methods: {
