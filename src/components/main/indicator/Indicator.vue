@@ -10,7 +10,9 @@
                   <h5>油井{{ item.Well_ID }}</h5>
                 </div>
                 <div class="ibox-content">
-                  <div id="ct-chart1" class="ct-perfect-fourth">sds</div>
+                  <div class="ct-perfect-fourth">
+                    <line-chart :chart-data="chartData"></line-chart>
+                  </div>
                 </div>
               </div>
             </div>
@@ -24,7 +26,7 @@
                   <h5>油井{{ item.Well_ID }}</h5>
                 </div>
                 <div class="ibox-content">
-                  <div id="ct" class="ct-perfect-fourth">sds</div>
+                  <div id="chart" class="ct-perfect-fourth">sds</div>
                 </div>
               </div>
             </div>
@@ -37,12 +39,19 @@
 
 <script>
   import API from '../../../config/request'
+  import LineChart from './LineChart.vue'
   export default {
     data() {
-        return {
-          chartMsgOdd: [],
-          chartMsgEven: []
-        }
+      return {
+        chartMsgOdd: [],
+        chartMsgEven: [],
+        chartData: {
+          axisData: [],
+          yaxisData: [],
+          id: ''
+        },
+        allData: []
+      }
     },
     created() {
       let that = this;
@@ -52,10 +61,21 @@
         size: '6'
       };
       this.$http.post(API.indicator, body).then(
-        response => {
-          if (response.data.status === '0') {
-            that.chartMsgOdd = response.data.data;
-            that.chartMsgEven = response.data.data;
+        function (res) {
+          if (res.data.status === '0')
+          {
+            that.chartMsgOdd = res.data.data;
+            that.chartMsgEven = res.data.data;
+          }
+        });
+
+      this.$http.post(API.indicator, body).then(
+        function (res) {
+          if (res.data.status === '0') {
+            that.allData = res.data.data;
+            that.chartData.axisData = that.allData[0].Indd_Data_Disp;
+            that.chartData.yaxisData = that.allData[0].Indd_Data_Load;
+            that.chartData.id = 'chart1';
           }
         })
     },
@@ -70,6 +90,9 @@
           return index % 2 === 0;
         })
       }
+    },
+    components: {
+      LineChart
     }
   }
 </script>
