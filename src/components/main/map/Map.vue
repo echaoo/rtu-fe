@@ -10,12 +10,15 @@
   export default {
     computed: {
       mapPath() {
+        if (this.$store.state.layout.sideBarList.length !== 0) {
           return 'http://' + this.$store.state.layout.sideBarList[parseInt(this.$store.state.layout.selectedSide)].MapPath
+        } else {
+          return ''
+        }
       }
     },
     data () {
-      return {
-      }
+      return {}
     },
     created () {
 
@@ -30,7 +33,7 @@
     position: absolute;
 
     img {
-      height:100%;
+      height: 100%;
     }
   }
 </style>
