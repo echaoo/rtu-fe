@@ -3,12 +3,11 @@
     <div class="wrapper animated fadeInRight">
       <div class="row">
         <div class="col-md-6">
-          <div class="row">
+          <div class="row" v-for="item in rederEven(chartMsgEven)">
             <div class="col-md-12">
               <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                  <h5>Simple line chart
-                  </h5>
+                  <h5>油井{{ item.Well_ID }}</h5>
                 </div>
                 <div class="ibox-content">
                   <div id="ct-chart1" class="ct-perfect-fourth">sds</div>
@@ -18,12 +17,11 @@
           </div>
         </div>
         <div class="col-md-6">
-          <div class="row">
+          <div class="row" v-for="item in rederOdd(chartMsgOdd)">
             <div class="col-md-12">
               <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                  <h5>Simple line chart
-                  </h5>
+                  <h5>油井{{ item.Well_ID }}</h5>
                 </div>
                 <div class="ibox-content">
                   <div id="ct" class="ct-perfect-fourth">sds</div>
@@ -38,7 +36,76 @@
 </template>
 
 <script>
-  export default {}
+  import API from '../../../config/request'
+  export default {
+    data: {
+      chartMsgOdd: [],
+      chartMsgEven: []
+    },
+    created() {
+      let that = this;
+      let body = {
+        blockid: '1',
+        page: '1',
+        size: '6'
+      };
+      this.$http.post(API.indicator, body).then(
+        response => {
+          if (response.data.status === '0') {
+            that.chartMsgOdd = response.data.data;
+            that.chartMsgEven = response.data.data;
+          }
+        })
+    },
+    methods: {
+      rederOdd: function (chartMsgOdd) {
+        return chartMsgOdd.filter(function (item, index) {
+          return index % 2 === 1;
+        })
+      },
+      rederEven: function (chartMsgEven) {
+        return chartMsgEven.filter(function (item, index) {
+          return index % 2 === 0;
+        })
+      },
+      paintChart: function (axis_data, ayis_data, value_data) {
+        option = {
+          tooltip: {
+            trigger: 'axis'
+          },
+          legend: {
+            data: ayis_data
+          },
+          grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '3%',
+            containLabel: true
+          },
+          toolbox: {
+            feature: {
+              saveAsImage: {}
+            }
+          },
+          xAxis: {
+            type: 'category',
+            boundaryGap: false,
+            data: axis_data
+          },
+          yAxis: {
+            type: 'value'
+          },
+          series: [
+            {
+              name:'载荷',
+              type:'line',
+              data: value_data
+            }
+          ]
+        };
+      }
+    }
+  }
 </script>
 
 <style lang="less" rel="stylesheet/less">
@@ -56,19 +123,24 @@
     margin-top: 0;
     padding: 0;
   }
+
   .ibox.collapsed .ibox-content {
     display: none;
   }
+
   .ibox.collapsed .fa.fa-chevron-up:before {
     content: "\f078";
   }
+
   .ibox.collapsed .fa.fa-chevron-down:before {
     content: "\f077";
   }
+
   .ibox:after,
   .ibox:before {
     display: table;
   }
+
   .ibox-title {
     -moz-border-bottom-colors: none;
     -moz-border-left-colors: none;
@@ -84,6 +156,7 @@
     padding: 14px 15px 7px;
     min-height: 48px;
   }
+
   .ibox-content {
     background-color: #ffffff;
     color: inherit;
@@ -93,6 +166,7 @@
     border-style: solid solid none;
     border-width: 1px 0;
   }
+
   .ibox-footer {
     color: inherit;
     border-top: 1px solid #e7eaec;
