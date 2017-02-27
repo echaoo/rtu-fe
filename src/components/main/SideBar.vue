@@ -1,7 +1,7 @@
 <template>
   <div class="side-container animated" v-bind:class="{'fadeOutLeft': !isSideBarOpen, 'fadeInLeft': isSideBarOpen}">
     <el-menu theme="dark" default-active="2" class="menu" @select="handleClick">
-      <el-menu-item v-for="(item, index) in sideBarConf.sideBarList" :index="index"><i class="el-icon-menu"></i>{{item[sideBarConf.index]}}
+      <el-menu-item v-for="(item, index) in sideBarList" :index="index.toString()"><i class="el-icon-menu"></i>{{item.Name}}
       </el-menu-item>
     </el-menu>
   </div>
@@ -15,8 +15,13 @@
       isSideBarOpen() {
         return this.$store.state.layout.isSideBarOpen;
       },
-      sideBarConf() {
-        return this.$store.state.layout.sideBarConf;
+      sideBarList() {
+        return this.$store.state.layout.sideBarList;
+      }
+    },
+    data() {
+      return {
+        index: 0
       }
     },
     created () {
