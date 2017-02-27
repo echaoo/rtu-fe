@@ -14,7 +14,7 @@
       <el-menu-item index="warnlog" :route="{name: 'warnlog'}">报警信息</el-menu-item>
       <el-menu-item index="welllist" :route="{name: 'welllist'}">井列表</el-menu-item>
 
-      <el-menu-item v-on:click="logout">登出</el-menu-item>
+      <el-menu-item index="logout" v-on:click="logout">登出</el-menu-item>
     </el-menu>
   </div>
 </template>
