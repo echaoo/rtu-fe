@@ -6,6 +6,7 @@ import NotFound from 'components/404/NotFound'
 
 import Main from 'components/main/Main'
 import Map from 'components/main/map/Map'
+import Indicator from 'components/main/indicator/Indicator'
 
 Vue.use(Router)
 
@@ -36,6 +37,11 @@ export default new Router({
           path: 'map',
           name: 'map',
           component: Map
+        },
+        {
+          path: 'indicator',
+          name: 'indicator',
+          component: Indicator
         },
       ]
     },
