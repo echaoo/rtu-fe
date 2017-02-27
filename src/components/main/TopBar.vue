@@ -11,8 +11,8 @@
       </div>
       <el-menu-item index="map" :route="{name: 'map'}">地图</el-menu-item>
       <el-menu-item index="indicator" :route="{name: 'indicator'}">示功图</el-menu-item>
-      <el-menu-item index="alert" :route="{name: 'alert'}">报警信息</el-menu-item>
-      <el-menu-item index="4">井列表</el-menu-item>
+      <el-menu-item index="warnlog" :route="{name: 'warnlog'}">报警信息</el-menu-item>
+      <el-menu-item index="welllist" :route="{name: 'welllist'}">井列表</el-menu-item>
 
       <el-menu-item v-on:click="logout">登出</el-menu-item>
     </el-menu>
@@ -26,10 +26,10 @@
         return this.$store.state.layout.isSideBarOpen
       }
     },
-    data() {
-      return {
-        activeIndex: 'map'
-      };
+    computed: {
+      activeIndex() {
+          return this.$route.name
+      }
     },
     methods: {
       changeSideBar() {
