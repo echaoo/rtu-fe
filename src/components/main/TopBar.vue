@@ -14,7 +14,7 @@
       <el-menu-item index="warnlog" :route="{name: 'warnlog'}">报警信息</el-menu-item>
       <el-menu-item index="welllist" :route="{name: 'welllist'}">井列表</el-menu-item>
 
-      <el-menu-item index="logout" v-on:click="logout">登出</el-menu-item>
+      <span v-on:click="logout" class="logout"><i class="fa fa-sign-out">登出</i></span>
     </el-menu>
   </div>
 </template>
@@ -86,6 +86,17 @@
           float: left;
           width: 60px;
         }
+      }
+
+      .logout {
+        float: right;
+        height: 60px;
+        line-height: 60px;
+        margin: 0 50px 0 0;
+        cursor: pointer;
+        position: relative;
+        box-sizing: border-box;
+        border-bottom: 5px solid transparent;
       }
     }
   }
