@@ -13,6 +13,8 @@
 
 <script>
   import API from '../../config/request'
+  import { Loading } from 'element-ui';
+
   export default {
     data() {
       return {
@@ -22,6 +24,7 @@
     },
     methods: {
       login() {
+        let loadingInstance = Loading.service({ fullscreen: true });
         let that = this;
         let param = {
           name: this.username,
@@ -29,7 +32,6 @@
         };
         this.$store.dispatch('doLogin', param).then(
           (rs) => {
-            console.log(rs)
             if (rs === '0') {
               setTimeout(function () {
                 that.$router.push('main');
@@ -43,6 +45,10 @@
                 type: 'error'
               });
             }
+            loadingInstance.close()
+          },
+          () => {
+            loadingInstance.close()
           }
         )
       }
