@@ -17,6 +17,9 @@
         return this.$store.state.layout.isSideBarOpen;
       }
     },
+    created() {
+      this.$store.dispatch('getSideBarList')
+    },
     methods: {
 
     },

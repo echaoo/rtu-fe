@@ -1,13 +1,48 @@
 <template>
-  <div>
-    123
+  <div class="map-container" v-bind:class="{'map-side-bar-open': isSideBarOpen}">
+    <img :src="mapPath" alt="loading map">
+
   </div>
 </template>
 
 <script>
-  export default {}
+  import API from '../../../config/request'
+
+  export default {
+    computed: {
+      isSideBarOpen() {
+        return this.$store.state.layout.isSideBarOpen
+      },
+      mapPath() {
+        if (this.$store.state.layout.sideBarList.length !== 0) {
+          return 'http://' + this.$store.state.layout.sideBarList[parseInt(this.$store.state.layout.selectedSide)].MapPath
+        } else {
+          return ''
+        }
+      }
+    },
+    data () {
+      return {}
+    },
+    created () {
+
+    }
+  }
 </script>
 
-<style lang="less" rel="stylesheet/less">
+<style lang="less" rel="stylesheet/less" scoped>
+  .map-container {
+    height: 100%;
+    width: 100%;
+    position: absolute;
 
+    img {
+      height: 100%;
+      width: 100%;
+    }
+  }
+
+  .map-side-bar-open {
+    padding-right: 260px;
+  }
 </style>

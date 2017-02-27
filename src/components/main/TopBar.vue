@@ -11,10 +11,10 @@
       </div>
       <el-menu-item index="map" :route="{name: 'map'}">地图</el-menu-item>
       <el-menu-item index="indicator" :route="{name: 'indicator'}">示功图</el-menu-item>
-      <el-menu-item index="alert" :route="{name: 'alert'}">报警信息</el-menu-item>
-      <el-menu-item index="4">井列表</el-menu-item>
+      <el-menu-item index="warnlog" :route="{name: 'warnlog'}">报警信息</el-menu-item>
+      <el-menu-item index="welllist" :route="{name: 'welllist'}">井列表</el-menu-item>
 
-      <el-menu-item v-on:click="logout">登出</el-menu-item>
+      <span v-on:click="logout" class="logout"><i class="fa fa-sign-out">登出</i></span>
     </el-menu>
   </div>
 </template>
@@ -24,12 +24,10 @@
     computed: {
       iconSwitch() {
         return this.$store.state.layout.isSideBarOpen
+      },
+      activeIndex() {
+        return this.$route.name
       }
-    },
-    data() {
-      return {
-        activeIndex: 'map'
-      };
     },
     methods: {
       changeSideBar() {
@@ -88,6 +86,17 @@
           float: left;
           width: 60px;
         }
+      }
+
+      .logout {
+        float: right;
+        height: 60px;
+        line-height: 60px;
+        margin: 0 50px 0 0;
+        cursor: pointer;
+        position: relative;
+        box-sizing: border-box;
+        border-bottom: 5px solid transparent;
       }
     }
   }

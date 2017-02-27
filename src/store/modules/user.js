@@ -54,7 +54,7 @@ const actions = {
       auth.doLogout().then(
         (res) => {
           if (res.data.status === '0') {
-            context.commit('setLogin', false)
+            context.commit('setLogin', false);
             resolve(true)
           }else {
             resolve(false)
