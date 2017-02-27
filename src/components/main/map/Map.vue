@@ -1,12 +1,12 @@
 <template>
-  <div class="map-container" v-bind:class="{'map-side-bar-open': isSideBarOpen}">
-    <img :src="mapPath" alt="loading map">
-
+  <div class="map-container" v-bind:style="{background: 'url('+mapPath+')'}" v-bind:class="{'map-side-bar-open': isSideBarOpen}">
+    <mark-pin></mark-pin>
   </div>
 </template>
 
 <script>
   import API from '../../../config/request'
+  import MarkPin from './MarkPin.vue'
 
   export default {
     computed: {
@@ -26,6 +26,9 @@
     },
     created () {
 
+    },
+    components: {
+      MarkPin
     }
   }
 </script>
