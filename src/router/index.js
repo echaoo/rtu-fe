@@ -6,6 +6,9 @@ import NotFound from 'components/404/NotFound'
 
 import Main from 'components/main/Main'
 import Map from 'components/main/map/Map'
+import Indicator from 'components/main/indicator/Indicator'
+import WarnLog from 'components/main/warnlog/WarnLog'
+import WellList from 'components/main/welllist/WellList'
 
 Vue.use(Router)
 
@@ -36,6 +39,21 @@ export default new Router({
           path: 'map',
           name: 'map',
           component: Map
+        },
+        {
+          path: 'indicator',
+          name: 'indicator',
+          component: Indicator
+        },
+        {
+          path: 'warnlog',
+          name: 'warnlog',
+          component: WarnLog
+        },
+        {
+          path: 'welllist',
+          name: 'welllist',
+          component: WellList
         },
       ]
     },
