@@ -38,9 +38,11 @@
 <script>
   import API from '../../../config/request'
   export default {
-    data: {
-      chartMsgOdd: [],
-      chartMsgEven: []
+    data() {
+        return {
+          chartMsgOdd: [],
+          chartMsgEven: []
+        }
     },
     created() {
       let that = this;
@@ -58,51 +60,15 @@
         })
     },
     methods: {
-      rederOdd: function (chartMsgOdd) {
+      rederOdd (chartMsgOdd) {
         return chartMsgOdd.filter(function (item, index) {
           return index % 2 === 1;
         })
       },
-      rederEven: function (chartMsgEven) {
+      rederEven (chartMsgEven) {
         return chartMsgEven.filter(function (item, index) {
           return index % 2 === 0;
         })
-      },
-      paintChart: function (axis_data, ayis_data, value_data) {
-        option = {
-          tooltip: {
-            trigger: 'axis'
-          },
-          legend: {
-            data: ayis_data
-          },
-          grid: {
-            left: '3%',
-            right: '4%',
-            bottom: '3%',
-            containLabel: true
-          },
-          toolbox: {
-            feature: {
-              saveAsImage: {}
-            }
-          },
-          xAxis: {
-            type: 'category',
-            boundaryGap: false,
-            data: axis_data
-          },
-          yAxis: {
-            type: 'value'
-          },
-          series: [
-            {
-              name:'载荷',
-              type:'line',
-              data: value_data
-            }
-          ]
-        };
       }
     }
   }
