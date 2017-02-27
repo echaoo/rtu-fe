@@ -1,6 +1,6 @@
 <template>
   <div class="side-container animated" v-bind:class="{'fadeOutLeft': !isSideBarOpen, 'fadeInLeft': isSideBarOpen}">
-    <el-menu theme="dark" default-active="2" class="menu" @select="handleClick">
+    <el-menu theme="dark" default-active="0" class="menu" @select="handleClick">
       <el-menu-item v-for="(item, index) in sideBarList" :index="index.toString()"><i class="el-icon-menu"></i>{{item.Name}}
       </el-menu-item>
     </el-menu>
@@ -25,17 +25,11 @@
       }
     },
     created () {
-      this.$http.get(API.block).then(
-        response => {
-          if (response.data.status === '0') {
-            this.blockInfo = response.data.data;
-          }
-        })
+
     },
     methods: {
       handleClick(index) {
-        console.log(123)
-        console.log(index)
+        this.$store.commit('setSideBarIndex', index)
       }
     }
   }

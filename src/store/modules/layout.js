@@ -39,6 +39,9 @@ const mutations = {
   },
   setSideBar(state, newSideBarArr) {
     state.sideBarList = newSideBarArr
+  },
+  setSideBarIndex(state, newSideBarIndex) {
+    state.selectedSide = newSideBarIndex
   }
 }
 

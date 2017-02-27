@@ -1,8 +1,6 @@
 <template>
-  <div>
-    <div class="map">
-      <img :src="mapPath" alt="ass">
-    </div>
+  <div class="map-container">
+    <img :src="mapPath" alt="loading map">
   </div>
 </template>
 
@@ -10,26 +8,29 @@
   import API from '../../../config/request'
 
   export default {
+    computed: {
+      mapPath() {
+          return 'http://' + this.$store.state.layout.sideBarList[parseInt(this.$store.state.layout.selectedSide)].MapPath
+      }
+    },
     data () {
       return {
-        mapPath: ''
       }
     },
     created () {
-      let that = this;
-      this.$http.get(API.block).then(
-        function (res) {
-          if (res.data.status === '0') {
-            that.mapPath = res.data.data[0].MapPath;
-            that.mapPath = 'http://' + that.mapPath;
-          }
-        })
+
     }
   }
 </script>
 
 <style lang="less" rel="stylesheet/less">
-  .map {
+  .map-container {
+    height: 100%;
+    width: 100%;
+    position: absolute;
 
+    img {
+      height:100%;
+    }
   }
 </style>
