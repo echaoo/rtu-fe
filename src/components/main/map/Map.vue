@@ -1,7 +1,7 @@
 <template>
   <div class="map-container" v-bind:class="{'map-side-bar-open': isSideBarOpen}">
     <div v-bind:style="{'background-image': 'url('+mapPath+')'}" class="map">
-      <map-marker v-for="item in markList"></map-marker>
+      <map-marker v-for="item in markList[1]" :mark-conf="item"></map-marker>
     </div>
   </div>
 </template>
@@ -25,11 +25,11 @@
     },
     data () {
       return {
-        markList: []
+        markList: [[], []]
       }
     },
     created () {
-
+      this.getWellData();
     },
     methods: {
       // 获取油井信息
@@ -54,10 +54,12 @@
       // 处理油井信息 TODO：加单元测试！
       dealWellData(data) {
         for (let item of data) {
-          if (markList[item.BLOCK_ID] === null) {
-            markList[item.BLOCK_ID] = []
+//          console.log(this.markList[3])
+          if (this.markList[item.BLOCK_ID] === undefined) {
+            this.markList[item.BLOCK_ID] = []
           }
-          markList[item.BLOCK_ID].push({id: item.ID, name: item.Name, })
+          this.markList[item.BLOCK_ID].push({id: item.ID, name: item.Name, left: item.Width, top: item.Height})
+//          console.log(this.markList)
         }
       }
     },
@@ -74,6 +76,7 @@
     position: absolute;
     background-repeat: no-repeat;
     background-size: contain;
+    padding-bottom: 60px;
 
     .map {
       height: 100%;

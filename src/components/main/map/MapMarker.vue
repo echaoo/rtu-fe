@@ -1,5 +1,5 @@
 <template>
-  <div class="mark-container" v-bind:style="{left: markConf.left, top: markConf.top}">
+  <div class="mark-container" v-bind:style="{'left': markConf.left, 'top': markConf.top}">
     <div class='pin'><span class="num">{{markConf.name}}</span></div>
     <div class='pulse'></div>
   </div>
@@ -13,6 +13,7 @@
         default() {
           return {
             name: '02',
+            id: 1,
             top: '20%',
             left: '50%'
           }
@@ -25,6 +26,7 @@
 <style lang="less" rel="stylesheet/less">
   .mark-container {
     display: inline-block;
+    position: relative;
 
     .num {
       display: block;
