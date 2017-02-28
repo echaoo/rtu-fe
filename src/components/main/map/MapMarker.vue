@@ -1,5 +1,5 @@
 <template>
-  <div class="mark-container" >
+  <div class="mark-container" v-bind:style="{left: markConf.left, top: markConf.top}">
     <div class='pin'><span class="num">{{markConf.name}}</span></div>
     <div class='pulse'></div>
   </div>
@@ -12,7 +12,9 @@
         type: Object,
         default() {
           return {
-            name: '02'
+            name: '02',
+            top: '20%',
+            left: '50%'
           }
         }
       }
