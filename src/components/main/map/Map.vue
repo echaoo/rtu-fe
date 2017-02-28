@@ -2,12 +2,14 @@
   <div>
     <div class="map">
       <img :src="mapPath" alt="ass">
+      <map-marker></map-marker>
     </div>
   </div>
 </template>
 
 <script>
   import API from '../../../config/request'
+  import MapMarker from './MapMarker.vue'
 
   export default {
     data () {
@@ -24,6 +26,9 @@
             that.mapPath = 'http://' + that.mapPath;
           }
         })
+    },
+    components: {
+        MapMarker
     }
   }
 </script>
