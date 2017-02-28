@@ -10,5 +10,6 @@ export default {
   reg: host + 'Register',
   isLogin: host + 'Login/IsLogin',
   block: host + 'Map/Block',
-  indicator : host + 'Indicator'
+  indicator : host + 'Indicator',
+  wellInfo: host + 'Map/Well'
 }

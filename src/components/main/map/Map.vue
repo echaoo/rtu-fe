@@ -1,12 +1,12 @@
 <template>
   <div class="map-container" v-bind:style="{background: 'url('+mapPath+')'}" v-bind:class="{'map-side-bar-open': isSideBarOpen}">
-    <mark-pin></mark-pin>
+    <map-marker></map-marker>
   </div>
 </template>
 
 <script>
   import API from '../../../config/request'
-  import MarkPin from './MarkPin.vue'
+  import MapMarker from './MapMarker.vue'
 
   export default {
     computed: {
@@ -28,7 +28,7 @@
 
     },
     components: {
-      MarkPin
+      MapMarker
     }
   }
 </script>
