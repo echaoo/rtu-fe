@@ -30,12 +30,14 @@
 
     .num {
       display: block;
-      /*color: #fff;*/
       transform: rotate(45deg);
       position: absolute;
       left: 6px;
       z-index: 99;
       top: 5px;
+      width: 100%;
+      margin-left: -7px;
+      text-align: center;
     }
 
     body {
@@ -62,6 +64,9 @@
         left: 12px;
         z-index: 99;
         top: 11px;
+        width: 100%;
+        margin-left: -13px;
+        text-align: center;
       }
     }
 
