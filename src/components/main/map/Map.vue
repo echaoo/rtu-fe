@@ -1,6 +1,8 @@
 <template>
-  <div class="map-container" v-bind:style="{background: 'url('+mapPath+')'}" v-bind:class="{'map-side-bar-open': isSideBarOpen}">
-    <map-marker></map-marker>
+  <div class="map-container" v-bind:class="{'map-side-bar-open': isSideBarOpen}">
+    <div v-bind:style="{'background-image': 'url('+mapPath+')'}" class="map">
+      <map-marker v-for="item in markList"></map-marker>
+    </div>
   </div>
 </template>
 
@@ -22,20 +24,15 @@
       }
     },
     data () {
-      return {}
+      return {
+        markList: [1, 2]
+      }
     },
     created () {
-      let that = this;
-      this.$http.get(API.block).then(
-        function (res) {
-          if (res.data.status === '0') {
-            that.mapPath = res.data.data[0].MapPath;
-            that.mapPath = 'http://' + that.mapPath;
-          }
-        })
+
     },
     components: {
-        MapMarker
+      MapMarker
     }
   }
 </script>
@@ -45,11 +42,15 @@
     height: 100%;
     width: 100%;
     position: absolute;
+    background-repeat: no-repeat;
+    background-size: contain;
 
-    img {
+    .map {
       height: 100%;
       width: 100%;
+      background-size: 100% 100%;
     }
+
   }
 
   .map-side-bar-open {
