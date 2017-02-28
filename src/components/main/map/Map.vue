@@ -25,11 +25,41 @@
     },
     data () {
       return {
-        markList: [1, 2]
+        markList: []
       }
     },
     created () {
 
+    },
+    methods: {
+      // 获取油井信息
+      getWellData() {
+        let that = this
+        this.$http.get(API.wellInfo).then(
+          (res) => {
+            console.log(res)
+            if (res.data.status === '0') {
+              // 正确的处理
+              that.dealWellData(res.data.data)
+            }
+            else {
+              // 错误的处理
+            }
+          },
+          () => {
+            // 网络错误或服务器端错误
+          }
+        )
+      },
+      // 处理油井信息 TODO：加单元测试！
+      dealWellData(data) {
+        for (let item of data) {
+          if (markList[item.BLOCK_ID] === null) {
+            markList[item.BLOCK_ID] = []
+          }
+          markList[item.BLOCK_ID].push({id: item.ID, name: item.Name, })
+        }
+      }
     },
     components: {
       MapMarker
