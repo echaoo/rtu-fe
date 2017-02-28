@@ -1,48 +1,24 @@
 <template>
   <div id="indicator">
-    <div class="wrapper animated fadeInRight">
-      <div class="row">
-        <div class="col-md-6">
-          <div class="row" v-for="item in rederEven(chartMsgEven)">
-            <div class="col-md-12">
-              <div class="ibox float-e-margins">
-                <div class="ibox-title">
-                  <h5>油井{{ item.Well_ID }}</h5>
-                </div>
-                <div class="ibox-content">
-                  <div id="ct-chart1" class="ct-perfect-fourth">sds</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="row" v-for="item in rederOdd(chartMsgOdd)">
-            <div class="col-md-12">
-              <div class="ibox float-e-margins">
-                <div class="ibox-title">
-                  <h5>油井{{ item.Well_ID }}</h5>
-                </div>
-                <div class="ibox-content">
-                  <div id="ct" class="ct-perfect-fourth">sds</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <line-chart></line-chart>
   </div>
 </template>
 
 <script>
   import API from '../../../config/request'
+  import LineChart from './LineChart.vue'
   export default {
     data() {
-        return {
-          chartMsgOdd: [],
-          chartMsgEven: []
-        }
+      return {
+        chartMsgOdd: [],
+        chartMsgEven: [],
+        chartData: {
+          axisData: [],
+          yaxisData: [],
+          id: ''
+        },
+        allData: []
+      }
     },
     created() {
       let that = this;
@@ -51,25 +27,12 @@
         page: '1',
         size: '6'
       };
-      this.$http.post(API.indicator, body).then(
-        response => {
-          if (response.data.status === '0') {
-            that.chartMsgOdd = response.data.data;
-            that.chartMsgEven = response.data.data;
-          }
-        })
     },
     methods: {
-      rederOdd (chartMsgOdd) {
-        return chartMsgOdd.filter(function (item, index) {
-          return index % 2 === 1;
-        })
-      },
-      rederEven (chartMsgEven) {
-        return chartMsgEven.filter(function (item, index) {
-          return index % 2 === 0;
-        })
-      }
+
+    },
+    components: {
+      LineChart
     }
   }
 </script>
