@@ -22,13 +22,13 @@
       },
       chartId: {
         type: String,
-        default: 'char1'
+        default: 'chart1'
       }
     },
     watch: {
       chartData: {
         handler(val, oldVal){
-          if (this.chartData.axisData !== undefined) {
+          if (this.chartData.axisData[0] !== undefined) {
             this.paintChart();
           }
         },
@@ -43,16 +43,15 @@
         let that = this
         let myChart = echarts.init(document.getElementById(that.chartId));
         let data = [];
+        let len = parseInt(that.chartId.substring(5))
+        console.log(that.chartData.axisData)
 
-        for(let i = 0; i < that.chartData.axisData.length; i++) {
+        for(let i = 0; i < that.chartData.axisData[len].length; i++) {
             let temp = [];
-            temp.push(that.chartData.axisData[i]);
-            temp.push(that.chartData.yaxisData[i]);
+            temp.push(that.chartData.axisData[len][i]);
+            temp.push(that.chartData.yaxisData[len][i]);
             data.push(temp);
         }
-
-        console.log(data)
-
         let option = {
           title: {
             text: 'Click to Add Points'

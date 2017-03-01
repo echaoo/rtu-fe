@@ -11,7 +11,7 @@
                 </div>
                 <div class="ibox-content">
                   <div class="ct-perfect-fourth">
-                    <line-chart :chart-data="chartData" :chart-id="chartId + index"></line-chart>
+                    <line-chart :chart-data="chartData" :chart-id="chartId + (index===0?0:(index*2))"></line-chart>
                   </div>
                 </div>
               </div>
@@ -19,14 +19,16 @@
           </div>
         </div>
         <div class="col-md-6">
-          <div class="row" v-for="item in rederOdd(chartMsgOdd)">
+          <div class="row" v-for="(item, index) in rederOdd(chartMsgOdd)">
             <div class="col-md-12">
               <div class="ibox float-e-margins">
                 <div class="ibox-title">
                   <h5>油井{{ item.Well_ID }}</h5>
                 </div>
                 <div class="ibox-content">
-                  <div id="chart" class="ct-perfect-fourth">sds</div>
+                  <div class="ct-perfect-fourth">
+                    <line-chart :chart-data="chartData" :chart-id="chartId + (index===0?1:((index*2)+1))"></line-chart>
+                  </div>
                 </div>
               </div>
             </div>
@@ -74,9 +76,19 @@
         function (res) {
           if (res.data.status === '0') {
             that.allData = res.data.data;
-            that.chartData.axisData = that.allData[0].Indd_Data_Disp;
-            that.chartData.yaxisData = that.allData[0].Indd_Data_Load;
-            that.chartData.id = 'chart'+ that.allData[0].ID;
+            console.log(that.allData)
+            let tempx= [];
+            let tempy= [];
+            let tempid = [];
+            for(let i = 0; i < that.allData.length; i++) {
+              tempx.push(that.allData[i].Indd_Data_Disp);
+              tempy.push(that.allData[i].Indd_Data_Load);
+//              tempid = 'chart'+ that.allData[i].ID;
+            }
+            that.chartData.axisData = tempx;
+            that.chartData.yaxisData = tempy;
+            console.log(tempx)
+//            that.chartData.id = tempid;
           }
         })
     },
