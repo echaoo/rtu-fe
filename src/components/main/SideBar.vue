@@ -1,6 +1,7 @@
 <template>
   <div class="side-container animated" v-bind:class="{'fadeOutLeft': !isSideBarOpen, 'fadeInLeft': isSideBarOpen}">
     <el-menu theme="dark" default-active="0" class="menu" @select="handleClick">
+      <el-menu-item index="all"><i class="el-icon-menu"></i>全部区块</el-menu-item>
       <el-menu-item v-for="(item, index) in sideBarList" :index="index.toString()"><i class="el-icon-menu"></i>{{item.Name}}
       </el-menu-item>
     </el-menu>
