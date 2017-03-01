@@ -1,6 +1,41 @@
 <template>
   <div id="indicator">
-    <line-chart></line-chart>
+    <div class="wrapper animated fadeInRight">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="row" v-for="(item, index) in rederEven(chartMsgEven)">
+            <div class="col-md-12">
+              <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                  <h5>油井{{ item.Well_ID }}</h5>
+                </div>
+                <div class="ibox-content">
+                  <div class="ct-perfect-fourth">
+                    <line-chart :chart-data="chartData" :chart-id="chartId + (index===0?0:(index*2))"></line-chart>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="row" v-for="(item, index) in rederOdd(chartMsgOdd)">
+            <div class="col-md-12">
+              <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                  <h5>油井{{ item.Well_ID }}</h5>
+                </div>
+                <div class="ibox-content">
+                  <div class="ct-perfect-fourth">
+                    <line-chart :chart-data="chartData" :chart-id="chartId + (index===0?1:((index*2)+1))"></line-chart>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -17,6 +52,7 @@
           yaxisData: [],
           id: ''
         },
+        chartId: 'chart',
         allData: []
       }
     },
@@ -27,9 +63,46 @@
         page: '1',
         size: '6'
       };
+      this.$http.post(API.indicator, body).then(
+        function (res) {
+          if (res.data.status === '0')
+          {
+            that.chartMsgOdd = res.data.data;
+            that.chartMsgEven = res.data.data;
+          }
+        });
+
+      this.$http.post(API.indicator, body).then(
+        function (res) {
+          if (res.data.status === '0') {
+            that.allData = res.data.data;
+            console.log(that.allData)
+            let tempx= [];
+            let tempy= [];
+            let tempid = [];
+            for(let i = 0; i < that.allData.length; i++) {
+              tempx.push(that.allData[i].Indd_Data_Disp);
+              tempy.push(that.allData[i].Indd_Data_Load);
+//              tempid = 'chart'+ that.allData[i].ID;
+            }
+            that.chartData.axisData = tempx;
+            that.chartData.yaxisData = tempy;
+            console.log(tempx)
+//            that.chartData.id = tempid;
+          }
+        })
     },
     methods: {
-
+      rederOdd (chartMsgOdd) {
+        return chartMsgOdd.filter(function (item, index) {
+          return index % 2 === 1;
+        })
+      },
+      rederEven (chartMsgEven) {
+        return chartMsgEven.filter(function (item, index) {
+          return index % 2 === 0;
+        })
+      }
     },
     components: {
       LineChart
