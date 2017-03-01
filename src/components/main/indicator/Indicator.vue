@@ -1,6 +1,39 @@
 <template>
   <div id="indicator">
-    <line-chart></line-chart>
+    <div class="wrapper animated fadeInRight">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="row" v-for="(item, index) in rederEven(chartMsgEven)">
+            <div class="col-md-12">
+              <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                  <h5>油井{{ item.Well_ID }}</h5>
+                </div>
+                <div class="ibox-content">
+                  <div class="ct-perfect-fourth">
+                    <line-chart :chart-data="chartData" :chart-id="chartId + index"></line-chart>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="row" v-for="item in rederOdd(chartMsgOdd)">
+            <div class="col-md-12">
+              <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                  <h5>油井{{ item.Well_ID }}</h5>
+                </div>
+                <div class="ibox-content">
+                  <div id="chart" class="ct-perfect-fourth">sds</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -17,6 +50,7 @@
           yaxisData: [],
           id: ''
         },
+        chartId: 'chart',
         allData: []
       }
     },
@@ -27,9 +61,36 @@
         page: '1',
         size: '6'
       };
+      this.$http.post(API.indicator, body).then(
+        function (res) {
+          if (res.data.status === '0')
+          {
+            that.chartMsgOdd = res.data.data;
+            that.chartMsgEven = res.data.data;
+          }
+        });
+
+      this.$http.post(API.indicator, body).then(
+        function (res) {
+          if (res.data.status === '0') {
+            that.allData = res.data.data;
+            that.chartData.axisData = that.allData[0].Indd_Data_Disp;
+            that.chartData.yaxisData = that.allData[0].Indd_Data_Load;
+            that.chartData.id = 'chart'+ that.allData[0].ID;
+          }
+        })
     },
     methods: {
-
+      rederOdd (chartMsgOdd) {
+        return chartMsgOdd.filter(function (item, index) {
+          return index % 2 === 1;
+        })
+      },
+      rederEven (chartMsgEven) {
+        return chartMsgEven.filter(function (item, index) {
+          return index % 2 === 0;
+        })
+      }
     },
     components: {
       LineChart
