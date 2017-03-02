@@ -1,8 +1,8 @@
 <template>
   <div class="mark-container" v-bind:style="{'left': markConf.left, 'top': markConf.top}">
-    <div class='pin'><span class="num">{{markConf.name}}</span>
+    <div class='pin' :style="{background: statusToColor(markConf.status)}"><span class="num">{{markConf.name}}</span>
     </div>
-    <div class='pulse' ></div>
+    <div :class='statusToClass(markConf.status)'></div>
   </div>
 </template>
 
@@ -23,7 +23,7 @@
       }
     },
     methods: {
-      statusToColor(status) {
+      statusToClass(status) {
         switch (status) {
           case 'breathe':
             return 'pulse-breathe'
@@ -34,12 +34,29 @@
           case 'dead':
             return 'pulse-dead'
         }
+      },
+      statusToColor(status) {
+        switch (status) {
+          case 'breathe':
+            return '#0cda32'
+          case 'bad':
+            return '#da020f'
+          case 'warn':
+            return '#e8be04'
+          case 'dead':
+            return '#000000'
+        }
       }
     }
   }
 </script>
 
 <style lang="less" rel="stylesheet/less">
+  @breathe-color: #0cda32;
+  @dead-color: #000000;
+  @bad-color: #da020f;
+  @warn-color: #e8be04;
+
   .pulse-after(@color) {
     content: "";
     border-radius: 50%;
@@ -124,7 +141,7 @@
       z-index: 1;
     }
 
-    .pulse :after {
+    .pulse:after {
       content: "";
       border-radius: 50%;
       height: 40px;
@@ -145,17 +162,17 @@
     }
 
     /*四种状态对应的颜色不同*/
-    .pulse-breathe :after {
-      .pulse-after(#0cda32);
+    .pulse-breathe:after {
+      .pulse-after(@breathe-color);
     }
-    .pulse-warn :after {
-      .pulse-after(#e8be04);
+    .pulse-warn:after {
+      .pulse-after(@warn-color);
     }
-    .pulse-dead :after {
-      .pulse-after(#000000);
+    .pulse-dead:after {
+      .pulse-after(@dead-color);
     }
-    .pulse-bad :after {
-      .pulse-after(#da020f);
+    .pulse-bad:after {
+      .pulse-after(@bad-color);
     }
 
     @keyframes pulsate {
