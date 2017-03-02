@@ -4,7 +4,7 @@
       <div class="col-lg-12">
         <div class="ibox float-e-margins">
           <div class="ibox-title">
-            <h5></h5>
+            <h5>油井报警信息记录</h5>
           </div>
           <div class="ibox-content">
             <el-table :data="warnList" border style="width: 100%"
