@@ -1,7 +1,8 @@
 <template>
   <div class="mark-container" v-bind:style="{'left': markConf.left, 'top': markConf.top}">
-    <div class='pin'><span class="num">{{markConf.name}}</span></div>
-    <div class='pulse'></div>
+    <div class='pin'><span class="num">{{markConf.name}}</span>
+    </div>
+    <div class='pulse' ></div>
   </div>
 </template>
 
@@ -15,8 +16,23 @@
             name: '02',
             id: 1,
             top: '20%',
-            left: '50%'
+            left: '50%',
+            status: 'dead'
           }
+        }
+      }
+    },
+    methods: {
+      statusToColor(status) {
+        switch (status) {
+          case 'breathe':
+            return 'pulse-breathe'
+          case 'bad':
+            return 'pulse-bad'
+          case 'warn':
+            return 'pulse-warn'
+          case 'dead':
+            return 'pulse-dead'
         }
       }
     }
@@ -24,6 +40,19 @@
 </script>
 
 <style lang="less" rel="stylesheet/less">
+  .pulse-after(@color) {
+    content: "";
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+    position: absolute;
+    margin: -13px 0 0 -13px;
+    animation: pulsate 1s ease-out;
+    animation-iteration-count: infinite;
+    opacity: 0;
+    box-shadow: 0 0 1px 2px @color;
+  }
+
   .mark-container {
     display: inline-block;
     position: relative;
@@ -48,7 +77,7 @@
       width: 30px;
       height: 30px;
       border-radius: 50% 50% 50% 0;
-      background: #02daaf;
+      background: red;
       position: absolute;
       transform: rotate(-45deg);
       margin: -33px 0 0 -8px;
@@ -95,7 +124,7 @@
       z-index: 1;
     }
 
-    .pulse:after {
+    .pulse :after {
       content: "";
       border-radius: 50%;
       height: 40px;
@@ -105,7 +134,28 @@
       animation: pulsate 1s ease-out;
       animation-iteration-count: infinite;
       opacity: 0;
-      box-shadow: 0 0 1px 2px #02daaf;
+      box-shadow: 0 0 1px 2px rebeccapurple;
+    }
+
+    .pulse-breathe,
+    .pulse-warn,
+    .pulse-dead,
+    .pulse-bad {
+      .mark-container .pulse;
+    }
+
+    /*四种状态对应的颜色不同*/
+    .pulse-breathe :after {
+      .pulse-after(#0cda32);
+    }
+    .pulse-warn :after {
+      .pulse-after(#e8be04);
+    }
+    .pulse-dead :after {
+      .pulse-after(#000000);
+    }
+    .pulse-bad :after {
+      .pulse-after(#da020f);
     }
 
     @keyframes pulsate {
