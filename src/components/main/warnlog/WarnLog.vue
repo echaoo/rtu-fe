@@ -18,8 +18,7 @@
             </el-table>
             <div class="page">
               <el-pagination v-bind:current-Page="pageIndex" v-bind:page-size="pageSize" :total="total"
-                             layout="total,sizes,prev,pager,next,jumper" v-bind:page-sizes="pageSizes"
-                             v-on:size-change="sizeChange" v-on:current-change="pageIndexChange">
+                             layout="prev,pager,next,jumper" v-on:size-change="sizeChange" v-on:current-change="pageIndexChange">
 
               </el-pagination>
             </div>
@@ -59,11 +58,11 @@
         this.pageSize = pageSize;
         this.pageRequest();
       },
-      pageRequest () {
+      pageRequest (pageIndex) {
         let body = {
           blockid: 0,
           size: this.pageSize,
-          page: this.pageIndex
+          page: pageIndex
         };
         let that = this;
         this.$http.post(API.wellLog, body).then(
