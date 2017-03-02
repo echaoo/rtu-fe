@@ -30,9 +30,6 @@
 </template>
 
 <script>
-  import dataTables from 'datatables.net'
-  import dataTablesBs from 'datatables.net-bs'
-  import 'datatables.net-bs/css/dataTables.bootstrap.css'
   import API from '../../../config/request'
   export default {
     data () {
