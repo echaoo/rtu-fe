@@ -17,8 +17,11 @@
               <el-table-column prop="isCheck" label="报警状态记录"></el-table-column>
             </el-table>
             <div class="page">
-              <el-pagination layout="prev, pager, next" :total="1000" v-bind:current-Page="pageIndex"
-                             v-bind:page-size="pageSize" v-on:current-change="pageIndexChange"></el-pagination>
+              <el-pagination v-bind:current-Page="pageIndex" v-bind:page-size="pageSize" :total="total"
+                             layout="total,sizes,prev,pager,next,jumper" v-bind:page-sizes="pageSizes"
+                             v-on:size-change="sizeChange" v-on:current-change="pageIndexChange">
+
+              </el-pagination>
             </div>
           </div>
         </div>
@@ -52,17 +55,22 @@
         this.pageIndex = this.pageIndex;
         this.pageRequest(pageIndex);
       },
-      pageRequest (pageIndex) {
+      sizeChange (pageSize) {
+        this.pageSize = pageSize;
+        this.pageRequest();
+      },
+      pageRequest () {
         let body = {
           blockid: 0,
           size: this.pageSize,
-          page: pageIndex
+          page: this.pageIndex
         };
         let that = this;
         this.$http.post(API.wellLog, body).then(
           function (res) {
             if (res.data.status === '0') {
               that.warnList = res.data.data;
+              that.total = res.data.totalnum;
             }
           });
       }
