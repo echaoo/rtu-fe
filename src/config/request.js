@@ -11,5 +11,6 @@ export default {
   isLogin: host + 'Login/IsLogin',
   block: host + 'Map/Block',
   indicator : host + 'Indicator',
-  wellInfo: host + 'Map/Well'
+  wellInfo: host + 'Map/Well',
+  wellLog: host + 'WarnLog'
 }
