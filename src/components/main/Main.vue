@@ -41,7 +41,7 @@
     }
 
     .side-bar-open {
-      margin-left: 260px;
+      margin-left: 220px;
     }
   }
 </style>

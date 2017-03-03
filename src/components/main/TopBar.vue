@@ -56,6 +56,7 @@
 
 <style lang="less" rel="stylesheet/less">
   .top-container {
+    margin-left: 220px;
 
     .el-menu {
 
