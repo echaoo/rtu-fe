@@ -1,5 +1,5 @@
 <template>
-  <div class="top-container">
+  <div class="top-container" v-bind:class="{'fadeMiniTop': !iconSwitch, 'fadeFullTop': iconSwitch}">
     <el-menu :default-active="activeIndex" class="" mode="horizontal" @select="handleSelect" :router=true>
       <button class="switch-btn" @click="changeSideBar">
         <i v-if="iconSwitch" class="el-icon-d-arrow-left"></i>
@@ -23,7 +23,7 @@
   export default {
     computed: {
       iconSwitch() {
-        return this.$store.state.layout.isSideBarOpen
+        return this.$store.state.layout.isSideBarOpen;
       },
       activeIndex() {
         return this.$route.name
@@ -57,7 +57,6 @@
 <style lang="less" rel="stylesheet/less">
   .top-container {
     margin-left: 220px;
-
     .el-menu {
 
       .switch-btn {
@@ -104,5 +103,60 @@
 
   .side-bar-open {
     margin-left: 220px;
+    background-color: #cb4747;
+  }
+
+  .side-bar-close {
+    margin-left: 70px;
+  }
+
+  @-webkit-keyframes fadeMiniTop {
+    from {
+      margin-left: 220px;
+    }
+
+    to {
+      margin-left: 70px;
+    }
+  }
+
+  @keyframes fadeMiniTop {
+    from {
+      margin-left: 220px;
+    }
+
+    to {
+      margin-left: 70px;
+    }
+  }
+
+  .fadeMiniTop {
+    -webkit-animation-name: fadeMiniTop;
+    animation-name: fadeMiniTop;
+  }
+
+  @-webkit-keyframes fadeFullTop {
+    from {
+      margin-left: 70px;
+    }
+
+    to {
+      margin-left: 220px;
+    }
+  }
+
+  @keyframes fadeFullTop {
+    from {
+      margin-left: 70px;
+    }
+
+    to {
+      margin-left: 220px;
+    }
+  }
+
+  .fadeFullTop {
+    -webkit-animation-name: fadeFullTop;
+    animation-name: fadeFullTop;
   }
 </style>
