@@ -1,8 +1,8 @@
 <template>
   <div class="main-container">
-    <top-bar></top-bar>
     <side-bar></side-bar>
-    <div class="main-box" v-bind:class="{'side-bar-open': isSideBarOpen}">
+    <div class="main-box" v-bind:class="{'side-bar-open': isSideBarOpen, 'side-bar-close': !isSideBarOpen}">
+      <top-bar></top-bar>
       <router-view></router-view>
     </div>
   </div>
@@ -11,6 +11,7 @@
 <script>
   import SideBar from './SideBar.vue'
   import TopBar from './TopBar.vue'
+
   export default {
     computed: {
       isSideBarOpen() {
@@ -41,7 +42,14 @@
     }
 
     .side-bar-open {
-      margin-left: 260px;
+      margin-left: 220px;
+      transition: margin-left 1s;
     }
+
+    .side-bar-close {
+      margin-left: 70px;
+      transition: margin-left 1s;
+    }
+
   }
 </style>

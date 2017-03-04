@@ -7,11 +7,130 @@
             <div class="col-md-12">
               <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                  <h5>油井{{ item.Well_ID }}</h5>
+                  <h5 style="display: inline-block;">油井{{ item.Well_ID }}</h5>
+                  <span class="date"> {{item.Datetime}} </span>
                 </div>
                 <div class="ibox-content">
                   <div class="ct-perfect-fourth">
                     <line-chart :chart-data="chartData" :chart-id="chartId + (index===0?0:(index*2))"></line-chart>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <table class="table table-stripped small m-t-md">
+                          <tbody>
+                          <tr>
+                            <td class="no-borders">
+                              <i class="fa fa-circle text-navy"></i>
+                            </td>
+                            <td  class="no-borders">
+                              冲&nbsp&nbsp&nbsp&nbsp程: {{item.Stroke}}(米)
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <i class="fa fa-circle text-navy"></i>
+                            </td>
+                            <td>
+                              最小载荷: {{item.minload}}(KN)
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <i class="fa fa-circle text-navy"></i>
+                            </td>
+                            <td>
+                              井口油压: {{item.O_Press}}(KN)
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <i class="fa fa-circle text-navy"></i>
+                            </td>
+                            <td>
+                              井口温度: {{item.O_Temp}}(C)
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <i class="fa fa-circle text-navy"></i>
+                            </td>
+                            <td>
+                              井口套压: {{item.Cas_Press}}(KN)
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <i class="fa fa-circle text-navy"></i>
+                            </td>
+                            <td>
+                              有功功率: {{item.Actpow}}(KW)
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <i class="fa fa-circle text-navy"></i>
+                            </td>
+                            <td>
+                              平衡率: {{item.Bal_Rate}}(%)
+                            </td>
+                          </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="col-md-6">
+                        <table class="table table-stripped small m-t-md">
+                          <tbody>
+                          <tr>
+                            <td class="no-borders">
+                              <i class="fa fa-circle text-navy"></i>
+                            </td>
+                            <td  class="no-borders">
+                              冲&nbsp&nbsp&nbsp&nbsp次: {{item.Stroketimes}}(次)
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <i class="fa fa-circle text-navy"></i>
+                            </td>
+                            <td>
+                              最大载荷: {{item.maxload}}(KN)
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <i class="fa fa-circle text-navy"></i>
+                            </td>
+                            <td>
+                              汇管压力: {{item.Manif_Press}}(KN)
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <i class="fa fa-circle text-navy"></i>
+                            </td>
+                            <td>
+                              汇管温度: {{item.Manif_Temp}}(C)
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <i class="fa fa-circle text-navy"></i>
+                            </td>
+                            <td>
+                              功率因数: {{item.Pow_Factor}}(%)
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <i class="fa fa-circle text-navy"></i>
+                            </td>
+                            <td>
+                              系统效率: {{item.Sys_Eff}}(%)
+                            </td>
+                          </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -23,11 +142,130 @@
             <div class="col-md-12">
               <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                  <h5>油井{{ item.Well_ID }}</h5>
+                  <h5 style="display: inline-block;">油井{{ item.Well_ID }}</h5>
+                  <span class="date"> {{item.Datetime}} </span>
                 </div>
                 <div class="ibox-content">
                   <div class="ct-perfect-fourth">
                     <line-chart :chart-data="chartData" :chart-id="chartId + (index===0?1:((index*2)+1))"></line-chart>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <table class="table table-stripped small m-t-md">
+                          <tbody>
+                          <tr>
+                            <td class="no-borders">
+                              <i class="fa fa-circle text-navy"></i>
+                            </td>
+                            <td  class="no-borders">
+                              冲&nbsp&nbsp&nbsp&nbsp程: {{item.Stroke}}(米)
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <i class="fa fa-circle text-navy"></i>
+                            </td>
+                            <td>
+                              最小载荷: {{item.minload}}(KN)
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <i class="fa fa-circle text-navy"></i>
+                            </td>
+                            <td>
+                              井口油压: {{item.O_Press}}(KN)
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <i class="fa fa-circle text-navy"></i>
+                            </td>
+                            <td>
+                              井口温度: {{item.O_Temp}}(C)
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <i class="fa fa-circle text-navy"></i>
+                            </td>
+                            <td>
+                              井口套压: {{item.Cas_Press}}(KN)
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <i class="fa fa-circle text-navy"></i>
+                            </td>
+                            <td>
+                              有功功率: {{item.Actpow}}(KW)
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <i class="fa fa-circle text-navy"></i>
+                            </td>
+                            <td>
+                              平衡率: {{item.Bal_Rate}}(%)
+                            </td>
+                          </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="col-md-6">
+                        <table class="table table-stripped small m-t-md">
+                          <tbody>
+                          <tr>
+                            <td class="no-borders">
+                              <i class="fa fa-circle text-navy"></i>
+                            </td>
+                            <td  class="no-borders">
+                              冲&nbsp&nbsp&nbsp&nbsp次: {{item.Stroketimes}}(次)
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <i class="fa fa-circle text-navy"></i>
+                            </td>
+                            <td>
+                              最大载荷: {{item.maxload}}(KN)
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <i class="fa fa-circle text-navy"></i>
+                            </td>
+                            <td>
+                              汇管压力: {{item.Manif_Press}}(KN)
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <i class="fa fa-circle text-navy"></i>
+                            </td>
+                            <td>
+                              汇管温度: {{item.Manif_Temp}}(C)
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <i class="fa fa-circle text-navy"></i>
+                            </td>
+                            <td>
+                              功率因数: {{item.Pow_Factor}}(%)
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <i class="fa fa-circle text-navy"></i>
+                            </td>
+                            <td>
+                              系统效率: {{item.Sys_Eff}}(%)
+                            </td>
+                          </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -111,12 +349,28 @@
 </script>
 
 <style lang="less" rel="stylesheet/less">
+  .date {
+    float: right;
+  }
+
+  .text-navy {
+    color: #1ab394;
+  }
+
+  .m-t-md {
+    margin-top: 20px;
+  }
+
+  .no-borders {
+    border: none !important;
+  }
+
   #indicator {
     background-color: #f3f3f4;
   }
 
   .wrapper {
-    padding: 20px 10px 40px;
+    padding: 30px 30px 40px;
   }
 
   .ibox {
