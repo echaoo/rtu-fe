@@ -56,7 +56,6 @@
 
 <style lang="less" rel="stylesheet/less">
   .top-container {
-    margin-left: 220px;
     .el-menu {
 
       .switch-btn {
@@ -103,7 +102,6 @@
 
   .side-bar-open {
     margin-left: 220px;
-    background-color: #cb4747;
   }
 
   .side-bar-close {

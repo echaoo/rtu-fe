@@ -48,7 +48,6 @@
     },
     methods: {
       pageIndexChange (pageIndex) {
-        this.pageIndex = this.pageIndex;
         this.pageRequest(pageIndex);
       },
       sizeChange (pageSize) {
