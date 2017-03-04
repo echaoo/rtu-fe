@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Index from 'components/index/Index'
 import Reg from 'components/reg/Reg'
 import NotFound from 'components/404/NotFound'
+import Oilwell from 'components/oilwell/Oilwell'
 
 import Main from 'components/main/Main'
 import Map from 'components/main/map/Map'
@@ -51,6 +52,11 @@ export default new Router({
           component: WellList
         },
       ]
+    },
+    {
+      name: 'oilwell',
+      path: '/oilwell/:wellid',
+      component: Oilwell
     },
     {
       path: '*',
