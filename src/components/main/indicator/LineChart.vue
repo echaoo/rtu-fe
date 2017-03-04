@@ -53,9 +53,6 @@
             data.push(temp);
         }
         let option = {
-          title: {
-            text: 'Click to Add Points'
-          },
           tooltip: {
             formatter: function (params) {
               var data = params.data || [0, 0];
@@ -66,17 +63,18 @@
             left: '3%',
             right: '4%',
             bottom: '3%',
+            top: '3%',
             containLabel: true
           },
           xAxis: {
             min: 0,
-            max: 5,
+            max: 4.5,
             type: 'value',
             axisLine: {onZero: false}
           },
           yAxis: {
             min: 0,
-            max: 30,
+            max: 25,
             type: 'value',
             axisLine: {onZero: false}
           },
@@ -99,7 +97,7 @@
 
 <style lang="less" rel="stylesheet/less" scoped>
   .test {
-    width: 300px;
+    width: 100%;
     height: 300px;
   }
 </style>
