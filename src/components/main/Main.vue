@@ -43,10 +43,12 @@
 
     .side-bar-open {
       margin-left: 220px;
+      transition: margin-left 1s;
     }
 
     .side-bar-close {
       margin-left: 70px;
+      transition: margin-left 1s;
     }
 
   }
