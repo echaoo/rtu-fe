@@ -44,81 +44,32 @@
     }
   }
 
-  @-webkit-keyframes fadeMiniNav {
-    0% {
-      opacity: 1;
-      width: 220px;
-    }
-
-    50% {
-      opacity: 0.8;
-    }
-
-    100% {
-      opacity: 1;
-      width: 70px;
-      /*display: block;*/
-    }
-  }
-
   @keyframes fadeMiniNav {
     0% {
-      opacity: 1;
       width: 220px;
     }
 
-    50% {
-      opacity: 0.8;
-    }
-
     100% {
-      opacity: 1;
       width: 70px;
       /*display: block;*/
     }
   }
 
   .fadeMiniNav {
-    -webkit-animation-name: fadeMiniNav;
     animation-name: fadeMiniNav;
-  }
-
-  @-webkit-keyframes fadeFullNav {
-    from {
-      0% {
-        opacity: 1;
-        width: 70px;
-      }
-
-      50% {
-        opacity: 0.8;
-      }
-
-      100% {
-        opacity: 1;
-        width: 220px;
-      }
-    }
   }
 
   @keyframes fadeFullNav {
     0% {
-      opacity: 1;
       width: 70px;
     }
 
-    50% {
-      opacity: 0.8;
-    }
-
     100% {
-      opacity: 1;
       width: 220px;
     }
   }
 
   .fadeFullNav {
-    -webkit-animation-name: fadeFullNav;
     animation-name: fadeFullNav;
   }
 </style>
