@@ -1,36 +1,27 @@
 <template>
   <div class="side-container animated" v-bind:class="{'fadeMiniNav': !isSideBarOpen, 'fadeFullNav': isSideBarOpen}">
-    <el-menu theme="dark" default-active="0" class="menu" @select="handleClick">
-      <el-menu-item index="all"><i class="el-icon-menu"></i>全部区块</el-menu-item>
-      <el-menu-item v-for="(item, index) in sideBarList" :index="index.toString()"><i class="el-icon-menu"></i>{{item.Name}}
-      </el-menu-item>
+
+    <div class="logo-area">
+      <img src="../../assets/main/CXSYIcon.png" alt="">
+      <span>创新石油</span>
+    </div>
+
+    <el-menu theme="dark" default-active="0" class="menu" @select="handleClick" :router=true>
+      <el-menu-item index="map" :route="{name: 'map'}">地图</el-menu-item>
+      <el-menu-item index="indicator" :route="{name: 'indicator'}">示功图</el-menu-item>
+      <el-menu-item index="warnlog" :route="{name: 'warnlog'}">报警信息</el-menu-item>
+      <el-menu-item index="welllist" :route="{name: 'welllist'}">井列表</el-menu-item>
     </el-menu>
   </div>
 </template>
 
 <script>
-  import API from '../../config/request'
+
 
   export default {
     computed: {
-      isSideBarOpen() {
-        return this.$store.state.layout.isSideBarOpen;
-      },
-      sideBarList() {
-        return this.$store.state.layout.sideBarList;
-      }
-    },
-    data() {
-      return {
-        index: 0
-      }
-    },
-    created () {
-
-    },
-    methods: {
-      handleClick(index) {
-        this.$store.commit('setSideBarIndex', index)
+      activeIndex() {
+        return this.$route.name
       }
     }
   }
