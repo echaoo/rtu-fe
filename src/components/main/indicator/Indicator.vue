@@ -12,7 +12,7 @@
                 </div>
                 <div class="ibox-content">
                   <div class="ct-perfect-fourth">
-                    <line-chart :chart-data="chartData" :chart-id="chartId + (index===0?0:(index*2))"></line-chart>
+                    <line-chart :chart-data="chartData" :chart-id="chartId + (index===0?0:(index*2))"   v-loading="loading2"></line-chart>
                     <div class="row">
                       <div class="col-md-6">
                         <table class="table table-stripped small m-t-md">
@@ -147,7 +147,7 @@
                 </div>
                 <div class="ibox-content">
                   <div class="ct-perfect-fourth">
-                    <line-chart :chart-data="chartData" :chart-id="chartId + (index===0?1:((index*2)+1))"></line-chart>
+                    <line-chart :chart-data="chartData" :chart-id="chartId + (index===0?1:((index*2)+1))"  v-loading="loading2"></line-chart>
                     <div class="row">
                       <div class="col-md-6">
                         <table class="table table-stripped small m-t-md">
@@ -291,7 +291,8 @@
           id: ''
         },
         chartId: 'chart',
-        allData: []
+        allData: [],
+        loading2: true
       }
     },
     created() {

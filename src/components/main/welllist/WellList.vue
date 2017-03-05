@@ -7,7 +7,7 @@
             <h5>区块 {{item[0].BLOCK_ID}}</h5>
           </div>
           <div class="ibox-content">
-            <el-table :data="wellList[index]" border style="width: 100%">
+            <el-table :data="wellList[index]" border style="width: 100%" v-loading="loading">
               <el-table-column prop="ID" label="油井编号" width="180"></el-table-column>
               <el-table-column prop="Name" label="油井名称" width="180"></el-table-column>
               <el-table-column label="油井状态" width="180">
@@ -41,7 +41,8 @@
   export default {
     data () {
       return {
-        wellList: []
+        wellList: [],
+        loading: true
       }
     },
     mounted () {
@@ -54,24 +55,12 @@
           function (res) {
             if (res.data.status === '0') {
               let temp = res.data.data;
-              let arr = [];
-              for (let i = 0; i < temp.length; i++) {
-                if (i === 0) {
-                  arr = [];
-                  arr.push(temp[i]);
-                } else if (i !== 0 && temp[i].BLOCK_ID !== temp[i - 1].BLOCK_ID) {
-                  console.log(arr)
-                  that.wellList.push(arr);
-                  arr = [];
-                  arr.push(temp[i]);
-                } else if (temp[i].BLOCK_ID === temp[i - 1].BLOCK_ID) {
-                  arr.push(temp[i]);
-                }
-              }
-              console.log(that.wellList)
+              that.dealData(temp)
+              that.loading = false;
             }
           });
       },
+
       statusToText (status) {
         switch (status) {
           case 'breathe':
@@ -82,6 +71,22 @@
             return '停用';
           case 'bad':
             return '故障';
+        }
+      },
+
+      dealData(temp) {
+        let arr = [];
+        for (let i = 0; i < temp.length; i++) {
+          if (i === 0) {
+            arr = [];
+            arr.push(temp[i]);
+          } else if (i !== 0 && temp[i].BLOCK_ID !== temp[i - 1].BLOCK_ID) {
+            this.wellList.push(arr);
+            arr = [];
+            arr.push(temp[i]);
+          } else if (temp[i].BLOCK_ID === temp[i - 1].BLOCK_ID) {
+            arr.push(temp[i]);
+          }
         }
       }
     }
