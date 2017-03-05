@@ -1,10 +1,10 @@
 <template>
   <div class="top-container" v-bind:class="{'fadeMiniTop': !iconSwitch, 'fadeFullTop': iconSwitch}">
-    <button class="switch-btn" @click="changeSideBar">
-      <i v-if="iconSwitch" class="el-icon-d-arrow-left"></i>
-      <i v-if="!iconSwitch" class="el-icon-d-arrow-right"></i>
-    </button>
-    <span v-on:click="logout" class="logout"><i class="fa fa-sign-out">登出</i></span>
+    <el-button class="toggle-side-menu" type="primary" @click="changeSideBar"><i class="fa fa-bars"></i></el-button>
+    <div class="right-menu">
+      <el-button type="danger" @click="logout"><i class="fa fa-sign-out"></i> 登出</el-button>
+      <el-button type="primary"><i class="fa fa-tasks"></i></el-button>
+    </div>
   </div>
 </template>
 
@@ -41,26 +41,18 @@
   .top-container {
     height: 60px;
     background-color: #f3f3f4;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 
-    .logout {
-      float: right;
-      height: 60px;
-      line-height: 60px;
-      margin: 0 50px 0 0;
-      cursor: pointer;
-      position: relative;
-      box-sizing: border-box;
-      border-bottom: 5px solid transparent;
+    .toggle-side-menu {
+      margin-left: 20px;
     }
 
-  }
+    .right-menu {
+      margin-right: 20px;
+    }
 
-  .side-bar-open {
-    margin-left: 220px;
-  }
-
-  .side-bar-close {
-    margin-left: 70px;
   }
 
   @-webkit-keyframes fadeMiniTop {
