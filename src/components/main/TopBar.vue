@@ -3,7 +3,7 @@
     <el-button class="toggle-side-menu" type="primary" @click="changeSideBar"><i class="fa fa-bars"></i></el-button>
     <div class="right-menu">
       <el-button type="danger" @click="logout"><i class="fa fa-sign-out"></i> 登出</el-button>
-      <el-button type="primary"><i class="fa fa-tasks"></i></el-button>
+      <el-button type="primary" @click="showRightMenu"><i class="fa fa-tasks"></i></el-button>
     </div>
   </div>
 </template>
@@ -16,6 +16,9 @@
       }
     },
     methods: {
+      showRightMenu() {
+        this.$store.dispatch('toggleRightMenu')
+      },
       changeSideBar() {
         this.$store.dispatch('changeSideBar')
       },
