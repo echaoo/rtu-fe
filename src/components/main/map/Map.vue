@@ -17,7 +17,7 @@
       },
       mapPath() {
         if (this.$store.state.layout.sideBarList.length !== 0) {
-          return 'http://' + this.$store.state.layout.sideBarList[parseInt(this.$store.state.layout.selectedSide)].MapPath
+          return 'http://' + this.$store.state.layout.sideBarList[parseInt(this.$store.state.layout.selectedSide)]
         } else {
           return ''
         }
