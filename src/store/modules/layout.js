@@ -6,6 +6,7 @@ import layout from '../../api/layout'
 
 const state = {
   isSideBarOpen: true,
+  isRightMenuOpen: false,
   sideBarList: [],
   selectedSide: 0
 }
@@ -13,10 +14,14 @@ const state = {
 const getters = {
   isSideBarOpen: state => state.isSideBarOpen,
   sideBarList: state => state.sideBarList,
-  selectedSide: state => state.selectedSide
+  selectedSide: state => state.selectedSide,
+  isRightMenuOpen: state => state.isRightMenuOpen
 }
 
 const actions = {
+  toggleRightMenu(context) {
+    context.commit('toggleRightMenu')
+  },
   changeSideBar(context) {
     context.commit('changeSideBar')
   },
@@ -42,6 +47,9 @@ const mutations = {
   },
   setSideBarIndex(state, newSideBarIndex) {
     state.selectedSide = newSideBarIndex
+  },
+  toggleRightMenu(state) {
+    state.isRightMenuOpen = !state.isRightMenuOpen
   }
 }
 

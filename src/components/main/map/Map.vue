@@ -87,6 +87,7 @@
     background-repeat: no-repeat;
     background-size: contain;
     padding-bottom: 60px;
+    padding-right: 70px;
 
     .map {
       height: 100%;
@@ -97,6 +98,6 @@
   }
 
   .map-side-bar-open {
-    padding-right: 260px;
+    padding-right: 220px;
   }
 </style>
