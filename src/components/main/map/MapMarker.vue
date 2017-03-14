@@ -104,6 +104,7 @@
       width: 40px;
       height: 40px;
       margin: -46px 0 0 -13px;
+      z-index: 2;
 
       .num {
         position: absolute;

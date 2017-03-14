@@ -5,17 +5,22 @@
       <top-bar></top-bar>
       <router-view></router-view>
     </div>
+    <right-side-menu v-show="isRightMenuOpen"></right-side-menu>
   </div>
 </template>
 
 <script>
   import SideBar from './SideBar.vue'
   import TopBar from './TopBar.vue'
+  import RightSideMenu from './RightSideBar.vue'
 
   export default {
     computed: {
       isSideBarOpen() {
         return this.$store.state.layout.isSideBarOpen;
+      },
+      isRightMenuOpen() {
+        return this.$store.state.layout.isRightMenuOpen;
       }
     },
     created() {
@@ -26,7 +31,8 @@
     },
     components: {
       SideBar,
-      TopBar
+      TopBar,
+      RightSideMenu
     }
   }
 </script>
