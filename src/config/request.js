@@ -2,7 +2,7 @@
  * Created by lhy95 on 2017/2/25.
  */
 
-let host = 'http://202.194.155.189:9999/';
+let host = 'http://47.93.46.153:8880/';
 
 export default {
   login: host + 'Login',
