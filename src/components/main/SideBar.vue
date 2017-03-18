@@ -15,10 +15,11 @@
           v-show="isSideBarOpen">井列表</span></el-menu-item>
       </div>
       <div v-if="!navSwitch">
+        <el-menu-item index="index"><i class="xds-icon fa fa-home"></i><span v-show="isSideBarOpen">首页</span></el-menu-item>
         <el-submenu index="curve">
           <template slot="title"><i class="xds-icon fa fa-line-chart"></i>曲线</template>
-          <el-menu-item index="1-1">实时曲线</el-menu-item>
-          <el-menu-item index="1-2">历史曲线</el-menu-item>
+          <el-menu-item index="realcurve">实时曲线</el-menu-item>
+          <el-menu-item index="historycurve">历史曲线</el-menu-item>
         </el-submenu>
         <el-submenu index="record">
           <template slot="title"><i class="xds-icon fa fa-edit"></i>记录</template>

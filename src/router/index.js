@@ -10,6 +10,9 @@ import Map from 'components/main/map/Map'
 import Indicator from 'components/main/indicator/Indicator'
 import WarnLog from 'components/main/warnlog/WarnLog'
 import WellList from 'components/main/welllist/WellList'
+import Curve from 'components/main/curve/Curve'
+import RealCurve from 'components/main/curve/RealCurve'
+import HistoryCurve from 'components/main/curve/HistoryCurve'
 
 Vue.use(Router)
 
@@ -51,6 +54,21 @@ export default new Router({
           name: 'welllist',
           component: WellList
         },
+        {
+          path: 'curve',
+          name: 'curve',
+          component: Curve
+        },
+        {
+          path: 'realcurve',
+          name: 'realcurve',
+          component: RealCurve
+        },
+        {
+          path: 'historycurve',
+          name: 'historycurve',
+          component: HistoryCurve
+        }
       ]
     },
     {

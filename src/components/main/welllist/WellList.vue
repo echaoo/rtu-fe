@@ -86,8 +86,7 @@
 
       handleWell(row) {
           this.$store.dispatch('setNavSwitch');
-          console.log(this.$store.state.layout.showIndex);
-          console.log(row)
+          this.$router.push('curve');
       }
     }
   }
