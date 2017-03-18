@@ -1,6 +1,6 @@
 <template>
   <div class="map-container" v-bind:class="{'map-side-bar-open': isSideBarOpen}">
-    <div v-bind:style="{'background-image': 'url('+mapPath+')'}" class="map">
+    <div v-bind:style="{'background-image': 'url(' + mapPath + ')'}" class="map">
       <map-marker v-for="item in markList[getSelectedID]" :mark-conf="item"></map-marker>
     </div>
   </div>
@@ -17,7 +17,8 @@
       },
       mapPath() {
         if (this.$store.state.layout.sideBarList.length !== 0) {
-          return 'http://' + this.$store.state.layout.sideBarList[parseInt(this.$store.state.layout.selectedSide)]
+          console.log(this.$store.state.layout.sideBarList.length)
+          return 'http://' + this.$store.state.layout.sideBarList[parseInt(this.$store.state.layout.selectedSide)].MapPath
         } else {
           return ''
         }

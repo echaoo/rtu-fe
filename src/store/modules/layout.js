@@ -8,14 +8,16 @@ const state = {
   isSideBarOpen: true,
   isRightMenuOpen: false,
   sideBarList: [],
-  selectedSide: 0
+  selectedSide: 0,
+  showIndex: true
 }
 
 const getters = {
   isSideBarOpen: state => state.isSideBarOpen,
   sideBarList: state => state.sideBarList,
   selectedSide: state => state.selectedSide,
-  isRightMenuOpen: state => state.isRightMenuOpen
+  isRightMenuOpen: state => state.isRightMenuOpen,
+  showIndex: state => state.showIndex
 }
 
 const actions = {
@@ -35,6 +37,9 @@ const actions = {
         }
       )
     })
+  },
+  setNavSwitch(context) {
+    context.commit('setNavSwitch')
   }
 }
 
@@ -50,6 +55,9 @@ const mutations = {
   },
   toggleRightMenu(state) {
     state.isRightMenuOpen = !state.isRightMenuOpen
+  },
+  setNavSwitch(state) {
+    state.showIndex = !state.showIndex
   }
 }
 

@@ -17,15 +17,9 @@
               </el-table-column>
               <el-table-column label="监控链接">
                 <template scope="scope">
-                  <el-button
-                    size="small"
-                    @click="handleEdit(scope.$index, scope.row)">云监控
+                  <el-button size="small" @click="handleWell(scope.row)">云监控
                   </el-button>
-                  <el-button
-                    size="small"
-                    type="danger"
-                    @click="handleDelete(scope.$index, scope.row)">现场
-                  </el-button>
+                  <el-button size="small" type="danger" @click="handleDelete(scope.$index, scope.row)">现场</el-button>
                 </template>
               </el-table-column>
             </el-table>
@@ -88,6 +82,12 @@
             arr.push(temp[i]);
           }
         }
+      },
+
+      handleWell(row) {
+          this.$store.dispatch('setNavSwitch');
+          console.log(this.$store.state.layout.showIndex);
+          console.log(row)
       }
     }
   }

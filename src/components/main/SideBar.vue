@@ -7,10 +7,34 @@
     </div>
 
     <el-menu theme="dark" :default-active="activeIndex" class="menu" @select="handleClick" :router=true>
-      <el-menu-item index="map" :route="{name: 'map'}"><i class="el-icon-picture"></i><span v-show="isSideBarOpen">地图</span></el-menu-item>
-      <el-menu-item index="indicator" :route="{name: 'indicator'}"><i class="el-icon-setting"></i><span v-show="isSideBarOpen">示功图</span></el-menu-item>
-      <el-menu-item index="warnlog" :route="{name: 'warnlog'}"><i class="el-icon-warning"></i><span v-show="isSideBarOpen">报警信息</span></el-menu-item>
-      <el-menu-item index="welllist" :route="{name: 'welllist'}"><i class="el-icon-more"></i><span v-show="isSideBarOpen">井列表</span></el-menu-item>
+      <div v-if="navSwitch">
+        <el-menu-item index="map" :route="{name: 'map'}"><i class="el-icon-picture"></i><span v-show="isSideBarOpen">地图</span></el-menu-item>
+        <el-menu-item index="indicator" :route="{name: 'indicator'}"><i class="el-icon-setting"></i><span v-show="isSideBarOpen">示功图</span></el-menu-item>
+        <el-menu-item index="warnlog" :route="{name: 'warnlog'}"><i class="el-icon-warning"></i><span v-show="isSideBarOpen">报警信息</span></el-menu-item>
+        <el-menu-item index="welllist" :route="{name: 'welllist'}"><i class="el-icon-more"></i><span
+          v-show="isSideBarOpen">井列表</span></el-menu-item>
+      </div>
+      <div v-if="!navSwitch">
+        <el-submenu index="curve">
+          <template slot="title"><i class="xds-icon fa fa-line-chart"></i>曲线</template>
+          <el-menu-item index="1-1">实时曲线</el-menu-item>
+          <el-menu-item index="1-2">历史曲线</el-menu-item>
+        </el-submenu>
+        <el-submenu index="record">
+          <template slot="title"><i class="xds-icon fa fa-edit"></i>记录</template>
+          <el-menu-item index="1-1">报警记录</el-menu-item>
+          <el-menu-item index="1-2">操作记录</el-menu-item>
+        </el-submenu>
+        <el-menu-item index="regulation"><i class="xds-icon fa fa-rss"></i><span v-show="isSideBarOpen">遥调</span></el-menu-item>
+        <el-submenu index="sigleIndicator">
+          <template slot="title"><i class="xds-icon fa fa-area-chart"></i>示功图</template>
+          <el-menu-item index="1-1">历史示功图</el-menu-item>
+          <el-menu-item index="1-2">示功图对比</el-menu-item>
+        </el-submenu>
+        <el-menu-item index="regulation"><i class="xds-icon fa fa-database"></i><span v-show="isSideBarOpen">全部数据</span></el-menu-item>
+        <el-menu-item index="regulation"><i class="xds-icon fa fa-android"></i><span v-show="isSideBarOpen">智能模块</span></el-menu-item>
+        <el-menu-item index="regulation"><i class="xds-icon fa fa-file-text"></i><span v-show="isSideBarOpen">数据报表</span></el-menu-item>
+      </div>
     </el-menu>
   </div>
 </template>
@@ -25,6 +49,9 @@
       },
       activeIndex() {
         return this.$route.name
+      },
+      navSwitch() {
+        return this.$store.state.layout.showIndex
       }
     },
     methods: {
@@ -36,6 +63,14 @@
 </script>
 
 <style lang="less" rel="stylesheet/less" scoped>
+  .el-submenu i {
+    margin-right: 10px;
+  }
+
+  .el-menu-item i {
+    margin-right: 10px;
+  }
+
   .side-container {
     position: absolute;
     top: 0;
