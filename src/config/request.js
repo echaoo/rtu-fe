@@ -2,7 +2,9 @@
  * Created by lhy95 on 2017/2/25.
  */
 
+// let host = 'http://202.194.155.189:9999/';
 let host = 'http://47.93.46.153:8880/';
+let laterHost = 'http://47.93.46.153:8889/'
 
 export default {
   login: host + 'Login',
@@ -12,5 +14,7 @@ export default {
   block: host + 'Map/Block',
   indicator : host + 'Indicator',
   wellInfo: host + 'Map/Well',
-  wellLog: host + 'WarnLog'
+  wellLog: host + 'WarnLog',
+  parameter: laterHost + '/Line/Parameter',
+  initialization: laterHost + '/Line/Initialization'
 }

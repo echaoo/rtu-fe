@@ -89,6 +89,9 @@
 
   .breadcrumb {
     height: 40px;
+    padding: 25px 15px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
     background-color: #fff;
     font-size: 14px;
     display: flex;

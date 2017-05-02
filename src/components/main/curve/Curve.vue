@@ -10,6 +10,12 @@
       return {
 
       }
+    },
+    computed: {
+
+    },
+    mounted () {
+      this.$store.commit('setIsNowTime', true)
     }
   }
 </script>

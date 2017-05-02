@@ -2,6 +2,8 @@
   <div class="top-container" v-bind:class="{'fadeMiniTop': !iconSwitch, 'fadeFullTop': iconSwitch}">
     <el-button class="toggle-side-menu" type="primary" @click="changeSideBar"><i class="fa fa-bars"></i></el-button>
     <div class="right-menu">
+      <div class="block" v-if="isNowTime">{{ nowTime }}</div>
+      <div class="time" v-if="isNowTime">{{ nowTime }}</div>
       <el-button type="danger" @click="logout"><i class="fa fa-sign-out"></i> 登出</el-button>
       <el-button type="primary" @click="showRightMenu"><i class="fa fa-tasks"></i></el-button>
     </div>
@@ -10,10 +12,25 @@
 
 <script>
   export default {
+    data () {
+      return {
+        nowTime: ''
+      }
+    },
     computed: {
       iconSwitch() {
         return this.$store.state.layout.isSideBarOpen;
+      },
+      isNowTime () {
+        return this.$store.state.singleWell.isNowTime
       }
+    },
+    mounted () {
+      let that = this
+      setInterval(function () {
+        let myDate = new Date()
+        that.nowTime = myDate.toLocaleString()
+      }, 1000)
     },
     methods: {
       showRightMenu() {
@@ -106,5 +123,10 @@
   .fadeFullTop {
     -webkit-animation-name: fadeFullTop;
     animation-name: fadeFullTop;
+  }
+
+  .block, .time {
+    display: inline-block;
+    margin-right: 20px;
   }
 </style>

@@ -7,6 +7,7 @@ import Vuex from 'vuex'
 import VueResource from 'vue-resource'
 import user from './modules/user'
 import layout from './modules/layout'
+import singleWell from './modules/singleWell'
 
 Vue.use(Vuex)
 Vue.use(VueResource)
@@ -15,7 +16,7 @@ const debug = process.env.NODE_ENV !== 'production'
 
 export default new Vuex.Store({
   modules: {
-    user, layout
+    user, layout, singleWell
   },
   strict: debug
 })

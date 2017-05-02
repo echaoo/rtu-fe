@@ -24,7 +24,7 @@
       }
     },
     created() {
-      this.$store.dispatch('getSideBarList')
+//      this.$store.dispatch('getSideBarList')
     },
     methods: {
 

@@ -18,6 +18,7 @@
               <el-table-column label="监控链接">
                 <template scope="scope">
                   <el-button size="small" @click="handleWell(scope.row)">云监控
+
                   </el-button>
                   <el-button size="small" type="danger" @click="handleDelete(scope.$index, scope.row)">现场</el-button>
                 </template>
@@ -85,15 +86,16 @@
       },
 
       handleWell(row) {
-          this.$store.dispatch('setNavSwitch');
-          this.$router.push('curve');
+        this.$store.dispatch('setNavSwitch');
+        this.$store.commit('getBlockId', row.Name);
+        this.$router.push('curve');
       }
     }
   }
 </script>
 
 <style lang="less" rel="stylesheet/less">
-.wrapper {
-  background-color: #f3f3f4;
-}
+  .wrapper {
+    background-color: #f3f3f4;
+  }
 </style>
