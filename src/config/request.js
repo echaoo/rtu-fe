@@ -16,5 +16,7 @@ export default {
   wellInfo: host + 'Map/Well',
   wellLog: host + 'WarnLog',
   parameter: laterHost + '/Line/Parameter',
-  initialization: laterHost + '/Line/Initialization'
+  initialization: laterHost + '/Line/Initialization',
+  historyLineData: laterHost + '/Line/HistoryLineData'
+
 }
