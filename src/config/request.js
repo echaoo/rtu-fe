@@ -17,6 +17,8 @@ export default {
   wellLog: host + 'WarnLog',
   parameter: laterHost + '/Line/Parameter',
   initialization: laterHost + '/Line/Initialization',
-  historyLineData: laterHost + '/Line/HistoryLineData'
+  historyLineData: laterHost + '/Line/HistoryLineData',
+  getwarn: host + '/WarnLog/WellWarn',
+  getoperator: host + '/WarnLog/WellOperation',
 
 }

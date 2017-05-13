@@ -13,6 +13,8 @@ import WellList from 'components/main/welllist/WellList'
 import Curve from 'components/main/curve/Curve'
 import RealCurve from 'components/main/curve/RealCurve'
 import HistoryCurve from 'components/main/curve/HistoryCurve'
+import WellWarnLog from 'components/main/record/WellWarnLog'
+import WellOperationLog from 'components/main/record/WellOperationLog'
 
 Vue.use(Router)
 
@@ -68,6 +70,16 @@ export default new Router({
           path: 'historycurve',
           name: 'historycurve',
           component: HistoryCurve
+        },
+        {
+          path: 'wellwarnlog',
+          name: 'wellwarnlog',
+          component: WellWarnLog
+        },
+        {
+          path: 'welloperationlog',
+          name: 'welloperationlog',
+          component: WellOperationLog
         }
       ]
     },

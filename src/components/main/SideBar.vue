@@ -23,8 +23,8 @@
         </el-submenu>
         <el-submenu index="record">
           <template slot="title"><i class="xds-icon fa fa-edit"></i>记录</template>
-          <el-menu-item index="1-1">报警记录</el-menu-item>
-          <el-menu-item index="1-2">操作记录</el-menu-item>
+          <el-menu-item index="wellwarnlog">报警记录</el-menu-item>
+          <el-menu-item index="welloperationlog">操作记录</el-menu-item>
         </el-submenu>
         <el-menu-item index="regulation"><i class="xds-icon fa fa-rss"></i><span v-show="isSideBarOpen">遥调</span></el-menu-item>
         <el-submenu index="sigleIndicator">

@@ -90,6 +90,7 @@
         this.$store.commit('getBlockId', row.Name);
         this.$router.push('curve');
       }
+      // Todo: 现场按钮事件处理
     }
   }
 </script>
