@@ -93,19 +93,22 @@
         window.open("/#/print", "a", "height=600, width=800, top=50, left=300, toolbar=no, menubar=no, scrollbars=no, resizable=no, location=no, status=no");
       },
       adjust () {
-        let that = this
-        this.$http.post(API.adjust, {data: 1}).then(
-          //todo: data值的获取
-          function (res) {
-            if (res.data.status === 0) {
-              console.log(res)
-              const h = that.$createElement
-              that.$notify({
-                title: '遥调',
-                message: h('i', { style: 'color: teal'}, '遥调成功')
-              })
-            }
-          })
+        let r = confirm("确定修改吗？")
+        if (r === true) {
+          let that = this
+          this.$http.post(API.adjust, {data: 1}).then(
+            //todo: data值的获取
+            function (res) {
+              if (res.data.status === 0) {
+                console.log(res)
+                const h = that.$createElement
+                that.$notify({
+                  title: '遥调',
+                  message: h('i', {style: 'color: teal'}, '遥调成功')
+                })
+              }
+            })
+        }
       }
     }
   }
