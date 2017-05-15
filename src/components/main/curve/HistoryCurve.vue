@@ -169,7 +169,7 @@
     }
   }
 </script>
-<style>
+<style scoped>
   .head-title {
     height: 60px;
     padding: 15px 30px;

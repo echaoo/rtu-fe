@@ -51,7 +51,7 @@
   }
 </script>
 
-<style lang="less" rel="stylesheet/less">
+<style lang="less" rel="stylesheet/less" scoped>
   @breathe-color: #0cda32;
   @dead-color: #000000;
   @bad-color: #da020f;

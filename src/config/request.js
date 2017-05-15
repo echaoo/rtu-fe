@@ -20,5 +20,9 @@ export default {
   historyLineData: laterHost + '/Line/HistoryLineData',
   getwarn: host + '/WarnLog/WellWarn',
   getoperator: host + '/WarnLog/WellOperation',
-
+  allData: laterHost + '/Data/Data',
+  fixedSensor: laterHost + 'Adjust/FixedSensor',
+  sensor: laterHost + '/Adjust/Sensor',
+  configration: laterHost + '/Adjust/Configuration',
+  adjust: laterHost + '/Adjust/Adjust'
 }

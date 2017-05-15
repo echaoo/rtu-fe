@@ -84,7 +84,7 @@
   }
 </script>
 
-<style lang="less" rel="stylesheet/less">
+<style lang="less" rel="stylesheet/less" scoped>
   .page {
     float: right;
     margin-top: 20px;

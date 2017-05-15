@@ -57,7 +57,7 @@
   }
 </script>
 
-<style lang="less" rel="stylesheet/less">
+<style lang="less" rel="stylesheet/less" scoped>
   .top-container {
     height: 60px;
     background-color: #f3f3f4;

@@ -15,6 +15,9 @@ import RealCurve from 'components/main/curve/RealCurve'
 import HistoryCurve from 'components/main/curve/HistoryCurve'
 import WellWarnLog from 'components/main/record/WellWarnLog'
 import WellOperationLog from 'components/main/record/WellOperationLog'
+import AllData from 'components/main/alldata/AllData'
+import Adjust from 'components/main/adjust/Adjust'
+import Print from 'components/main/print/Print'
 
 Vue.use(Router)
 
@@ -80,6 +83,16 @@ export default new Router({
           path: 'welloperationlog',
           name: 'welloperationlog',
           component: WellOperationLog
+        },
+        {
+          path: 'alldata',
+          name: 'alldata',
+          component: AllData
+        },
+        {
+          path: 'adjust',
+          name: 'adjust',
+          component: Adjust
         }
       ]
     },
@@ -87,6 +100,11 @@ export default new Router({
       name: 'oilwell',
       path: '/oilwell/:wellid',
       component: Oilwell
+    },
+    {
+      path: '/print',
+      name: 'print',
+      component: Print
     },
     {
       path: '*',

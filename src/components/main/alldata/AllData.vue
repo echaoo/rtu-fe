@@ -1,39 +1,27 @@
 <template>
   <div>
-    <div class="breadcrumb">
-      <el-breadcrumb separator="/" style="align-items: center">
-        <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-        <el-breadcrumb-item>报警记录</el-breadcrumb-item>
-      </el-breadcrumb>
-    </div>
+    <!--<div class="breadcrumb">-->
+      <!--<el-breadcrumb separator="/" style="align-items: center">-->
+        <!--<el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>-->
+        <!--<el-breadcrumb-item>报警记录</el-breadcrumb-item>-->
+      <!--</el-breadcrumb>-->
+    <!--</div>-->
     <div class="wrapper wrapper-content animated fadeInRight">
       <div class="row">
         <div class="col-lg-12">
           <div class="ibox float-e-margins">
             <div class="ibox-title">
-              <h5>油井报警信息记录</h5>
+              <h5>全部数据</h5>
             </div>
             <div class="ibox-content" style="overflow: hidden">
               <el-table :data="warnList" border style="width: 100%"
                         :default-sort="{prop: ['IDCode', 'WELL_ID'], order: ['ascending', 'descending']}">
-                <el-table-column prop="IDCode" label="报警信息" sortable width="180"></el-table-column>
-                <el-table-column prop="ActionTime" label="报警开始时间" width="180"></el-table-column>
-                <el-table-column prop="  ErrorEndTime" label="报警结束时间" width="180"></el-table-column>
-                <el-table-column prop="isCheck" label="报警状态记录"></el-table-column>
-                <el-table-column label="操作">
-                  <template scope="scope">
-                    <el-button
-                      size="small"
-                      type="primary"
-                      @click="notice(scope.row)">通知
-                    </el-button>
-                    <el-button
-                      size="small"
-                      type="primary"
-                      @click="ignore(scope.row)">忽略
-                    </el-button>
-                  </template>
-                </el-table-column>
+                <el-table-column prop="Datetime" label="时间" sortable width="180"></el-table-column>
+                <el-table-column sortable prop="Identifier" label="标识位" width="180"></el-table-column>
+                <el-table-column sortable prop="Parameter" label="参数名" width="180"></el-table-column>
+                <el-table-column sortable prop="Value" label="参数值"></el-table-column>
+                <el-table-column sortable prop="Range" label="取值范围"></el-table-column>
+                <el-table-column sortable prop="Style" label="参数类型"></el-table-column>
               </el-table>
               <div class="page">
                 <el-pagination v-bind:current-Page="pageIndex" v-bind:page-size="pageSize" :total="total"
@@ -75,30 +63,17 @@
         this.pageSize = pageSize;
         this.pageRequest();
       },
-      pageRequest (pageIndex) {
-        let body = {
-          wellid: 1,
-          // Todo: 获取井id
-          size: this.pageSize,
-          page: pageIndex
-        };
+      pageRequest () {
         let that = this;
-        this.$http.post(API.getwarn, body).then(
+        this.$http.post(API.allData, {wellid: 1}).then(
           function (res) {
             console.log(res)
             if (res.data.status === '0') {
               that.warnList = res.data.data;
               that.total = res.data.totalnum;
+              //todo: 表格分页处理
             }
           });
-      },
-      notice (row) {
-        console.log(row)
-        //TODO: 通知处理
-      },
-      ignore () {
-        console.log(row)
-        //TODO: 忽略处理
       }
     }
   }
