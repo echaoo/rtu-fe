@@ -24,5 +24,7 @@ export default {
   fixedSensor: laterHost + 'Adjust/FixedSensor',
   sensor: laterHost + '/Adjust/Sensor',
   configration: laterHost + '/Adjust/Configuration',
-  adjust: laterHost + '/Adjust/Adjust'
+  adjust: laterHost + '/Adjust/Adjust',
+  historyIndicator: laterHost + '/Indicator/History',
+  compareIndicator: laterHost + '/Indicator/AllHistory',
 }

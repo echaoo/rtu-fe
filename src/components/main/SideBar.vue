@@ -29,8 +29,8 @@
         <el-menu-item index="adjust"><i class="xds-icon fa fa-rss"></i><span v-show="isSideBarOpen">遥调</span></el-menu-item>
         <el-submenu index="sigleIndicator">
           <template slot="title"><i class="xds-icon fa fa-area-chart"></i>示功图</template>
-          <el-menu-item index="1-1">历史示功图</el-menu-item>
-          <el-menu-item index="1-2">示功图对比</el-menu-item>
+          <el-menu-item index="historyindicator">历史示功图</el-menu-item>
+          <el-menu-item index="compareindicator">示功图对比</el-menu-item>
         </el-submenu>
         <el-menu-item index="alldata"><i class="xds-icon fa fa-database"></i><span v-show="isSideBarOpen">全部数据</span></el-menu-item>
         <el-menu-item index="regulation"><i class="xds-icon fa fa-android"></i><span v-show="isSideBarOpen">智能模块</span></el-menu-item>
