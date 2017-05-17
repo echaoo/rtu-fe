@@ -88,7 +88,7 @@
       handleWell(row) {
         this.$store.dispatch('setNavSwitch');
         this.$store.commit('getBlockId', row.Name);
-        this.$router.push('curve');
+        this.$router.push('wellindex');
       }
       // Todo: 现场按钮事件处理
     }

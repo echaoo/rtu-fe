@@ -15,7 +15,7 @@
           v-show="isSideBarOpen">井列表</span></el-menu-item>
       </div>
       <div v-if="!navSwitch">
-        <el-menu-item index="index"><i class="xds-icon fa fa-home"></i><span v-show="isSideBarOpen">首页</span></el-menu-item>
+        <el-menu-item index="wellindex"><i class="xds-icon fa fa-home"></i><span v-show="isSideBarOpen">首页</span></el-menu-item>
         <el-submenu index="curve">
           <template slot="title"><i class="xds-icon fa fa-line-chart"></i>曲线</template>
           <el-menu-item index="realcurve">实时曲线</el-menu-item>
@@ -33,7 +33,7 @@
           <el-menu-item index="compareindicator">示功图对比</el-menu-item>
         </el-submenu>
         <el-menu-item index="alldata"><i class="xds-icon fa fa-database"></i><span v-show="isSideBarOpen">全部数据</span></el-menu-item>
-        <el-menu-item index="regulation"><i class="xds-icon fa fa-android"></i><span v-show="isSideBarOpen">智能模块</span></el-menu-item>
+        <el-menu-item index="smartmodule"><i class="xds-icon fa fa-android"></i><span v-show="isSideBarOpen">智能模块</span></el-menu-item>
         <el-menu-item index="regulation"><i class="xds-icon fa fa-file-text"></i><span v-show="isSideBarOpen">数据报表</span></el-menu-item>
       </div>
     </el-menu>

@@ -12,7 +12,8 @@ import HistoryIndicator from 'components/main/indicator/HistoryIndicator'
 import CompareIndicator from 'components/main/indicator/CompareIndicator'
 import WarnLog from 'components/main/warnlog/WarnLog'
 import WellList from 'components/main/welllist/WellList'
-import Curve from 'components/main/curve/Curve'
+import WellIndex from 'components/main/wellindex/WellIndex'
+import SmartModule from 'components/main/smartmodule/SmartModule'
 import RealCurve from 'components/main/curve/RealCurve'
 import HistoryCurve from 'components/main/curve/HistoryCurve'
 import WellWarnLog from 'components/main/record/WellWarnLog'
@@ -62,9 +63,14 @@ export default new Router({
           component: WellList
         },
         {
-          path: 'curve',
-          name: 'curve',
-          component: Curve
+          path: 'wellindex',
+          name: 'wellindex',
+          component: WellIndex
+        },
+        {
+          path: 'smartmodule',
+          name: 'smartmodule',
+          component: SmartModule
         },
         {
           path: 'realcurve',
