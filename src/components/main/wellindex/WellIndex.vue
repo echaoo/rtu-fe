@@ -5,8 +5,8 @@
         <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
       </el-breadcrumb>
     </div>
-    <div class="content">
-      <el-row :gutter="20">
+    <div class="wi-content">
+      <el-row :gutter="20" style="margin-bottom: 20px">
         <el-col :span="6">
           <div class="well-transform" style="background-color: #fff">
             <span class="pidai pidai1"></span>
@@ -34,7 +34,153 @@
           </div>
         </el-col>
         <el-col :span="18">
-          <div class="grid-content" style="background-color: #fff">sds</div>
+          <el-row :gutter="20" style="margin-bottom: 20px">
+            <el-col :span="12">
+              <div class="wellindex-chart">
+                <div class="ibox float-e-margins margin-bottom">
+                  <div class="ibox-title new-title">
+                    <h5 style="display: inline-block;">油井基本信息</h5>
+                    <span class="date"></span>
+                  </div>
+                  <div class="ibox-content" style="padding: 10px 20px 20px 15px">
+                    <div class="ct-perfect-fourth">
+                      <p class="well-row">
+                        <span class="left">位置</span>
+                        <span class="right">暂无</span>
+                      </p>
+                      <p class="well-row">
+                        <span class="left">位置</span>
+                        <span class="right">暂无</span>
+                      </p>
+                      <button class="optimize">人工智能优化</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </el-col>
+            <el-col :span="12">
+              <div class="wellindex-chart">
+                <div class="ibox float-e-margins margin-bottom">
+                  <div class="ibox-title new-title">
+                    <h5 style="display: inline-block;">基本控制</h5>
+                    <span class="date"></span>
+                  </div>
+                  <div class="ibox-content" style="padding: 10px 20px 20px 15px">
+                    <div class="ct-perfect-fourth">
+                      <button class="optimize launch">启动</button>
+                      <button class="optimize stop">停止</button>
+                      <button class="optimize control">急停</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </el-col>
+          </el-row>
+          <el-row :gutter="20">
+            <el-col :span="24">
+              <div class="wellindex-chart">
+                <div class="ibox float-e-margins margin-bottom">
+                  <div class="ibox-title new-title">
+                    <h5 style="display: inline-block;">油井基本信息</h5>
+                    <span class="date"></span>
+                  </div>
+                  <div class="ibox-content" style="padding: 10px 20px 20px 15px;height: 345px;">
+                    <div class="ct-perfect-fourth">
+                      <line-chart :chart-data="chartData" chart-id="chart1"></line-chart>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </el-col>
+          </el-row>
+        </el-col>
+      </el-row>
+      <el-row :gutter="20">
+        <el-col :span="8">
+          <div class="wellindex-chart">
+            <div class="ibox float-e-margins margin-bottom">
+              <div class="ibox-title new-title">
+                <h5 style="display: inline-block;">油井基本信息</h5>
+              </div>
+              <div class="ibox-content" style="padding: 10px 20px 20px 15px">
+                <div class="ct-perfect-fourth">
+                  <p class="well-row">
+                    <span class="left">位置</span>
+                    <span class="right">暂无</span>
+                  </p>
+                  <p class="well-row">
+                    <span class="left">位置</span>
+                    <span class="right">暂无</span>
+                  </p>
+                  <button class="optimize">人工智能优化</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </el-col>
+        <el-col :span="8">
+          <div class="wellindex-chart">
+            <div class="ibox float-e-margins margin-bottom">
+              <div class="ibox-title new-title">
+                <h5 style="display: inline-block;">调节冲程</h5>
+              </div>
+              <div class="ibox-content" style="padding: 10px 20px 20px 15px">
+                <div class="ct-perfect-fourth">
+                  <span class="slider">
+                    <span class="slider-label-left">1米</span>
+                    <span class="slider-label-right">5米</span>
+                      <el-slider
+                        v-model="sliderValue"
+                        range
+                        step="0.2"
+                        show-stops
+                        :max="5">
+                      </el-slider>
+                  </span>
+                  <button class="optimize">确定</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </el-col>
+        <el-col :span="8">
+          <div class="wellindex-chart">
+            <div class="ibox float-e-margins margin-bottom">
+              <div class="ibox-title new-title">
+                <h5 style="display: inline-block;">调节冲次</h5>
+                <span class="date"></span>
+              </div>
+              <div class="ibox-content" style="padding: 10px 20px 20px 15px;">
+                <div class="ct-perfect-fourth">
+                  <span class="slider-title">上行冲次</span>
+                  <span class="slider" style="margin-top: 0">
+                    <span class="slider-label-left slider-width">1次/分</span>
+                    <span class="slider-label-right slider-width">5次/分</span>
+                      <el-slider
+                        v-model="sliderValue"
+                        range
+                        step="0.2"
+                        show-stops
+                        :max="5">
+                      </el-slider>
+                  </span>
+                  <span class="slider-title">下行冲次</span>
+                  <span class="slider" style="margin-top: 10px">
+                    <span class="slider-label-left slider-width">1次/分</span>
+                    <span class="slider-label-right slider-width">5次/分</span>
+                      <el-slider
+                        v-model="sliderValue"
+                        range
+                        step="0.2"
+                        show-stops
+                        :max="5">
+                      </el-slider>
+                  </span>
+                  <button class="optimize" style="margin-top: 10px">确定</button>
+                </div>
+              </div>
+            </div>
+          </div>
         </el-col>
       </el-row>
     </div>
@@ -42,17 +188,52 @@
 </template>
 
 <script>
+  import LineChart from '../indicator/LineChart.vue'
+  import API from '../../../config/request'
+
   export default {
     data () {
-      return {}
+      return {
+        allData: [],
+        chartData: {
+          axisData: [],
+          yaxisData: [],
+          id: ''
+        },
+        sliderValue: [0, 5]
+      }
     },
-    computed: {},
+    methods: {
+      getIndd () {
+        this.$http.post(API.getIndd, {wellid: 1}).then(
+          function (res) {
+            if (res.data.status === '0') {
+              console.log(res)
+              this.allData = res.data.data;
+              let tempx = [];
+              let tempy = [];
+//              let tempid = [];
+              for (let i = 0; i < this.allData.length; i++) {
+                tempx.push(this.allData[i].Indd_Data_Disp);
+                tempy.push(this.allData[i].Indd_Data_Load);
+//              tempid = 'chart'+ that.allData[i].ID;
+              }
+              this.chartData.axisData = tempx;
+              this.chartData.yaxisData = tempy;
+            }
+          })
+      }
+    },
     mounted () {
+      this.getIndd()
       this.$store.commit('setIsNowTime', true)
+    },
+    components: {
+      LineChart
     }
   }
 </script>
-<style>
+<style scoped>
   #wellindex {
     background-color: #f0f0f1;
   }
@@ -68,6 +249,10 @@
     overflow: hidden;
   }
 
+  .wi-content {
+    padding: 0 10px;
+  }
+
   .well-transform {
     height: 650px;
     padding: 10px;
@@ -76,27 +261,51 @@
   }
 
   @keyframes pidai1 {
-    0% { height: 300px; }
-    50% { height: 40px; }
-    100% { height: 300px; }
+    0% {
+      height: 300px;
+    }
+    50% {
+      height: 40px;
+    }
+    100% {
+      height: 300px;
+    }
   }
 
   @keyframes pidai2 {
-    0% { height: 40px; }
-    50% { height: 300px; }
-    100% { height: 40px; }
+    0% {
+      height: 40px;
+    }
+    50% {
+      height: 300px;
+    }
+    100% {
+      height: 40px;
+    }
   }
 
   @keyframes jingkou {
-    0% { top: 25px; }
-    50% { top: 286px; }
-    100% { top: 25px; }
+    0% {
+      top: 25px;
+    }
+    50% {
+      top: 286px;
+    }
+    100% {
+      top: 25px;
+    }
   }
 
   @keyframes line {
-    0% { height: 380px; }
-    50% { height: 100px; }
-    100% { height: 380px; }
+    0% {
+      height: 380px;
+    }
+    50% {
+      height: 100px;
+    }
+    100% {
+      height: 380px;
+    }
   }
 
   .pidai {
@@ -111,14 +320,14 @@
   .pidai1 {
     height: 300px;
     left: 40px;
-    animation:pidai1 10s infinite;
+    animation: pidai1 10s infinite;
   }
 
   .pidai2 {
     height: 300px;
     left: 30px;
     border-left: 1px solid black;
-    animation:pidai2 10s infinite;
+    animation: pidai2 10s infinite;
     z-index: 5;
   }
 
@@ -127,7 +336,7 @@
     top: 70px;
     left: 20px;
     z-index: 6;
-    animation:jingkou 10s infinite;
+    animation: jingkou 10s infinite;
   }
 
   .top {
@@ -162,11 +371,11 @@
     top: 80px;
     left: 7px;
     height: 370px;
-    animation:line 10s infinite;
+    animation: line 10s infinite;
   }
 
   .dis {
-    display:  inline-block;
+    display: inline-block;
     width: 70px;
     height: 30px;
     padding: 3px;
@@ -217,7 +426,7 @@
     height: 40px;
     left: 25px;
     top: 10px;
-    animation:peizhong 10s infinite;
+    animation: peizhong 10s infinite;
   }
 
   .well-label {
@@ -239,8 +448,116 @@
   }
 
   @keyframes peizhong {
-    0% { top: 365px; }
-    50% { top: 100px; }
-    100% { top: 365px; }
+    0% {
+      top: 365px;
+    }
+    50% {
+      top: 100px;
+    }
+    100% {
+      top: 365px;
+    }
+  }
+
+  .wellindex-chart {
+    padding: 10px;
+    background-color: #fff;
+  }
+
+  .new-title {
+    padding: 1px 15px 7px;
+    height: 38px;
+    min-height: 38px;
+  }
+
+  .well-row {
+    border-bottom: 1px solid #e7eaec;
+    margin: 0;
+    padding: 10px 0;
+  }
+
+  .right {
+    float: right;
+    right: 40px;
+  }
+
+  .optimize {
+    width: 100%;
+    height: 25px;
+    background-color: #2ea77f;
+    color: #fff;
+    border: none;
+    margin-top: 30px;
+    outline: none;
+  }
+
+  .launch {
+    margin-top: 15px;
+    height: 30px;
+    background-color: #1f6dc0;
+  }
+
+  .stop {
+    margin-top: 15px;
+    height: 30px;
+    background-color: #f09d39;
+  }
+
+  .control {
+    margin-top: 15px;
+    height: 31px;
+    background-color: #df3e52;
+  }
+
+  .margin-bottom {
+    margin-bottom: 0;
+  }
+
+  .slider {
+    display: inline-block;
+    width: 100%;
+    margin: 25px 0 0 0;
+    position: relative;
+  }
+
+  .slider-label-left {
+    /*position: absolute;*/
+    /*top: 0;*/
+    display: inline-block;
+    width: 35px;
+    height: 20px;
+    text-align: center;
+    font-size: 12px;
+    background-color: #f0f0f1;
+    color: #333;
+    padding: 3px;
+    margin-left: -20px;
+  }
+
+  .slider-label-right {
+    /*position: absolute;*/
+    /*top: 0;*/
+    display: inline-block;
+    width: 35px;
+    height: 20px;
+    text-align: center;
+    font-size: 12px;
+    background-color: #f0f0f1;
+    color: #333;
+    padding: 3px;
+    float: right;
+    margin-right: -20px;
+  }
+
+  .slider-width {
+    width: 50px;
+  }
+
+  .slider-title {
+    font-size: 12px;
+    display: inline-block;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
   }
 </style>

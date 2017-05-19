@@ -27,4 +27,5 @@ export default {
   adjust: laterHost + '/Adjust/Adjust',
   historyIndicator: laterHost + '/Indicator/History',
   compareIndicator: laterHost + '/Indicator/AllHistory',
+  getIndd: laterHost + '/FirstPage/SIGN_INDD',
 }
