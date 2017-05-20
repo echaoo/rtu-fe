@@ -315,7 +315,7 @@
         function (res) {
           if (res.data.status === '0') {
             that.allData = res.data.data;
-            console.log(that.allData)
+//            console.log(that.allData)
             let tempx= [];
             let tempy= [];
             let tempid = [];
@@ -326,7 +326,7 @@
             }
             that.chartData.axisData = tempx;
             that.chartData.yaxisData = tempy;
-            console.log(tempx)
+//            console.log(that.chartData)
 //            that.chartData.id = tempid;
           }
         })

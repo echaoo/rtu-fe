@@ -44,7 +44,6 @@
         let myChart = echarts.init(document.getElementById(that.chartId));
         let data = [];
         let len = parseInt(that.chartId.substring(5))
-        console.log(that.chartData.axisData)
 
         for(let i = 0; i < that.chartData.axisData[len].length; i++) {
             let temp = [];
@@ -52,6 +51,7 @@
             temp.push(that.chartData.yaxisData[len][i]);
             data.push(temp);
         }
+        console.log(data)
         let option = {
           tooltip: {
             formatter: function (params) {
@@ -66,6 +66,18 @@
             top: '3%',
             containLabel: true
           },
+//          dataZoom: [
+//            {
+//              type: 'slider',
+//              xAxisIndex: 0,
+//              filterMode: 'empty'
+//            },
+//            {
+//              type: 'inside',
+//              xAxisIndex: 0,
+//              filterMode: 'empty'
+//            }
+//          ],
           xAxis: {
             min: 0,
             max: 4.5,

@@ -104,15 +104,7 @@
               </div>
               <div class="ibox-content" style="padding: 10px 20px 20px 15px">
                 <div class="ct-perfect-fourth">
-                  <p class="well-row">
-                    <span class="left">位置</span>
-                    <span class="right">暂无</span>
-                  </p>
-                  <p class="well-row">
-                    <span class="left">位置</span>
-                    <span class="right">暂无</span>
-                  </p>
-                  <button class="optimize">人工智能优化</button>
+                  <div id="container" style="min-width:800px;height:400px"></div>
                 </div>
               </div>
             </div>
@@ -132,7 +124,6 @@
                       <el-slider
                         v-model="sliderValue"
                         range
-                        step="0.2"
                         show-stops
                         :max="5">
                       </el-slider>
@@ -159,7 +150,6 @@
                       <el-slider
                         v-model="sliderValue"
                         range
-                        step="0.2"
                         show-stops
                         :max="5">
                       </el-slider>
@@ -171,7 +161,6 @@
                       <el-slider
                         v-model="sliderValue"
                         range
-                        step="0.2"
                         show-stops
                         :max="5">
                       </el-slider>
@@ -198,7 +187,7 @@
         chartData: {
           axisData: [],
           yaxisData: [],
-          id: ''
+          id: 'chart1'
         },
         sliderValue: [0, 5]
       }
@@ -210,18 +199,29 @@
             if (res.data.status === '0') {
               console.log(res)
               this.allData = res.data.data;
-              let tempx = [];
-              let tempy = [];
-//              let tempid = [];
-              for (let i = 0; i < this.allData.length; i++) {
-                tempx.push(this.allData[i].Indd_Data_Disp);
-                tempy.push(this.allData[i].Indd_Data_Load);
-//              tempid = 'chart'+ that.allData[i].ID;
-              }
-              this.chartData.axisData = tempx;
-              this.chartData.yaxisData = tempy;
+              let obj = this.setChartData (this.allData)
+              console.log(obj)
+              this.chartData.axisData = obj.xdata;
+              this.chartData.yaxisData = obj.ydata;
+//              console.log(this.chartData)
             }
           })
+      },
+      setChartData (data) {
+        let obj = {xdata: [], ydata: []}
+        for (let i = 0; i < data.length; i++) {
+          let xdata = ''
+          let ydata = ''
+          xdata = (data[i].MW4097 + data[i].MW4107 + data[i].MW4117 + data[i].MW4127 + data[i].MW4137 + data[i].MW4147 + data[i].MW4157 + data[i].MW4167 + data[i].MW4177 + data[i].MW4187 + data[i].MW4197 + data[i].MW4207 + data[i].MW4217 + data[i].MW4227 + data[i].MW4237 + data[i].MW4247 + data[i].MW4257 + data[i].MW4267 + data[i].MW4277 + data[i].MW4287).split(' ').map(function (x) {
+            return (parseInt(x)/1000)
+          })
+          ydata = (data[i].MW4297 + data[i].MW4307 + data[i].MW4317 + data[i].MW4327 + data[i].MW4337 + data[i].MW4347 + data[i].MW4357 + data[i].MW4367 + data[i].MW4377 + data[i].MW4387 + data[i].MW4397 + data[i].MW4407 + data[i].MW4417 + data[i].MW4427 + data[i].MW4437 + data[i].MW4447 + data[i].MW4457 + data[i].MW4467 + data[i].MW4477 + data[i].MW4487).split(' ').map(function (x) {
+            return (parseInt(x)/100)
+          })
+          obj.xdata.push(xdata)
+          obj.ydata.push(ydata)
+        }
+        return obj
       }
     },
     mounted () {
