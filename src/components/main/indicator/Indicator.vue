@@ -322,12 +322,9 @@
             for(let i = 0; i < that.allData.length; i++) {
               tempx.push(that.allData[i].Indd_Data_Disp);
               tempy.push(that.allData[i].Indd_Data_Load);
-//              tempid = 'chart'+ that.allData[i].ID;
             }
             that.chartData.axisData = tempx;
             that.chartData.yaxisData = tempy;
-//            console.log(that.chartData)
-//            that.chartData.id = tempid;
           }
         })
     },

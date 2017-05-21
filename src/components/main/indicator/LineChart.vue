@@ -1,7 +1,5 @@
 <template>
-  <div :id="chartId" class="test">
-
-  </div>
+  <div v-bind:id="chartId" class="test"></div>
 </template>
 
 <script>
@@ -33,6 +31,15 @@
           }
         },
         deep: true
+      },
+      chartId: {
+        handler(val, oldVal){
+          this.$nextTick(function () {
+            this.paintChart ()
+          })
+
+        },
+        deep: true
       }
     },
     mounted () {
@@ -43,7 +50,7 @@
         let that = this
         let myChart = echarts.init(document.getElementById(that.chartId));
         let data = [];
-        let len = parseInt(that.chartId.substring(5))
+        let len = parseInt(that.chartId.substring(5))//根据id确定渲染哪一个图表，有待优化
 
         for(let i = 0; i < that.chartData.axisData[len].length; i++) {
             let temp = [];
@@ -66,18 +73,6 @@
             top: '3%',
             containLabel: true
           },
-//          dataZoom: [
-//            {
-//              type: 'slider',
-//              xAxisIndex: 0,
-//              filterMode: 'empty'
-//            },
-//            {
-//              type: 'inside',
-//              xAxisIndex: 0,
-//              filterMode: 'empty'
-//            }
-//          ],
           xAxis: {
             min: 0,
             max: 4.5,

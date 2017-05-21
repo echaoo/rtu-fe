@@ -82,12 +82,24 @@
                 <div class="ibox float-e-margins margin-bottom">
                   <div class="ibox-title new-title">
                     <h5 style="display: inline-block;">油井基本信息</h5>
-                    <span class="date"></span>
                   </div>
                   <div class="ibox-content" style="padding: 10px 20px 20px 15px;height: 345px;">
-                    <div class="ct-perfect-fourth">
-                      <line-chart :chart-data="chartData" chart-id="chart1"></line-chart>
+                    <div class="chart">
+                      <line-chart :chart-data="chartData" :chart-id="id"></line-chart>
                     </div>
+                    <span class="slider">
+                    <span class="slider-label-left" style="width: 120px"> {{ chartTime[0] }}</span>
+                    <span class="slider-label-right" style="width: 120px">{{ chartTime[chartTime.length - 1] }}</span>
+                      <!--<span class="dot" v-for="(item, index) in new Array(chartTime.length)"-->
+                      <!--v-bind:style="{ left: (100/chartTime.length)*index + '%'}"></span>-->
+                      <el-slider
+                        v-model="sliderTime"
+                        show-stops
+                        v-on:change="changeEvent"
+                        :format-tooltip="formatTooltip"
+                        :max="maxValue">
+                      </el-slider>
+                  </span>
                   </div>
                 </div>
               </div>
@@ -104,7 +116,7 @@
               </div>
               <div class="ibox-content" style="padding: 10px 20px 20px 15px">
                 <div class="ct-perfect-fourth">
-                  <div id="container" style="min-width:800px;height:400px"></div>
+                  <dash-board chart-id="dash1"></dash-board>
                 </div>
               </div>
             </div>
@@ -178,6 +190,7 @@
 
 <script>
   import LineChart from '../indicator/LineChart.vue'
+  import DashBoard from './DashBoard.vue'
   import API from '../../../config/request'
 
   export default {
@@ -187,9 +200,14 @@
         chartData: {
           axisData: [],
           yaxisData: [],
-          id: 'chart1'
+          id: ''
         },
-        sliderValue: [0, 5]
+        chartTime: [],
+        sliderValue: [2, 3],
+        sliderTime: 0,
+        left: [],
+        id: 'chart0',
+        maxValue: 0
       }
     },
     methods: {
@@ -197,39 +215,53 @@
         this.$http.post(API.getIndd, {wellid: 1}).then(
           function (res) {
             if (res.data.status === '0') {
-              console.log(res)
+//              console.log(res)
               this.allData = res.data.data;
-              let obj = this.setChartData (this.allData)
-              console.log(obj)
-              this.chartData.axisData = obj.xdata;
-              this.chartData.yaxisData = obj.ydata;
-//              console.log(this.chartData)
+              let obj = this.setChartData(this.allData)
+              this.chartData.axisData = obj.xdata
+              this.chartData.yaxisData = obj.ydata
+              this.chartTime = obj.time
+              this.maxValue = parseInt(this.chartTime.length - 1)
             }
           })
       },
       setChartData (data) {
-        let obj = {xdata: [], ydata: []}
+        let obj = {xdata: [], ydata: [], time: []}
         for (let i = 0; i < data.length; i++) {
           let xdata = ''
           let ydata = ''
+          let t1 = (data[i].Time.split('('))[1].split(')');
+          let t2 = new Date(parseInt(t1[0]));
           xdata = (data[i].MW4097 + data[i].MW4107 + data[i].MW4117 + data[i].MW4127 + data[i].MW4137 + data[i].MW4147 + data[i].MW4157 + data[i].MW4167 + data[i].MW4177 + data[i].MW4187 + data[i].MW4197 + data[i].MW4207 + data[i].MW4217 + data[i].MW4227 + data[i].MW4237 + data[i].MW4247 + data[i].MW4257 + data[i].MW4267 + data[i].MW4277 + data[i].MW4287).split(' ').map(function (x) {
-            return (parseInt(x)/1000)
+            return (parseInt(x) / 1000)
           })
           ydata = (data[i].MW4297 + data[i].MW4307 + data[i].MW4317 + data[i].MW4327 + data[i].MW4337 + data[i].MW4347 + data[i].MW4357 + data[i].MW4367 + data[i].MW4377 + data[i].MW4387 + data[i].MW4397 + data[i].MW4407 + data[i].MW4417 + data[i].MW4427 + data[i].MW4437 + data[i].MW4447 + data[i].MW4457 + data[i].MW4467 + data[i].MW4477 + data[i].MW4487).split(' ').map(function (x) {
-            return (parseInt(x)/100)
+            return (parseInt(x) / 100)
           })
+          let datatime = t2.getFullYear() + '/' + (parseInt(t2.getMonth()) + 1) + '/' + t2.getDate() + ' ' + t2.getHours() + ':' + t2.getMinutes() + ':' + t2.getSeconds();
           obj.xdata.push(xdata)
           obj.ydata.push(ydata)
+          obj.time.push(datatime)
         }
         return obj
+      },
+      changeEvent (value) {
+        this.id = 'chart' + value
+        console.log(this.id)
+      },
+      formatTooltip (val) {
+//        let index = this.sliderTime.indexOf(val)
+        return this.chartTime[val] // 格式化返回值
       }
     },
     mounted () {
       this.getIndd()
       this.$store.commit('setIsNowTime', true)
+
     },
     components: {
-      LineChart
+      LineChart,
+      DashBoard
     }
   }
 </script>
@@ -476,6 +508,11 @@
     padding: 10px 0;
   }
 
+  .chart {
+    width: 100%;
+    height: 260px !important;
+  }
+
   .right {
     float: right;
     right: 40px;
@@ -547,6 +584,16 @@
     padding: 3px;
     float: right;
     margin-right: -20px;
+  }
+
+  .dot {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    background-color: #2987fe;
+    border-radius: 50%;
+    position: absolute;
+    top: 35px;
   }
 
   .slider-width {

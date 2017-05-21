@@ -16,7 +16,7 @@
         </span>
       </span>
     </span>
-    <div class="module-item bottom" v-if="loaditems1[0]">
+    <div class="module-item bottom" v-if="loaditems1">
       <div class="title">阶梯电价定时模块</div>
       <div class="content">
         <span class="vertical">请选择低电价时段以便优化生产成本:</span>
@@ -38,7 +38,7 @@
         <button class="save" @click="save">保存选择并在该时段加大冲次</button>
       </div>
     </div>
-    <div class="module-item" v-if="loaditems2[0]">
+    <div class="module-item" v-if="loaditems2">
       <div class="title">根据载荷改变冲程模块</div>
       <div class="content">
         <span class="negative-margin">载荷/冲程比: 载荷</span>
@@ -48,7 +48,7 @@
         <button class="save" @click="adjustLoad">调节冲程</button>
       </div>
     </div>
-    <div class="module-item" v-if="loaditems3[0]">
+    <div class="module-item" v-if="loaditems1">
       <div class="title">缓下模块</div>
       <div class="content">
         <span class="negative-margin">上行/下行速率比: 上行</span>
