@@ -58,7 +58,7 @@
             temp.push(that.chartData.yaxisData[len][i]);
             data.push(temp);
         }
-        console.log(data)
+//        console.log(data)
         let option = {
           tooltip: {
             formatter: function (params) {

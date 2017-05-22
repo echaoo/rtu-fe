@@ -107,7 +107,7 @@
           </el-row>
         </el-col>
       </el-row>
-      <el-row :gutter="20">
+      <el-row :gutter="20" style="margin-bottom: 20px">
         <el-col :span="8">
           <div class="wellindex-chart">
             <div class="ibox float-e-margins margin-bottom">
@@ -189,6 +189,53 @@
           </div>
         </el-col>
       </el-row>
+      <el-row :gutter="20">
+        <el-col :span="12">
+          <div class="wellindex-chart">
+            <div class="ibox float-e-margins margin-bottom">
+              <div class="ibox-title new-title">
+                <h5 style="display: inline-block;">载荷变化图</h5>
+                <span class="right-select">
+                  <select v-model="loadSelect" v-on:change="changeData">
+                    <option value="1">6h</option>
+                    <option value="2">12h</option>
+                    <option value="4">24h</option>
+                  </select>
+                </span>
+              </div>
+              <div class="ibox-content" style="padding: 10px 20px 20px 15px;">
+                <div class="ct-perfect-fourth">
+                  <bar-chart :chart-data="loadData"></bar-chart>
+                </div>
+              </div>
+            </div>
+          </div>
+        </el-col>
+        <el-col :span="12">
+          <div class="wellindex-chart">
+            <div class="ibox float-e-margins margin-bottom">
+              <div class="ibox-title new-title">
+                <h5 style="display: inline-block;">调节冲程</h5>
+              </div>
+              <div class="ibox-content" style="padding: 10px 20px 20px 15px">
+                <div class="ct-perfect-fourth" style="height: 197px">
+                  <span class="slider" style="margin: 43px 0">
+                    <span class="slider-label-left">1米</span>
+                    <span class="slider-label-right">5米</span>
+                      <el-slider
+                        v-model="sliderValue"
+                        range
+                        show-stops
+                        :max="5">
+                      </el-slider>
+                  </span>
+                  <button class="optimize">确定</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </el-col>
+      </el-row>
     </div>
   </div>
 </template>
@@ -196,6 +243,7 @@
 <script>
   import LineChart from '../indicator/LineChart.vue'
   import DashBoard from './DashBoard.vue'
+  import BarChart from './BarChart.vue'
   import API from '../../../config/request'
 
   export default {
@@ -214,7 +262,9 @@
         id: 'chart0',
         maxValue: 0,
         phl: 0,
-        xtxl: 0
+        xtxl: 0,
+        loadData: {},
+        loadSelect: 1
       }
     },
     methods: {
@@ -230,6 +280,7 @@
               this.chartData.yaxisData = obj.ydata
               this.chartTime = obj.time
               this.maxValue = parseInt(this.chartTime.length - 1)
+              this.loadData = this.setLoadData(obj, 1)
             }
           })
       },
@@ -244,7 +295,7 @@
           })
       },
       setChartData (data) {
-        let obj = {xdata: [], ydata: [], time: []}
+        let obj = {xdata: [], ydata: [], time: [], load1: [], load2: []}
         for (let i = 0; i < data.length; i++) {
           let xdata = ''
           let ydata = ''
@@ -260,6 +311,8 @@
           obj.xdata.push(xdata)
           obj.ydata.push(ydata)
           obj.time.push(datatime)
+          obj.load1.push(data[i].MW4095)
+          obj.load2.push(data[i].MW4096)
         }
         return obj
       },
@@ -270,6 +323,33 @@
       formatTooltip (val) {
 //        let index = this.sliderTime.indexOf(val)
         return this.chartTime[val] // 格式化返回值
+      },
+      setLoadData (data, t) {
+        let s = data.time
+        let load1 = data.load1
+        let load2 = data.load2
+        let timedata = []
+        let loaddata1 = []
+        let loaddata2 = []
+        for (let i = 0; i < 6; i++) {
+          let j = parseInt(s.length - 2) - parseInt(i * t);
+          if (j >= 0) {
+            timedata[5 - i] = (s[i].split(' '))[0] + "\n" + (s[i].split(' '))[1];
+            loaddata1[5 - i] = load1[i];
+            loaddata2[5 - i] = load2[i];
+          }
+          else {
+            timedata[5 - i] = '0000/00/00\n00:00:00';
+            loaddata1[5 - i] = 0;
+            loaddata2[5 - i] = 0;
+          }
+        }
+        return {timeData: timedata, loadData1: loaddata1, loadData2: loaddata2}
+      },
+      changeData () {
+        let obj = this.setChartData(this.allData)
+        let val = this.loadSelect
+        this.loadData = this.setLoadData(obj, val)
       }
     },
     mounted () {
@@ -279,7 +359,8 @@
     },
     components: {
       LineChart,
-      DashBoard
+      DashBoard,
+      BarChart
     }
   }
 </script>
@@ -518,6 +599,12 @@
     padding: 1px 15px 7px;
     height: 38px;
     min-height: 38px;
+  }
+
+  .right-select {
+    float: right;
+    margin-top: 5px;
+    margin-right: 30px;
   }
 
   .first {
