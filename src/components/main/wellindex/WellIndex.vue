@@ -114,8 +114,8 @@
               <div class="ibox-title new-title">
                 <h5 style="display: inline-block;">油井基本信息</h5>
               </div>
-              <div class="ibox-content" style="padding: 10px 20px 20px 15px">
-                <div class="ct-perfect-fourth">
+              <div class="ibox-content" style="padding: 10px 20px 20px 15px;">
+                <div class="ct-perfect-fourth" style="height: 197px">
                   <div class="first">
                     <dash-board chart-id="dash1" :data="phl" title="平衡率"></dash-board>
                   </div>
@@ -134,8 +134,8 @@
                 <h5 style="display: inline-block;">调节冲程</h5>
               </div>
               <div class="ibox-content" style="padding: 10px 20px 20px 15px">
-                <div class="ct-perfect-fourth">
-                  <span class="slider">
+                <div class="ct-perfect-fourth" style="height: 197px">
+                  <span class="slider" style="margin: 43px 0">
                     <span class="slider-label-left">1米</span>
                     <span class="slider-label-right">5米</span>
                       <el-slider
