@@ -28,4 +28,5 @@ export default {
   historyIndicator: laterHost + '/Indicator/History',
   compareIndicator: laterHost + '/Indicator/AllHistory',
   getIndd: laterHost + '/FirstPage/SIGN_INDD',
+  getimportant: laterHost + '/FirstPage/SIGN_IMPORTANT',
 }

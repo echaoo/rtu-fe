@@ -116,7 +116,12 @@
               </div>
               <div class="ibox-content" style="padding: 10px 20px 20px 15px">
                 <div class="ct-perfect-fourth">
-                  <dash-board chart-id="dash1"></dash-board>
+                  <div class="first">
+                    <dash-board chart-id="dash1" :data="phl" title="平衡率"></dash-board>
+                  </div>
+                  <div class="first">
+                    <dash-board chart-id="dash2" :data="xtxl" title="系统效率"></dash-board>
+                  </div>
                 </div>
               </div>
             </div>
@@ -207,11 +212,14 @@
         sliderTime: 0,
         left: [],
         id: 'chart0',
-        maxValue: 0
+        maxValue: 0,
+        phl: 0,
+        xtxl: 0
       }
     },
     methods: {
       getIndd () {
+        //todo: wellid 的获取
         this.$http.post(API.getIndd, {wellid: 1}).then(
           function (res) {
             if (res.data.status === '0') {
@@ -222,6 +230,16 @@
               this.chartData.yaxisData = obj.ydata
               this.chartTime = obj.time
               this.maxValue = parseInt(this.chartTime.length - 1)
+            }
+          })
+      },
+      getimportant () {
+        this.$http.post(API.getimportant, {wellid: 1}).then(
+          function (res) {
+            if (res.data.status === '0') {
+              let data = res.data.data
+              this.phl = parseInt(data[0].Calc001)
+              this.xtxl = parseInt(data[0].Calc002)
             }
           })
       },
@@ -257,7 +275,7 @@
     mounted () {
       this.getIndd()
       this.$store.commit('setIsNowTime', true)
-
+      this.getimportant()
     },
     components: {
       LineChart,
@@ -500,6 +518,11 @@
     padding: 1px 15px 7px;
     height: 38px;
     min-height: 38px;
+  }
+
+  .first {
+    width: 49%;
+    display: inline-block;
   }
 
   .well-row {
