@@ -231,6 +231,41 @@
           </div>
         </el-col>
       </el-row>
+      <el-row :gutter="20">
+        <el-col :span="12">
+          <div class="wellindex-chart">
+            <div class="ibox float-e-margins margin-bottom">
+              <div class="ibox-title new-title">
+                <h5 style="display: inline-block;">ABC三相电压有效值</h5>
+              </div>
+              <div class="ibox-content" style="padding: 10px 20px 20px 15px;">
+                <div class="ct-perfect-fourth">
+                  <bar-chart :chart-data="loadData" chart-id="load" name="载荷(KN)" :label="loadLabel"></bar-chart>
+                </div>
+              </div>
+            </div>
+          </div>
+        </el-col>
+        <el-col :span="12">
+          <div class="wellindex-chart">
+            <div class="ibox float-e-margins margin-bottom">
+              <div class="ibox-title new-title">
+                <h5 style="display: inline-block;">功率变化图</h5>
+                <select v-model="powSelect" v-on:change="changePowData">
+                  <option value="1">6h</option>
+                  <option value="2">12h</option>
+                  <option value="4">24h</option>
+                </select>
+              </div>
+              <div class="ibox-content" style="padding: 10px 20px 20px 15px">
+                <div class="ct-perfect-fourth">
+                  <bar-chart :chart-data="powData" chart-id="pow" name="功率(KN)" :label="powLabel"></bar-chart>
+                </div>
+              </div>
+            </div>
+          </div>
+        </el-col>
+      </el-row>
     </div>
   </div>
 </template>
@@ -280,7 +315,6 @@
               this.chartTime = obj.time
               this.maxValue = parseInt(this.chartTime.length - 1)
               this.loadData = this.setLoadData(obj.time, obj.load1, obj.load2, 1)
-              this.powData = this.setLoadData(obj.time, obj.pow1, obj.pow2, 1)
             }
           })
       },
@@ -291,11 +325,14 @@
               let data = res.data.data
               this.phl = parseInt(data[0].Calc001)
               this.xtxl = parseInt(data[0].Calc002)
+              let obj1 = this.setImportantData(this.allData)
+              console.log(obj1)
+              this.powData = this.setLoadData(obj1.time, obj1.pow1, obj1.pow2, 1)
             }
           })
       },
       setChartData (data) {
-        let obj = {xdata: [], ydata: [], time: [], load1: [], load2: [], pow1: [], pow2: []}
+        let obj = {xdata: [], ydata: [], time: [], load1: [], load2: []}
         for (let i = 0; i < data.length; i++) {
           let xdata = ''
           let ydata = ''
@@ -313,8 +350,21 @@
           obj.time.push(datatime)
           obj.load1.push(data[i].MW4095)
           obj.load2.push(data[i].MW4096)
+        }
+        return obj
+      },
+      setImportantData (data) {
+          let obj = {time: [], pow1: [], pow2: [], voltdata1: [], voltdata2: [], voltdata3: []}
+        for (let i = 0; i < data.length; i++) {
+          let t1 = (data[i].Time.split('('))[1].split(')');
+          let t2 = new Date(parseInt(t1[0]));
+          let datatime = t2.getFullYear() + '/' + (parseInt(t2.getMonth()) + 1) + '/' + t2.getDate() + ' ' + t2.getHours() + ':' + t2.getMinutes() + ':' + t2.getSeconds();
+          obj.time.push(datatime)
           obj.pow1.push(data[i].MW1041)
           obj.pow2.push(data[i].MW1042)
+          obj.voltdata1.push([datatime, data[i].MW1035 / 10])
+          obj.voltdata2.push([datatime, data[i].MW1036 / 10])
+          obj.voltdata3.push([datatime, data[i].MW1037 / 10])
         }
         return obj
       },
@@ -354,7 +404,7 @@
         this.loadData = this.setLoadData(obj.time, obj.load1, obj.load2, val)
       },
       changePowData () {
-        let obj = this.setChartData(this.allData)
+        let obj = this.setImportantData(this.allData)
         let val = this.powSelect
         this.powData = this.setLoadData(obj.time, obj.pow1, obj.pow2, val)
       }
