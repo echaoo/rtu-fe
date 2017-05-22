@@ -240,7 +240,7 @@
               </div>
               <div class="ibox-content" style="padding: 10px 20px 20px 15px;">
                 <div class="ct-perfect-fourth">
-                  <bar-chart :chart-data="loadData" chart-id="load" name="载荷(KN)" :label="loadLabel"></bar-chart>
+                  <line-valuechart :chart-data="voltdata" chart-id="vol"></line-valuechart>
                 </div>
               </div>
             </div>
@@ -259,7 +259,7 @@
               </div>
               <div class="ibox-content" style="padding: 10px 20px 20px 15px">
                 <div class="ct-perfect-fourth">
-                  <bar-chart :chart-data="powData" chart-id="pow" name="功率(KN)" :label="powLabel"></bar-chart>
+                  <line-valuechart :chart-data="currData" chart-id="curr"></line-valuechart>
                 </div>
               </div>
             </div>
@@ -274,6 +274,7 @@
   import LineChart from '../indicator/LineChart.vue'
   import DashBoard from './DashBoard.vue'
   import BarChart from './BarChart.vue'
+  import LineValuechart from './LineValuechart.vue'
   import API from '../../../config/request'
 
   export default {
@@ -298,7 +299,9 @@
         loadSelect: 1,
         powSelect: 1,
         loadLabel: ['最大载荷', '最小载荷'],
-        powLabel: ['有功功率', '无功功率']
+        powLabel: ['有功功率', '无功功率'],
+        voltdata: [],
+        currData: []
       }
     },
     methods: {
@@ -325,9 +328,25 @@
               let data = res.data.data
               this.phl = parseInt(data[0].Calc001)
               this.xtxl = parseInt(data[0].Calc002)
-              let obj1 = this.setImportantData(this.allData)
-              console.log(obj1)
-              this.powData = this.setLoadData(obj1.time, obj1.pow1, obj1.pow2, 1)
+              let obj1 = this.setImportantData(data)
+              this.powData = this.setLoadData(obj1[0], obj1[1], obj1[2], 1)
+              let tempArr = []
+              tempArr.push(obj1[0])
+              tempArr.push(obj1[3])
+              tempArr.push(obj1[4])
+              tempArr.push(obj1[5])
+              this.voltdata = tempArr
+            }
+          })
+      },
+      getcurr () {
+        this.$http.post(API.getcurr, {wellid: 1}).then(
+          function (res) {
+            if (res.data.status === '0') {
+              let data = res.data.data
+              let obj = this.setCurrData(data)
+              this.currData = obj
+              console.log(typeof this.currData)
             }
           })
       },
@@ -354,18 +373,57 @@
         return obj
       },
       setImportantData (data) {
-          let obj = {time: [], pow1: [], pow2: [], voltdata1: [], voltdata2: [], voltdata3: []}
+          let obj = []
+          let time = []
+          let pow1 = []
+          let pow2 = []
+          let voltdata1 = []
+          let voltdata2 = []
+          let voltdata3 = []
+          let tempdata1 = []
+          let tempdata2 = []
         for (let i = 0; i < data.length; i++) {
           let t1 = (data[i].Time.split('('))[1].split(')');
           let t2 = new Date(parseInt(t1[0]));
           let datatime = t2.getFullYear() + '/' + (parseInt(t2.getMonth()) + 1) + '/' + t2.getDate() + ' ' + t2.getHours() + ':' + t2.getMinutes() + ':' + t2.getSeconds();
-          obj.time.push(datatime)
-          obj.pow1.push(data[i].MW1041)
-          obj.pow2.push(data[i].MW1042)
-          obj.voltdata1.push([datatime, data[i].MW1035 / 10])
-          obj.voltdata2.push([datatime, data[i].MW1036 / 10])
-          obj.voltdata3.push([datatime, data[i].MW1037 / 10])
+          time.push(datatime)
+          pow1.push(data[i].MW1041)
+          pow2.push(data[i].MW1042)
+          voltdata1.push([datatime, parseInt(data[i].MW1035) / 10])
+          voltdata2.push([datatime, parseInt(data[i].MW1036) / 10])
+          voltdata3.push([datatime, parseInt(data[i].MW1037) / 10])
+          tempdata1.push(data[i].MW1010);
+          tempdata2.push(data[i].MW1008);
         }
+        obj.push(time.reverse())
+        obj.push(pow1)
+        obj.push(pow2)
+        obj.push(voltdata1.reverse())
+        obj.push(voltdata2.reverse())
+        obj.push(voltdata3.reverse())
+        obj.push(tempdata1)
+        obj.push(tempdata2)
+        return obj
+      },
+      setCurrData (data) {
+        let obj = []
+        let timedata = []
+        let currdataA = []
+        let currdataB = []
+        let currdataC = []
+        for (let i = 0; i < data.length; i++) {
+          let t1 = (data[i].Time.split('('))[1].split(')');
+          let t2 = new Date(parseInt(t1[0]));
+          let datatime = t2.getFullYear() + '/' + (parseInt(t2.getMonth()) + 1) + '/' + t2.getDate() + ' ' + t2.getHours() + ':' + t2.getMinutes() + ':' + t2.getSeconds();
+          timedata.push(datatime)
+          currdataA.push([datatime, parseInt(data[i].MW1172) / 10])
+          currdataB.push([datatime, parseInt(data[i].MW1173) / 10])
+          currdataC.push([datatime, parseInt(data[i].MW1174) / 10])
+        }
+        obj.push(timedata.reverse())
+        obj.push(currdataA.reverse())
+        obj.push(currdataB.reverse())
+        obj.push(currdataC.reverse())
         return obj
       },
       changeEvent (value) {
@@ -413,11 +471,13 @@
       this.getIndd()
       this.$store.commit('setIsNowTime', true)
       this.getimportant()
+      this.getcurr()
     },
     components: {
       LineChart,
       DashBoard,
-      BarChart
+      BarChart,
+      LineValuechart
     }
   }
 </script>

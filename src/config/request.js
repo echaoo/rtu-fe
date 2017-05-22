@@ -29,4 +29,5 @@ export default {
   compareIndicator: laterHost + '/Indicator/AllHistory',
   getIndd: laterHost + '/FirstPage/SIGN_INDD',
   getimportant: laterHost + '/FirstPage/SIGN_IMPORTANT',
+  getcurr: laterHost + '/FirstPage/SIGN_PER_CURR_VOLT_POW',
 }
