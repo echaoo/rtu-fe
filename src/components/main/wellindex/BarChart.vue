@@ -13,6 +13,10 @@
         type: String,
         default: 'barchart'
       },
+      name: {
+        type: String,
+        default: ''
+      },
       chartData: {
         type: Object,
         default () {
@@ -20,6 +24,9 @@
             id: 'barchart'
           }
         }
+      },
+      label: {
+        type: Array
       },
     },
     watch: {
@@ -50,9 +57,6 @@
         let xdata = this.chartData.timeData
         let data1 = this.chartData.loadData1
         let data2 = this.chartData.loadData2
-        console.log(xdata)
-        console.log(data1)
-        console.log(data2)
         let option = {
           title: {
             show:false,
@@ -84,7 +88,8 @@
           },
           yAxis: {
             type: 'value',
-            name: '载荷(KN)',
+//            name: '载荷(KN)',
+            name: name,
             axisLine: { onZero: false }
           },
           legend: {
@@ -92,17 +97,17 @@
             x: 'center',
             y: 'bottom',
             borderWidth: 0,
-            data: ['最大载荷', '最小载荷']
+            data: this.label
           },
           series: []
         };
         option.series = new Array();
         option.series[0] = new Object();
-        option.series[0].name = '最大载荷';
+        option.series[0].name = this.label[0];
         option.series[0].type = 'bar';
         option.series[0].data = data1;
         option.series[1] = new Object();
-        option.series[1].name = '最小载荷';
+        option.series[1].name = this.label[1];
         option.series[1].type = 'bar';
         option.series[1].data = data2;
         myChart.setOption(option);

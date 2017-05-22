@@ -205,7 +205,7 @@
               </div>
               <div class="ibox-content" style="padding: 10px 20px 20px 15px;">
                 <div class="ct-perfect-fourth">
-                  <bar-chart :chart-data="loadData"></bar-chart>
+                  <bar-chart :chart-data="loadData" chart-id="load" name="载荷(KN)" :label="loadLabel"></bar-chart>
                 </div>
               </div>
             </div>
@@ -215,21 +215,16 @@
           <div class="wellindex-chart">
             <div class="ibox float-e-margins margin-bottom">
               <div class="ibox-title new-title">
-                <h5 style="display: inline-block;">调节冲程</h5>
+                <h5 style="display: inline-block;">功率变化图</h5>
+                <select v-model="powSelect" v-on:change="changePowData">
+                  <option value="1">6h</option>
+                  <option value="2">12h</option>
+                  <option value="4">24h</option>
+                </select>
               </div>
               <div class="ibox-content" style="padding: 10px 20px 20px 15px">
-                <div class="ct-perfect-fourth" style="height: 197px">
-                  <span class="slider" style="margin: 43px 0">
-                    <span class="slider-label-left">1米</span>
-                    <span class="slider-label-right">5米</span>
-                      <el-slider
-                        v-model="sliderValue"
-                        range
-                        show-stops
-                        :max="5">
-                      </el-slider>
-                  </span>
-                  <button class="optimize">确定</button>
+                <div class="ct-perfect-fourth">
+                  <bar-chart :chart-data="powData" chart-id="pow" name="功率(KN)" :label="powLabel"></bar-chart>
                 </div>
               </div>
             </div>
@@ -264,7 +259,11 @@
         phl: 0,
         xtxl: 0,
         loadData: {},
-        loadSelect: 1
+        powData: {},
+        loadSelect: 1,
+        powSelect: 1,
+        loadLabel: ['最大载荷', '最小载荷'],
+        powLabel: ['有功功率', '无功功率']
       }
     },
     methods: {
@@ -280,7 +279,8 @@
               this.chartData.yaxisData = obj.ydata
               this.chartTime = obj.time
               this.maxValue = parseInt(this.chartTime.length - 1)
-              this.loadData = this.setLoadData(obj, 1)
+              this.loadData = this.setLoadData(obj.time, obj.load1, obj.load2, 1)
+              this.powData = this.setLoadData(obj.time, obj.pow1, obj.pow2, 1)
             }
           })
       },
@@ -295,7 +295,7 @@
           })
       },
       setChartData (data) {
-        let obj = {xdata: [], ydata: [], time: [], load1: [], load2: []}
+        let obj = {xdata: [], ydata: [], time: [], load1: [], load2: [], pow1: [], pow2: []}
         for (let i = 0; i < data.length; i++) {
           let xdata = ''
           let ydata = ''
@@ -313,6 +313,8 @@
           obj.time.push(datatime)
           obj.load1.push(data[i].MW4095)
           obj.load2.push(data[i].MW4096)
+          obj.pow1.push(data[i].MW1041)
+          obj.pow2.push(data[i].MW1042)
         }
         return obj
       },
@@ -324,10 +326,10 @@
 //        let index = this.sliderTime.indexOf(val)
         return this.chartTime[val] // 格式化返回值
       },
-      setLoadData (data, t) {
-        let s = data.time
-        let load1 = data.load1
-        let load2 = data.load2
+      setLoadData (time, load1, load2, t) {
+        let s = time
+        let loadone = load1
+        let loadtwo = load2
         let timedata = []
         let loaddata1 = []
         let loaddata2 = []
@@ -335,8 +337,8 @@
           let j = parseInt(s.length - 2) - parseInt(i * t);
           if (j >= 0) {
             timedata[5 - i] = (s[i].split(' '))[0] + "\n" + (s[i].split(' '))[1];
-            loaddata1[5 - i] = load1[i];
-            loaddata2[5 - i] = load2[i];
+            loaddata1[5 - i] = loadone[i];
+            loaddata2[5 - i] = loadtwo[i];
           }
           else {
             timedata[5 - i] = '0000/00/00\n00:00:00';
@@ -349,7 +351,12 @@
       changeData () {
         let obj = this.setChartData(this.allData)
         let val = this.loadSelect
-        this.loadData = this.setLoadData(obj, val)
+        this.loadData = this.setLoadData(obj.time, obj.load1, obj.load2, val)
+      },
+      changePowData () {
+        let obj = this.setChartData(this.allData)
+        let val = this.powSelect
+        this.powData = this.setLoadData(obj.time, obj.pow1, obj.pow2, val)
       }
     },
     mounted () {
