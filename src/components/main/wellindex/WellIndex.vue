@@ -320,17 +320,12 @@
           <div class="wellindex-chart">
             <div class="ibox float-e-margins margin-bottom">
               <div class="ibox-title new-title">
-                <h5 style="display: inline-block;">功率变化图</h5>
-                <!--<select v-model="powSelect" v-on:change="changeCurrData">-->
-                <!--<option value="1">6h</option>-->
-                <!--<option value="2">12h</option>-->
-                <!--<option value="4">24h</option>-->
-                <!--</select>-->
+                <h5 style="display: inline-block;">温度</h5>
               </div>
               <div class="ibox-content" style="padding: 10px 20px 20px 15px">
                 <div class="ct-perfect-fourth">
-                  <line-valuechart :chart-data="currData" chart-id="curr" name="电流(A)" :datalabel="currLabel2"
-                                   label1="A相电流" label2="B相电流" label3="C相电流"></line-valuechart>
+                  <temp-chart :chart-data="tempData" chart-id="temp" name="压力(Pa)"
+                               :label="pressLabel"></temp-chart>
                 </div>
               </div>
             </div>
@@ -347,6 +342,7 @@
   import BarChart from './BarChart.vue'
   import LineValuechart from './LineValuechart.vue'
   import PressChart from './PressChart.vue'
+  import TempChart from './TempChart.vue'
   import API from '../../../config/request'
 
   export default {
@@ -381,7 +377,8 @@
         pressLabel: ['井口油压', '井口套压', '汇管压力'], //压力
         pressSelect: 1,
         mainData: {},
-        mainAllData: []
+        mainAllData: [],
+        tempData: {}
       }
     },
     methods: {
@@ -411,6 +408,8 @@
               let obj1 = this.setImportantData(data)
               this.powData = this.setLoadData(obj1[0], obj1[1], obj1[2], 1)
               this.voltdata = obj1
+              this.tempData = {timeData: obj1[0], loadData1: obj1[6], loadData2: obj1[7]}
+              console.log(this.tempData)
               this.pressData = this.setLoadData(obj1[0], obj1[8], obj1[9], 1, obj1[10])
             }
           })
@@ -619,7 +618,8 @@
       DashBoard,
       BarChart,
       LineValuechart,
-      PressChart
+      PressChart,
+      TempChart
     }
   }
 </script>
