@@ -238,7 +238,8 @@
               </div>
               <div class="ibox-content" style="padding: 10px 20px 20px 15px;">
                 <div class="ct-perfect-fourth">
-                  <line-valuechart :chart-data="voltdata" chart-id="vol" name="电压(V)" :datalabel="currLabel1" label1="A相电压" label2="B相电压" label3="C相电压"></line-valuechart>
+                  <line-valuechart :chart-data="voltdata" chart-id="vol" name="电压(V)" :datalabel="currLabel1"
+                                   label1="A相电压" label2="B相电压" label3="C相电压"></line-valuechart>
                 </div>
               </div>
             </div>
@@ -250,14 +251,15 @@
               <div class="ibox-title new-title">
                 <h5 style="display: inline-block;">功率变化图</h5>
                 <!--<select v-model="powSelect" v-on:change="changeCurrData">-->
-                  <!--<option value="1">6h</option>-->
-                  <!--<option value="2">12h</option>-->
-                  <!--<option value="4">24h</option>-->
+                <!--<option value="1">6h</option>-->
+                <!--<option value="2">12h</option>-->
+                <!--<option value="4">24h</option>-->
                 <!--</select>-->
               </div>
               <div class="ibox-content" style="padding: 10px 20px 20px 15px">
                 <div class="ct-perfect-fourth">
-                  <line-valuechart :chart-data="currData" chart-id="curr" name="电流(A)" :datalabel="currLabel2" label1="A相电流" label2="B相电流" label3="C相电流"></line-valuechart>
+                  <line-valuechart :chart-data="currData" chart-id="curr" name="电流(A)" :datalabel="currLabel2"
+                                   label1="A相电流" label2="B相电流" label3="C相电流"></line-valuechart>
                 </div>
               </div>
             </div>
@@ -288,15 +290,25 @@
                 </div>
               </div>
             </el-col>
+          </el-row>
+          <el-row>
             <el-col :span="24">
               <div class="wellindex-chart">
                 <div class="ibox float-e-margins margin-bottom">
                   <div class="ibox-title new-title">
-                    <h5 style="display: inline-block;">ABC三相电压有效值</h5>
+                    <h5 style="display: inline-block;">伴热温度与伴热压力</h5>
+                    <span class="right-select">
+                  <select v-model="tempSelect" v-on:change="changeTempData">
+                    <option value="1">6h</option>
+                    <option value="2">12h</option>
+                    <option value="4">24h</option>
+                  </select>
+                </span>
                   </div>
                   <div class="ibox-content" style="padding: 10px 20px 20px 15px;">
                     <div class="ct-perfect-fourth">
-                      <line-valuechart :chart-data="voltdata" chart-id="vol" name="电压(V)" :datalabel="currLabel1" label1="A相电压" label2="B相电压" label3="C相电压"></line-valuechart>
+                      <press-chart :chart-data="mainData" chart-id="main" name="压力(Pa)"
+                                   :label="pressLabel"></press-chart>
                     </div>
                   </div>
                 </div>
@@ -317,7 +329,8 @@
               </div>
               <div class="ibox-content" style="padding: 10px 20px 20px 15px">
                 <div class="ct-perfect-fourth">
-                  <line-valuechart :chart-data="currData" chart-id="curr" name="电流(A)" :datalabel="currLabel2" label1="A相电流" label2="B相电流" label3="C相电流"></line-valuechart>
+                  <line-valuechart :chart-data="currData" chart-id="curr" name="电流(A)" :datalabel="currLabel2"
+                                   label1="A相电流" label2="B相电流" label3="C相电流"></line-valuechart>
                 </div>
               </div>
             </div>
@@ -333,6 +346,7 @@
   import DashBoard from './DashBoard.vue'
   import BarChart from './BarChart.vue'
   import LineValuechart from './LineValuechart.vue'
+  import PressChart from './PressChart.vue'
   import API from '../../../config/request'
 
   export default {
@@ -356,6 +370,7 @@
         powData: {},
         loadSelect: 1,
         powSelect: 1,
+        tempSelect: 1,
         loadLabel: ['最大载荷', '最小载荷'],
         powLabel: ['有功功率', '无功功率'],
         currLabel1: ['A相电压', 'B相电压', 'C相电压'],
@@ -364,7 +379,9 @@
         currData: [],
         pressData: {},
         pressLabel: ['井口油压', '井口套压', '汇管压力'], //压力
-        pressSelect: 1
+        pressSelect: 1,
+        mainData: {},
+        mainAllData: []
       }
     },
     methods: {
@@ -409,6 +426,17 @@
             }
           })
       },
+      getmain () {
+        this.$http.post(API.getmain, {wellid: 1}).then(
+          function (res) {
+            if (res.data.status === '0') {
+              let data = res.data.data
+              this.mainAllData = data
+              let obj = this.setMainData(data)
+              this.mainData = this.setLoadData(obj[0], obj[1], obj[2], 1)
+            }
+          })
+      },
       setChartData (data) {
         let obj = {xdata: [], ydata: [], time: [], load1: [], load2: []}
         for (let i = 0; i < data.length; i++) {
@@ -432,18 +460,18 @@
         return obj
       },
       setImportantData (data) {
-          let obj = []
-          let time = []
-          let pow1 = []
-          let pow2 = []
-          let voltdata1 = []
-          let voltdata2 = []
-          let voltdata3 = []
-          let tempdata1 = []
-          let tempdata2 = []
-          let pressdata1 = []
-          let pressdata2 = []
-          let pressdata3 = []
+        let obj = []
+        let time = []
+        let pow1 = []
+        let pow2 = []
+        let voltdata1 = []
+        let voltdata2 = []
+        let voltdata3 = []
+        let tempdata1 = []
+        let tempdata2 = []
+        let pressdata1 = []
+        let pressdata2 = []
+        let pressdata3 = []
         for (let i = 0; i < data.length; i++) {
           let t1 = (data[i].Time.split('('))[1].split(')');
           let t2 = new Date(parseInt(t1[0]));
@@ -494,6 +522,24 @@
         obj.push(currdataC.reverse())
         return obj
       },
+      setMainData (data) {
+        let obj = []
+        let timedata = []
+        let pressdata = []
+        let tempdata = []
+        for (let i = 0; i < data.length; i++) {
+          let t1 = (data[i].Time.split('('))[1].split(')');
+          let t2 = new Date(parseInt(t1[0]));
+          let datatime = t2.getFullYear() + '/' + (parseInt(t2.getMonth()) + 1) + '/' + t2.getDate() + ' ' + t2.getHours() + ':' + t2.getMinutes() + ':' + t2.getSeconds();
+          timedata.push(datatime)
+          pressdata.push(data[i].MW1017)
+          tempdata.push(data[i].MW1016)
+        }
+        obj.push(timedata.reverse())
+        obj.push(pressdata.reverse())
+        obj.push(tempdata.reverse())
+        return obj
+      },
       changeEvent (value) {
         this.id = 'chart' + value
         console.log(this.id)
@@ -511,7 +557,7 @@
         let loaddata2 = []
         let loadthree
         let loaddata3
-        if(load3) {
+        if (load3) {
           loadthree = load3
           loaddata3 = []
         }
@@ -554,6 +600,11 @@
         let obj1 = this.voltdata
         let val = this.pressSelect
         this.pressData = this.setLoadData(obj1[0], obj1[8], obj1[9], val, obj1[10])
+      },
+      changeTempData () {
+        let obj = this.setMainData(this.mainAllData)
+        let val = this.tempSelect
+        this.mainData = this.setLoadData(obj[0], obj[1], obj[2], val)
       }
     },
     mounted () {
@@ -561,12 +612,14 @@
       this.$store.commit('setIsNowTime', true)
       this.getimportant()
       this.getcurr()
+      this.getmain()
     },
     components: {
       LineChart,
       DashBoard,
       BarChart,
-      LineValuechart
+      LineValuechart,
+      PressChart
     }
   }
 </script>
