@@ -90,8 +90,6 @@
                     <span class="slider">
                     <span class="slider-label-left" style="width: 120px"> {{ chartTime[0] }}</span>
                     <span class="slider-label-right" style="width: 120px">{{ chartTime[chartTime.length - 1] }}</span>
-                      <!--<span class="dot" v-for="(item, index) in new Array(chartTime.length)"-->
-                      <!--v-bind:style="{ left: (100/chartTime.length)*index + '%'}"></span>-->
                       <el-slider
                         v-model="sliderTime"
                         show-stops
@@ -189,7 +187,7 @@
           </div>
         </el-col>
       </el-row>
-      <el-row :gutter="20">
+      <el-row :gutter="20" style="margin-bottom: 20px">
         <el-col :span="12">
           <div class="wellindex-chart">
             <div class="ibox float-e-margins margin-bottom">
@@ -231,7 +229,7 @@
           </div>
         </el-col>
       </el-row>
-      <el-row :gutter="20">
+      <el-row :gutter="20" style="margin-bottom: 20px">
         <el-col :span="12">
           <div class="wellindex-chart">
             <div class="ibox float-e-margins margin-bottom">
@@ -240,7 +238,7 @@
               </div>
               <div class="ibox-content" style="padding: 10px 20px 20px 15px;">
                 <div class="ct-perfect-fourth">
-                  <line-valuechart :chart-data="voltdata" chart-id="vol"></line-valuechart>
+                  <line-valuechart :chart-data="voltdata" chart-id="vol" name="电压(V)" :datalabel="currLabel1" label1="A相电压" label2="B相电压" label3="C相电压"></line-valuechart>
                 </div>
               </div>
             </div>
@@ -251,15 +249,75 @@
             <div class="ibox float-e-margins margin-bottom">
               <div class="ibox-title new-title">
                 <h5 style="display: inline-block;">功率变化图</h5>
-                <select v-model="powSelect" v-on:change="changePowData">
-                  <option value="1">6h</option>
-                  <option value="2">12h</option>
-                  <option value="4">24h</option>
-                </select>
+                <!--<select v-model="powSelect" v-on:change="changeCurrData">-->
+                  <!--<option value="1">6h</option>-->
+                  <!--<option value="2">12h</option>-->
+                  <!--<option value="4">24h</option>-->
+                <!--</select>-->
               </div>
               <div class="ibox-content" style="padding: 10px 20px 20px 15px">
                 <div class="ct-perfect-fourth">
-                  <line-valuechart :chart-data="currData" chart-id="curr"></line-valuechart>
+                  <line-valuechart :chart-data="currData" chart-id="curr" name="电流(A)" :datalabel="currLabel2" label1="A相电流" label2="B相电流" label3="C相电流"></line-valuechart>
+                </div>
+              </div>
+            </div>
+          </div>
+        </el-col>
+      </el-row>
+      <el-row :gutter="20">
+        <el-col :span="12">
+          <el-row>
+            <el-col :span="24">
+              <div class="wellindex-chart">
+                <div class="ibox float-e-margins margin-bottom">
+                  <div class="ibox-title new-title">
+                    <h5 style="display: inline-block;">压力(Pa)</h5>
+                    <span class="right-select">
+                  <select v-model="pressSelect" v-on:change="changePressData">
+                    <option value="1">6h</option>
+                    <option value="2">12h</option>
+                    <option value="4">24h</option>
+                  </select>
+                </span>
+                  </div>
+                  <div class="ibox-content" style="padding: 10px 20px 20px 15px;">
+                    <div class="ct-perfect-fourth">
+                      <bar-chart :chart-data="pressData" chart-id="press" name="压力(Pa)" :label="pressLabel"></bar-chart>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </el-col>
+            <el-col :span="24">
+              <div class="wellindex-chart">
+                <div class="ibox float-e-margins margin-bottom">
+                  <div class="ibox-title new-title">
+                    <h5 style="display: inline-block;">ABC三相电压有效值</h5>
+                  </div>
+                  <div class="ibox-content" style="padding: 10px 20px 20px 15px;">
+                    <div class="ct-perfect-fourth">
+                      <line-valuechart :chart-data="voltdata" chart-id="vol" name="电压(V)" :datalabel="currLabel1" label1="A相电压" label2="B相电压" label3="C相电压"></line-valuechart>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </el-col>
+          </el-row>
+        </el-col>
+        <el-col :span="12">
+          <div class="wellindex-chart">
+            <div class="ibox float-e-margins margin-bottom">
+              <div class="ibox-title new-title">
+                <h5 style="display: inline-block;">功率变化图</h5>
+                <!--<select v-model="powSelect" v-on:change="changeCurrData">-->
+                <!--<option value="1">6h</option>-->
+                <!--<option value="2">12h</option>-->
+                <!--<option value="4">24h</option>-->
+                <!--</select>-->
+              </div>
+              <div class="ibox-content" style="padding: 10px 20px 20px 15px">
+                <div class="ct-perfect-fourth">
+                  <line-valuechart :chart-data="currData" chart-id="curr" name="电流(A)" :datalabel="currLabel2" label1="A相电流" label2="B相电流" label3="C相电流"></line-valuechart>
                 </div>
               </div>
             </div>
@@ -300,8 +358,13 @@
         powSelect: 1,
         loadLabel: ['最大载荷', '最小载荷'],
         powLabel: ['有功功率', '无功功率'],
+        currLabel1: ['A相电压', 'B相电压', 'C相电压'],
+        currLabel2: ['A相电流', 'B相电流', 'C相电流'],
         voltdata: [],
-        currData: []
+        currData: [],
+        pressData: {},
+        pressLabel: ['井口油压', '井口套压', '汇管压力'], //压力
+        pressSelect: 1
       }
     },
     methods: {
@@ -330,12 +393,8 @@
               this.xtxl = parseInt(data[0].Calc002)
               let obj1 = this.setImportantData(data)
               this.powData = this.setLoadData(obj1[0], obj1[1], obj1[2], 1)
-              let tempArr = []
-              tempArr.push(obj1[0])
-              tempArr.push(obj1[3])
-              tempArr.push(obj1[4])
-              tempArr.push(obj1[5])
-              this.voltdata = tempArr
+              this.voltdata = obj1
+              this.pressData = this.setLoadData(obj1[0], obj1[8], obj1[9], 1, obj1[10])
             }
           })
       },
@@ -382,6 +441,9 @@
           let voltdata3 = []
           let tempdata1 = []
           let tempdata2 = []
+          let pressdata1 = []
+          let pressdata2 = []
+          let pressdata3 = []
         for (let i = 0; i < data.length; i++) {
           let t1 = (data[i].Time.split('('))[1].split(')');
           let t2 = new Date(parseInt(t1[0]));
@@ -394,6 +456,9 @@
           voltdata3.push([datatime, parseInt(data[i].MW1037) / 10])
           tempdata1.push(data[i].MW1010);
           tempdata2.push(data[i].MW1008);
+          pressdata1.push(data[i].MW1009);
+          pressdata2.push(data[i].MW1011);
+          pressdata3.push(data[i].MW1017);
         }
         obj.push(time.reverse())
         obj.push(pow1)
@@ -403,6 +468,9 @@
         obj.push(voltdata3.reverse())
         obj.push(tempdata1)
         obj.push(tempdata2)
+        obj.push(pressdata1.reverse())
+        obj.push(pressdata2.reverse())
+        obj.push(pressdata3.reverse())
         return obj
       },
       setCurrData (data) {
@@ -434,27 +502,43 @@
 //        let index = this.sliderTime.indexOf(val)
         return this.chartTime[val] // 格式化返回值
       },
-      setLoadData (time, load1, load2, t) {
+      setLoadData (time, load1, load2, t, load3) {
         let s = time
         let loadone = load1
         let loadtwo = load2
         let timedata = []
         let loaddata1 = []
         let loaddata2 = []
+        let loadthree
+        let loaddata3
+        if(load3) {
+          loadthree = load3
+          loaddata3 = []
+        }
         for (let i = 0; i < 6; i++) {
           let j = parseInt(s.length - 2) - parseInt(i * t);
           if (j >= 0) {
             timedata[5 - i] = (s[i].split(' '))[0] + "\n" + (s[i].split(' '))[1];
             loaddata1[5 - i] = loadone[i];
             loaddata2[5 - i] = loadtwo[i];
+            if (load3) {
+              loaddata3[5 - i] = loadthree[i];
+            }
           }
           else {
             timedata[5 - i] = '0000/00/00\n00:00:00';
             loaddata1[5 - i] = 0;
             loaddata2[5 - i] = 0;
+            if (load3) {
+              loaddata3[5 - i] = 0;
+            }
           }
         }
-        return {timeData: timedata, loadData1: loaddata1, loadData2: loaddata2}
+        if (load3) {
+          return {timeData: timedata, loadData1: loaddata1, loadData2: loaddata2, loadData3: loaddata3}
+        } else {
+          return {timeData: timedata, loadData1: loaddata1, loadData2: loaddata2}
+        }
       },
       changeData () {
         let obj = this.setChartData(this.allData)
@@ -465,6 +549,11 @@
         let obj = this.setImportantData(this.allData)
         let val = this.powSelect
         this.powData = this.setLoadData(obj.time, obj.pow1, obj.pow2, val)
+      },
+      changePressData () {
+        let obj1 = this.voltdata
+        let val = this.pressSelect
+        this.pressData = this.setLoadData(obj1[0], obj1[8], obj1[9], val, obj1[10])
       }
     },
     mounted () {

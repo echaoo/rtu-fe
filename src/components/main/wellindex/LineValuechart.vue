@@ -15,6 +15,21 @@
       chartId: {
         type: String,
         default: 'barchart'
+      },
+      datalabel: {
+        type: Array
+      },
+      label1: {
+        type: String
+      },
+      label2: {
+        type: String
+      },
+      label3: {
+        type: String
+      },
+      name: {
+        type: String
       }
     },
     watch: {
@@ -25,7 +40,7 @@
       }
     },
     mounted () {
-//      this.paintChart()
+      this.paintChart();
     },
     methods: {
       paintChart () {
@@ -59,7 +74,7 @@
           },
           yAxis: {
             type: 'value',
-            name: '电压（V）',
+            name: this.name,
             axisLine: {onZero: false}
           },
           tooltip: {
@@ -70,27 +85,27 @@
             x: 'center',
             y: 'bottom',
             borderWidth: 0,
-            data: ['A相电压', 'B相电压', 'C相电压']
+            data: this.datalabel
           },
           series: []
         };
         option.series = new Array();
         option.series[0] = new Object();
-        option.series[0].name = 'A相电压';
+        option.series[0].name = this.label1;
         option.series[0].type = 'line';
         option.series[0].animation = false;
         option.series[0].smoth = true;
         option.series[0].symbolSize = 1;
         option.series[0].data = dataA;
         option.series[1] = new Object();
-        option.series[1].name = 'B相电压';
+        option.series[1].name = this.label2;
         option.series[1].type = 'line';
         option.series[1].animation = false;
         option.series[1].smoth = true;
         option.series[1].symbolSize = 1;
         option.series[1].data = dataB;
         option.series[2] = new Object();
-        option.series[2].name = 'C相电压';
+        option.series[2].name = this.label3;
         option.series[2].type = 'line';
         option.series[2].animation = false;
         option.series[2].smoth = true;

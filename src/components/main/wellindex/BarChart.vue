@@ -89,7 +89,7 @@
           yAxis: {
             type: 'value',
 //            name: '载荷(KN)',
-            name: name,
+            name: this.name,
             axisLine: { onZero: false }
           },
           legend: {
@@ -110,6 +110,12 @@
         option.series[1].name = this.label[1];
         option.series[1].type = 'bar';
         option.series[1].data = data2;
+        if (this.chartData.loadData3) {
+          option.series[2] = new Object();
+          option.series[2].name = this.label[2];
+          option.series[2].type = 'bar';
+          option.series[2].data = this.chartData.loadData3;
+        }
         myChart.setOption(option);
       }
     }
