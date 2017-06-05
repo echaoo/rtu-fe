@@ -38,6 +38,7 @@
     },
     created () {
       this.getWellData();
+      this.$store.commit('setNavSwitch', true);
     },
     methods: {
       // 获取油井信息

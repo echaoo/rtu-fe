@@ -326,7 +326,8 @@
             that.chartData.axisData = tempx;
             that.chartData.yaxisData = tempy;
           }
-        })
+        });
+      this.$store.commit('setNavSwitch', true);
     },
     methods: {
       rederOdd (chartMsgOdd) {

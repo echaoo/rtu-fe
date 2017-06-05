@@ -50,6 +50,7 @@
     },
     created () {
       this.pageRequest(this.pageIndex);
+      this.$store.commit('setNavSwitch', true);
     },
     mounted () {
 

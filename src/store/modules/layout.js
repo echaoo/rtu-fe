@@ -95,9 +95,6 @@ const actions = {
         }
       )
     })
-  },
-  setNavSwitch(context) {
-    context.commit('setNavSwitch')
   }
 }
 
@@ -114,8 +111,11 @@ const mutations = {
   toggleRightMenu(state) {
     state.isRightMenuOpen = !state.isRightMenuOpen
   },
-  setNavSwitch(state) {
-    state.showIndex = !state.showIndex
+  // setNavSwitch(state) {
+  //   state.showIndex = !state.showIndex
+  // },
+  setNavSwitch(state, bool) {
+    state.showIndex = bool
   },
   getBlockId(state, id) {
     state.blockId = id

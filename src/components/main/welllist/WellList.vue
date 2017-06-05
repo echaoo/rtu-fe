@@ -42,6 +42,7 @@
     },
     mounted () {
       this.getwellList();
+      this.$store.commit('setNavSwitch', true);
     },
     methods: {
       getwellList () {
@@ -86,7 +87,7 @@
       },
 
       handleWell(row) {
-        this.$store.dispatch('setNavSwitch');
+        this.$store.commit('setNavSwitch', false);
         this.$store.commit('getBlockId', row.Name);
         this.$router.push('wellindex');
       }

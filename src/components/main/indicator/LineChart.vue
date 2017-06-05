@@ -43,7 +43,7 @@
       }
     },
     mounted () {
-
+//      this.paintChart()
     },
     methods: {
       paintChart () {
