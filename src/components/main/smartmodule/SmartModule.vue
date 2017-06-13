@@ -1,7 +1,7 @@
 <template>
   <div class="checkbox-item bottom">
     <span class="check-title"><el-button type="primary" @click="load">加载/关停</el-button>
-      <span style="margin-left: 4%;display: inline-block;">
+      <span style="margin-left: 4%;display: inline-block;" v-if="!isHide">
         <span class="checkbox-left">
           <input type="checkbox" id="one" value="0" v-model="loaditems1">
         <label for="one">阶梯电价定时模块</label>
@@ -16,7 +16,7 @@
         </span>
       </span>
     </span>
-    <div class="module-item bottom" v-if="loaditems1">
+    <div class="module-item bottom" v-if="loaditems1[0]">
       <div class="title">阶梯电价定时模块</div>
       <div class="content">
         <span class="vertical">请选择低电价时段以便优化生产成本:</span>
@@ -38,7 +38,7 @@
         <button class="save" @click="save">保存选择并在该时段加大冲次</button>
       </div>
     </div>
-    <div class="module-item" v-if="loaditems2">
+    <div class="module-item" v-if="loaditems2[0]">
       <div class="title">根据载荷改变冲程模块</div>
       <div class="content">
         <span class="negative-margin">载荷/冲程比: 载荷</span>
@@ -48,7 +48,7 @@
         <button class="save" @click="adjustLoad">调节冲程</button>
       </div>
     </div>
-    <div class="module-item" v-if="loaditems1">
+    <div class="module-item" v-if="loaditems3[0]">
       <div class="title">缓下模块</div>
       <div class="content">
         <span class="negative-margin">上行/下行速率比: 上行</span>
@@ -68,11 +68,17 @@
         loaditems1: [],
         loaditems2: [],
         loaditems3: [],
-        sliderValue: [0, 24]
+        sliderValue: [0, 24],
+        isHide: true
       }
     },
     methods: {
-      load () {},
+      load () {
+        this.loaditems1 = []
+        this.loaditems2 = []
+        this.loaditems3 = []
+        this.isHide = !this.isHide
+      },
       save () {},
       adjustLoad () {},
       adjustSpeed () {}
