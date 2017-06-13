@@ -68,7 +68,8 @@
     mounted () {
       this.$http.get(API.parameter).then(res => {
         this.parameter = res.data.data
-      });
+      })
+      this.$store.commit('setNavSwitch', false)
     },
     computed: {
       blockId() {

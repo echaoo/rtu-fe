@@ -42,9 +42,9 @@
     },
     mounted () {
       this.$http.get(API.parameter).then(res => {
-        console.log(res.data.data)
         this.parameter = res.data.data
       });
+      this.$store.commit('setNavSwitch', false)
     },
     computed: {
       blockId() {
@@ -53,8 +53,6 @@
     },
     methods: {
       getCurveData (val) {
-        console.log(val)
-        console.log(this.blockId)
         this.$http.post(API.initialization, {wellid: this.blockId, parameter: val}).then(res => {
           console.log(res.data.data)
           this.paintLineChart(res.data.unit, res.data.data)

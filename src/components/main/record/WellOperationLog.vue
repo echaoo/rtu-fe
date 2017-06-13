@@ -53,7 +53,7 @@
       this.pageRequest(this.pageIndex);
     },
     mounted () {
-
+      this.$store.commit('setNavSwitch', false)
     },
     methods: {
       pageIndexChange (pageIndex) {

@@ -2,7 +2,7 @@
   <div class="top-container" v-bind:class="{'fadeMiniTop': !iconSwitch, 'fadeFullTop': iconSwitch}">
     <el-button class="toggle-side-menu" type="primary" @click="changeSideBar"><i class="fa fa-bars"></i></el-button>
     <div class="right-menu">
-      <div class="block" v-if="isNowTime">{{ nowTime }}</div>
+      <div class="block">当前：{{ isblockId }}</div>
       <div class="time" v-if="isNowTime">{{ nowTime }}</div>
       <el-button type="danger" @click="logout"><i class="fa fa-sign-out"></i> 登出</el-button>
       <el-button type="primary" @click="showRightMenu"><i class="fa fa-tasks"></i></el-button>
@@ -14,7 +14,8 @@
   export default {
     data () {
       return {
-        nowTime: ''
+        nowTime: '',
+        blockId: ''
       }
     },
     computed: {
@@ -23,6 +24,9 @@
       },
       isNowTime () {
         return this.$store.state.singleWell.isNowTime
+      },
+      isblockId() {
+        return this.$store.state.layout.blockId
       }
     },
     mounted () {

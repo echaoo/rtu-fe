@@ -35,15 +35,16 @@
       chartId: {
         handler(val, oldVal){
           this.$nextTick(function () {
-            this.paintChart ()
+            this.paintChart()
           })
-
         },
         deep: true
       }
     },
     mounted () {
-//      this.paintChart()
+      if (this.chartData.axisData.length !== 0) {
+        this.paintChart()
+      }
     },
     methods: {
       paintChart () {
@@ -52,13 +53,13 @@
         let data = [];
         let len = parseInt(that.chartId.substring(5))//根据id确定渲染哪一个图表，有待优化
 
-        for(let i = 0; i < that.chartData.axisData[len].length; i++) {
-            let temp = [];
-            temp.push(that.chartData.axisData[len][i]);
-            temp.push(that.chartData.yaxisData[len][i]);
-            data.push(temp);
+        for (let i = 0; i < that.chartData.axisData[len].length; i++) {
+          let temp = [];
+          temp.push(that.chartData.axisData[len][i]);
+          temp.push(that.chartData.yaxisData[len][i]);
+          data.push(temp);
         }
-//        console.log(data)
+        console.log(data)
         let option = {
           tooltip: {
             formatter: function (params) {
@@ -105,6 +106,7 @@
 <style lang="less" rel="stylesheet/less" scoped>
   .test {
     width: 100%;
+    min-width: 350px;
     height: 300px;
   }
 </style>

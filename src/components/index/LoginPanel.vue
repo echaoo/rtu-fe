@@ -38,12 +38,11 @@
               }, 1000)
             }
             else {
-              // TODO:错误处理
               this.$notify({
                 title: '错误',
                 message: '账户或密码错误',
                 type: 'error'
-              });
+              })
             }
             loadingInstance.close()
           },

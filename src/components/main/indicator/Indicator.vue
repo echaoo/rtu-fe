@@ -295,13 +295,18 @@
         loading2: true
       }
     },
+    computed: {
+      blockId() {
+        return this.$store.state.layout.blockId
+      }
+    },
     created() {
       let that = this;
       let body = {
-        blockid: '1',
+        blockid: this.blockId,
         page: '1',
         size: '6'
-      };
+      }
       this.$http.post(API.indicator, body).then(
         function (res) {
           if (res.data.status === '0')
@@ -309,7 +314,7 @@
             that.chartMsgOdd = res.data.data;
             that.chartMsgEven = res.data.data;
           }
-        });
+        })
 
       this.$http.post(API.indicator, body).then(
         function (res) {
@@ -326,8 +331,8 @@
             that.chartData.axisData = tempx;
             that.chartData.yaxisData = tempy;
           }
-        });
-      this.$store.commit('setNavSwitch', true);
+        })
+      this.$store.commit('setNavSwitch', true)
     },
     methods: {
       rederOdd (chartMsgOdd) {

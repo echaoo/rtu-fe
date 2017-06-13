@@ -381,10 +381,14 @@
         tempData: {}
       }
     },
+    computed: {
+      blockId() {
+        return this.$store.state.layout.blockId
+      }
+    },
     methods: {
       getIndd () {
-        //todo: wellid 的获取
-        this.$http.post(API.getIndd, {wellid: 1}).then(
+        this.$http.post(API.getIndd, {wellid: this.blockId}).then(
           function (res) {
             if (res.data.status === '0') {
 //              console.log(res)
@@ -399,7 +403,7 @@
           })
       },
       getimportant () {
-        this.$http.post(API.getimportant, {wellid: 1}).then(
+        this.$http.post(API.getimportant, {wellid: this.blockId}).then(
           function (res) {
             if (res.data.status === '0') {
               let data = res.data.data
@@ -415,7 +419,7 @@
           })
       },
       getcurr () {
-        this.$http.post(API.getcurr, {wellid: 1}).then(
+        this.$http.post(API.getcurr, {wellid: this.blockId}).then(
           function (res) {
             if (res.data.status === '0') {
               let data = res.data.data
@@ -426,7 +430,7 @@
           })
       },
       getmain () {
-        this.$http.post(API.getmain, {wellid: 1}).then(
+        this.$http.post(API.getmain, {wellid: this.blockId}).then(
           function (res) {
             if (res.data.status === '0') {
               let data = res.data.data
@@ -541,10 +545,8 @@
       },
       changeEvent (value) {
         this.id = 'chart' + value
-        console.log(this.id)
       },
       formatTooltip (val) {
-//        let index = this.sliderTime.indexOf(val)
         return this.chartTime[val] // 格式化返回值
       },
       setLoadData (time, load1, load2, t, load3) {
@@ -609,6 +611,7 @@
     mounted () {
       this.getIndd()
       this.$store.commit('setIsNowTime', true)
+      this.$store.commit('setNavSwitch', false)
       this.getimportant()
       this.getcurr()
       this.getmain()

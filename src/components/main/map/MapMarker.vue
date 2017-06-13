@@ -1,12 +1,43 @@
 <template>
   <div class="mark-container" v-bind:style="{'left': markConf.left, 'top': markConf.top}">
-    <div class='pin' :style="{background: statusToColor(markConf.status)}"><span class="num">{{markConf.name}}</span>
+    <el-popover
+      ref="popover2"
+      placement="right"
+      width="400"
+      trigger="click"
+      @hide="hideEle">
+      <div class="well-title">
+        <span style="margin: 0 20px 0 10px;color: #1f6dc0;font-size: 14px">当前油井：{{markConf.name}}</span>
+        <span v-if="!done">
+          <el-button size="small" type="primary" @click="goWellindex(markConf.name)">现场</el-button>
+        </span>
+      </div>
+      <div class="well-body" v-if="done">
+        <p><span>当前油井:{{markConf.name}}</span><span>时间：{{alldata.Datetime}}</span></p>
+        <div style="width: 350px;">
+          <line-chart :chart-data="chartData" :chart-id="chartId"></line-chart>
+          <p>
+            <span class="text">冲程：{{ alldata.Stroke }}</span>
+            <span>冲次：{{ alldata.Jig }}</span>
+          </p>
+          <p>
+            <span class="text">上行冲刺：{{ alldata.Up_Jig }}</span>
+            <span>下行冲刺：{{ alldata.Down_Jig }}</span>
+          </p>
+        </div>
+      </div>
+      <div v-if="!done" style="margin-top: 20px"><p>该油井不存在！</p></div>
+    </el-popover>
+    <div class='pin' v-on:click="getWellData(markConf.name)" v-popover:popover2
+         :style="{background: statusToColor(markConf.status)}"><span class="num">{{markConf.name}}</span>
     </div>
     <div :class='statusToClass(markConf.status)'></div>
   </div>
 </template>
 
 <script>
+  import LineChart from '../indicator/LineChart.vue'
+  import API from '../../../config/request'
   export default {
     props: {
       markConf: {
@@ -20,6 +51,18 @@
             status: 'dead'
           }
         }
+      }
+    },
+    data () {
+      return {
+        chartData: {
+          axisData: [],
+          yaxisData: [],
+          id: ''
+        },
+        alldata: {Datetime: ''},
+        done: false,
+        chartId: 'chart0'
       }
     },
     methods: {
@@ -46,7 +89,40 @@
           case 'dead':
             return '#000000'
         }
+      },
+      goWellindex (id) {
+        this.$store.commit('getBlockId', id);
+        this.$router.push('wellindex')
+      },
+      getWellData (id) {
+        this.$http.post(API.getWellData, {wellid: id}).then(
+          function (res) {
+            if (res.data.status === '0') {
+              console.log(res.data.data)
+              this.alldata = res.data.data
+              let tempx = [];
+              let tempy = [];
+//              console.log(this.alldata.Data_Disp[10])
+              tempx.push(this.alldata.Data_Disp);
+              tempy.push(this.alldata.Data_Load);
+              this.chartData.axisData = tempx;
+              this.chartData.yaxisData = tempy;
+              this.done = true
+            }
+          },
+          function () {
+            this.done = false
+          }
+        )
+      },
+      hideEle () {
+        this.chartData.axisData = [];
+        this.chartData.yaxisData = [];
+        this.done = false
       }
+    },
+    components: {
+      LineChart
     }
   }
 </script>
@@ -56,6 +132,24 @@
   @dead-color: #000000;
   @bad-color: #da020f;
   @warn-color: #e8be04;
+
+  .well-title {
+    height: 50px;
+    background-color: #f5f5f5;
+    margin: -10px;
+    padding: 10px 0;
+  }
+
+  .well-body {
+    text-align: center;
+    margin-top: 15px;
+
+    .text {
+      display: inline-block;
+      width: 180px;
+      text-align: left;
+    }
+  }
 
   .pulse-after(@color) {
     content: "";
