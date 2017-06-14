@@ -73,6 +73,10 @@
         return this.$store.state.layout.blockId
       }
     },
+    mounted () {
+      this.$store.commit('setIsNowTime', true)
+      this.$store.commit('setNavSwitch', false)
+    },
     methods: {
       getCurveData () {
         let start = this.formatTime(this.startTime)

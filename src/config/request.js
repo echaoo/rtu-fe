@@ -31,5 +31,6 @@ export default {
   getimportant: laterHost + '/FirstPage/SIGN_IMPORTANT',
   getcurr: laterHost + '/FirstPage/SIGN_PER_CURR_VOLT_POW',
   getmain: laterHost + '/FirstPage/SIGN_Main',
-  getWellData: laterHost + '/Map/WellData'
+  getWellData: laterHost + '/Map/WellData',
+  getOnesWarn: laterHost + '/WarnLog/GetOnesWarn'
 }

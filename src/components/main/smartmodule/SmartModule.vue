@@ -72,6 +72,10 @@
         isHide: true
       }
     },
+    mounted () {
+      this.$store.commit('setIsNowTime', true)
+      this.$store.commit('setNavSwitch', false)
+    },
     methods: {
       load () {
         this.loaditems1 = []

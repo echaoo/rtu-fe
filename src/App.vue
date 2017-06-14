@@ -5,6 +5,7 @@
 </template>
 
 <script>
+  import API from './config/request'
   export default {
     name: 'app',
     created() {
@@ -20,6 +21,34 @@
           }
         }
       )
+    },
+    methods: {
+      getData () {
+        this.$http.get(API.getOnesWarn).then(res => {
+          if (res.data.status === '0') {
+            this.$notify({
+              title: '警告',
+              message: '油井出现错误',
+              type: 'error'
+            });
+          }
+        })
+      }
+    },
+    mounted () {
+      this.getData()
+      let that = this
+      setInterval(function () {
+        that.$http.get(API.getOnesWarn).then(res => {
+          if (res.data.status === '0') {
+            this.$notify({
+              title: '警告',
+              message: '油井出现错误',
+              type: 'error'
+            })
+          }
+        })
+      }, 3000)
     }
   }
 </script>
