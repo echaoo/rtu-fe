@@ -268,7 +268,7 @@
       </el-row>
       <el-row :gutter="20">
         <el-col :span="12">
-          <el-row>
+          <el-row style="margin-bottom: 20px">
             <el-col :span="24">
               <div class="wellindex-chart">
                 <div class="ibox float-e-margins margin-bottom">

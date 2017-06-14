@@ -333,6 +333,7 @@
           }
         })
       this.$store.commit('setNavSwitch', true)
+      this.$store.commit('setIsNowTime', false)
     },
     methods: {
       rederOdd (chartMsgOdd) {

@@ -42,7 +42,8 @@
     },
     mounted () {
       this.getwellList();
-      this.$store.commit('setNavSwitch', true);
+      this.$store.commit('setNavSwitch', true)
+      this.$store.commit('setIsNowTime', false)
     },
     methods: {
       getwellList () {
@@ -91,7 +92,6 @@
         this.$store.commit('getBlockId', row.Name);
         this.$router.push('wellindex');
       }
-      // Todo: 现场按钮事件处理
     }
   }
 </script>

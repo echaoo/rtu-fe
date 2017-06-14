@@ -5,9 +5,9 @@
         <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
         <el-breadcrumb-item>遥调控制</el-breadcrumb-item>
       </el-breadcrumb>
-      <button class="showAndHide">显示/隐藏</button>
+      <button class="showAndHide" v-on:click="changeHide">显示/隐藏</button>
     </div>
-    <div class="hideItem">
+    <div class="hideItem" v-if="isHide">
       <span v-for="(item, index) in tempData" style="padding: 0 6%">
         <input type="checkbox" :id="'item' + index" :value="item.SensorName" v-model="hideItem">
         <label :for="'item' + index">{{ item.SensorChina }}</label>
@@ -92,15 +92,16 @@
         hideItem: [],
         tempData: [],
         sensorItem: [],
-        sensorData: {}
+        sensorData: {},
+        isHide: false
       }
     },
     watch: {
       hideItem: function () {
-          for (let i = 0; i < this.hideItem.length; i++) {
-            console.log(this.warnList.concat(this.sensorData[this.hideItem[i]]))
-            this.sensorItem[i] = this.sensorData[this.hideItem[i]]
-          }
+        for (let i = 0; i < this.hideItem.length; i++) {
+          console.log(this.warnList.concat(this.sensorData[this.hideItem[i]]))
+          this.sensorItem[i] = this.sensorData[this.hideItem[i]]
+        }
       }
     },
     created () {
@@ -168,6 +169,9 @@
               }
             })
         }
+      },
+      changeHide () {
+        this.isHide = !this.isHide
       }
     }
   }

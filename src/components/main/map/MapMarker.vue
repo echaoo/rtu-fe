@@ -8,7 +8,7 @@
       @hide="hideEle">
       <div class="well-title">
         <span style="margin: 0 20px 0 10px;color: #1f6dc0;font-size: 14px">当前油井：{{markConf.name}}</span>
-        <span v-if="!done">
+        <span v-if="done">
           <el-button size="small" type="primary" @click="goWellindex(markConf.name)">现场</el-button>
         </span>
       </div>

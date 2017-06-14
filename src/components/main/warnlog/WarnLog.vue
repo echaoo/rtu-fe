@@ -51,6 +51,7 @@
     created () {
       this.pageRequest(this.pageIndex);
       this.$store.commit('setNavSwitch', true);
+      this.$store.commit('setIsNowTime', false)
     },
     mounted () {
 

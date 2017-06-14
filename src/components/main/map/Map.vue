@@ -39,6 +39,7 @@
     created () {
       this.getWellData();
       this.$store.commit('setNavSwitch', true);
+      this.$store.commit('setIsNowTime', false)
     },
     methods: {
       // 获取油井信息
